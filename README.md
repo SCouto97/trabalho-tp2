@@ -1,5 +1,5 @@
 # README
-**Lembrar de Atualizar informações**
+*Lembrar de Atualizar informações*
 ## Membros do Grupo: 
 				  
 				  - Gabriel Campos                       matr.:
@@ -16,4 +16,4 @@ Para a execução do programa, usar o comando './usuario'.
 
 ## Link do repositório no GitHub
 
-[GitHub](https://github.com/SCouto97/trabalho-tp2)
+[github.com/SCouto97/trabalho-tp2](https://github.com/SCouto97/trabalho-tp2)
