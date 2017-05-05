@@ -4,7 +4,7 @@
 				  
 				  - Gabriel Campos                       matr.:
 				  
-				  - Gabriel Nunes (@gabnunes)            matr.:
+				  - Gabriel Nunes (@gabnunes)            matr.:15/0126689
 				  
 				  - Samuel Andrade do Couto (@SCouto97)  matr.: 15/0021623
 
