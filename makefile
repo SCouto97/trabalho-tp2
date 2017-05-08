@@ -3,9 +3,9 @@ CFLAGS = -ansi -Wall
 DEPS = usuario.h GerenciaDisciplina.h listagem.h
 OBJS = usuario.o GerenciaDisciplina.o listagem.o
 
-all: main clean
+all: usuario
 
-main: usuario.o GerenciaDisciplina.o listagem.o
+usuario: $(OBJS)
 	$(CC) $(OBJS) -o usuario
 
 usuario.o: usuario.c $(DEPS)
@@ -18,4 +18,4 @@ listagem.o: listagem.c
 	$(CC) $(CFLAGS) listagem.c -c
 
 clean: 
-	rm -rf *.o
+	rm -rf *.o *.gch usuario
