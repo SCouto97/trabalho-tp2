@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "usuario.h"
 #include <string.h>
+#include "GerenciaDisciplina.h"
 
 /*Função responsável por apresentar a tela de Login ao cliente. Pede que seja inserido usuário e senha e
 Informa se o Login foi realizado com sucesso. */
@@ -18,7 +19,7 @@ void TelaLogin() {
 
 	if(fopen(nomearquivo, "r") == NULL) {
 		printf("Nao existem usuarios cadastrados!\n");
-		printf("Insira <QUALQUER TECLA> para retornar ao menu inicial.");
+		printf("Insira <ENTER> para retornar ao menu inicial.");
 		getchar();
 		getchar();
 
@@ -29,15 +30,17 @@ void TelaLogin() {
 			if(strcmp(user_read,user) == 0 && strcmp(password_read,password) == 0) {
 				printf("Login Efetuado com Sucesso!\n");
 				printf("Seja Bem-Vindo, %s\n", name);
+				printf("Insira <ENTER> para ir para a entrada do sistema.\n");
 				getchar();
 				getchar();
 				loginfound = 1;
+				TelaEntradaSistema(user_read);
 				break;
 			}
 		}
 		if(loginfound == 0) {
 			printf("Usuario e/ou Senha Incorretos.\n");
-			printf("Insira <QUALQUER TECLA> para retornar ao menu inicial.");
+			printf("Insira <ENTER> para retornar ao menu inicial.");
 			getchar();
 			getchar();
 			system("clear");
@@ -87,7 +90,7 @@ void TelaCadastro() {
 		fp = fopen(nomearquivo, "w");
 		fprintf(fp,"%s %s %s\n", nome, login, senha);
 		printf("Cadastro realizado com sucesso.\n");
-		printf("Insira <QUALQUER TECLA> para retornar ao menu inicial e fazer seu Login.\n");
+		printf("Insira <ENTER> para retornar ao menu inicial e fazer seu Login.\n");
 		getchar();
 		getchar();
 		system("clear");
@@ -97,7 +100,7 @@ void TelaCadastro() {
 		fp = fopen(nomearquivo, "a");
 		fprintf(fp,"%s %s %s\n", nome, login, senha);
 		printf("Cadastro realizado com sucesso.\n");
-		printf("Insira <QUALQUER TECLA> para retornar ao menu inicial e fazer seu Login.\n");
+		printf("Insira <ENTER> para retornar ao menu inicial e fazer seu Login.\n");
 		getchar();
 		getchar();
 		system("clear");
@@ -119,7 +122,7 @@ void TelaRecuperarSenha() {
 	scanf("%s", usuario);
 	if (fopen(nomearquivo, "r") == NULL) {	/*checa existencia do arquivo de cadastros*/
 		printf("Nao existe nenhum usuario cadastrado!\n");
-		printf("Insira <QUALQUER TECLA> para retornar ao menu inicial.");
+		printf("Insira <ENTER> para retornar ao menu inicial.");
 		getchar();
 		getchar();		
 	}
@@ -129,7 +132,7 @@ void TelaRecuperarSenha() {
 			if(strcmp(nome_read,nome) == 0 && strcmp(usuario_read,usuario) == 0) { /*Compara dados lido do arquivo com dados inserido pelo usuario*/
 				loginfound = 1;
 				printf("Sua senha: %s\n", senha);
-				printf("Insira <QUALQUER TECLA> para retornar ao menu inicial e fazer seu Login.\n");
+				printf("Insira <ENTER> para retornar ao menu inicial e fazer seu Login.\n");
 				getchar();
 				getchar();
 				fclose(fp);
@@ -138,7 +141,7 @@ void TelaRecuperarSenha() {
 		}
 		if(loginfound == 0) {	/*nenhum usuario foi encontrado durante a pesquisa. */
 			printf("Nenhum usuario como o inserido foi encontrado.\n");
-			printf("Insira <QUALQUER TECLA> para retornar ao menu inicial.\n");
+			printf("Insira <ENTER> para retornar ao menu inicial.\n");
 			getchar();
 			getchar();
 			fclose(fp);
@@ -149,11 +152,88 @@ void TelaRecuperarSenha() {
 /* Externar uma mensagem de saida para o usuario */
 void TelaSaida(int *opcao) {
 	printf("Obrigado por utilizar o QuizTime!\n");
-	printf("Insira <QUALQUER TECLA> para encerrar.\n");
+	printf("Insira <ENTER> para encerrar.\n");
 	*opcao = 4;
 	getchar();
 	getchar();
 }
+
+void TelaFinalizarSessao(int *opcao) {
+	printf("Sessao finalizada com sucesso.\n");
+	printf("Insira <ENTER> para retornar ao Menu Inicial.\n");
+	getchar();
+	getchar();
+}
+
+/*void CadastrarDisciplina(char usuario_sessao[20], char nomearquivo[20]) {
+	FILE *fp;
+	int counter = 0, opcao;
+	if(fopen(nomearquivo,"r") == NULL) {
+		printf("Ainda nao existe disciplina disponivel para cadastro.\n");
+		printf("Insira <ENTER> para retornar ao Menu de Entrada.\n");
+		getchar();
+		getchar();
+	}
+	else {
+		
+	
+	}
+}
+*/
+
+
+void TelaEntradaSistema(char usuario_sessao[20]) {
+	int opcao = 1;
+	char nomearquivo[] = "disciplinas.txt";
+	tipoListaDisciplina lista;
+	system("clear");
+	if(strcmp(usuario_sessao,"admin") != 0) {
+		while(opcao != 4) {
+			printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sessao Ativa - %s %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", usuario_sessao);
+			printf("Perfil: Estudante\n");
+			printf("Opcoes: \n");
+			printf("1 - Cadastrar em Nova Disciplina\n");
+			printf("2 - Listar Disciplinas\n");
+			printf("3 - Acessar Disciplina \n");
+			printf("4 - Encerrar Sessao e retornar para o Menu Inicial\n");
+			printf("Opcao Desejada: ");
+			scanf("%d", &opcao);
+			switch(opcao) {
+				case 1: break; //CadastrarDisciplina(usuario_sessao,nomearquivo);
+				case 2: break;
+				case 3: break;
+				case 4: TelaFinalizarSessao(&opcao);
+						break;
+			}
+		}	
+	}
+	else {
+		while(opcao != 4) {
+			system("clear");
+			printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sessao Ativa - %s %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", usuario_sessao);
+			printf("Perfil: Administrador\n");
+			printf("Opcoes: \n");
+				printf("1 - Cadastrar Novo Usuario\n");
+				printf("2 - Criar Disciplina\n");
+				printf("3 - Encerrar Sessao e retornar para o Menu Inicial\n");
+				printf("Opcao Desejada: ");
+				scanf("%d", &opcao);
+				if(opcao == 3) {
+					opcao = 4;
+				}
+				switch(opcao) {
+					case 1: TelaCadastro();
+					case 2: ModificarArquivo(nomearquivo,usuario_sessao);
+					case 3: break;
+					case 4: TelaFinalizarSessao(&opcao);
+							break;
+				}
+			}
+		}
+}
+
+
+
 
 /*Tela Inicial do nosso QuizTime. A Mesma informara ao usuario as opcoes que ele pode utilizar.*/
 void TelaInicial() {
