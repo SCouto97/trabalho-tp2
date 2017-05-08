@@ -23,6 +23,10 @@ void ModificarArquivo(char *nomearquivo, char *usuario_sessao) {
 		scanf(" %[^\n]s", nometopico);
 		fputs("00.1|", fp);
 		fprintf(fp, "%s|%s|{Quiz 1}\n", nomedisciplina, nometopico);
+		printf("Topico adicionado com sucesso!\n");
+		printf("Insira <ENTER> para retornar ao MENU de Administrador.\n");
+		getchar();
+		getchar();
 		fclose(fp);
 	}
 	else {

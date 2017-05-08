@@ -1,6 +1,5 @@
 #ifndef usuario_h_
 #define usuario_h_
-#include "TAD.h"
 
 void TelaInicial();
 

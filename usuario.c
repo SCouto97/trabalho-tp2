@@ -185,7 +185,7 @@ void TelaFinalizarSessao(int *opcao) {
 void TelaEntradaSistema(char usuario_sessao[20]) {
 	int opcao = 1;
 	char nomearquivo[] = "disciplinas.txt";
-	tipoListaDisciplina lista;
+
 	system("clear");
 	if(strcmp(usuario_sessao,"admin") != 0) {
 		while(opcao != 4) {
