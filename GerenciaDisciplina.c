@@ -3,6 +3,13 @@
 #include "GerenciaDisciplina.h"
 #include <string.h>
 
+void TopicoSucesso() {
+	printf("Topico adicionado com sucesso!\n");
+	printf("Insira <ENTER> para retornar ao MENU de Administrador.\n");
+	getchar();
+	getchar();
+}
+
 
 /*Funcao responsavel por permitir modificacoes no arquivo de disciplinas (apenas o administrador pode fazer isto) 
 O Administrador podera: criar um arquivo ( se ainda nao existir ), inserir Disciplina e Topicos.
@@ -23,10 +30,7 @@ void ModificarArquivo(char *nomearquivo, char *usuario_sessao) {
 		scanf(" %[^\n]s", nometopico);
 		fputs("00.1|", fp);
 		fprintf(fp, "%s|%s|{Quiz 1}\n", nomedisciplina, nometopico);
-		printf("Topico adicionado com sucesso!\n");
-		printf("Insira <ENTER> para retornar ao MENU de Administrador.\n");
-		getchar();
-		getchar();
+		TopicoSucesso();
 		fclose(fp);
 	}
 	else {
@@ -67,10 +71,7 @@ void ModificarArquivo(char *nomearquivo, char *usuario_sessao) {
 			fclose(fp);
 			fp = fopen(nomearquivo,"a");
 			fprintf(fp, "%d.%d|%s|%s|{Quiz 1}\n", numerodisciplina, counter+1, nomedisciplina, nometopico);
-			printf("Topico adicionado com sucesso!\n");
-			printf("Insira <ENTER> para retornar ao MENU de Administrador.\n");
-			getchar();
-			getchar();
+			TopicoSucesso();
 			fclose(fp);
 		}
 	}
