@@ -4,7 +4,7 @@
 
 void ModificarArquivo(char *nomearquivo,char *usuario_sessao);
 
-
+void TopicoSucesso();
 
 
 
