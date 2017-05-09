@@ -27,7 +27,6 @@ void gerenciaPerguntas(char* nomearquivo, char* usuario_sessao){
             break;
         }
     }
-    printf("%f\n", num);
     fclose(arq);
     arq = fopen("perguntas.txt","a");
     printf("Digite sua pergunta: ");
@@ -59,5 +58,3 @@ void gerenciaPerguntas(char* nomearquivo, char* usuario_sessao){
     fprintf(arq,"%.1f|%s|%c|\n",num,pergunta,resposta);
     fclose(arq);
 }
-
-
