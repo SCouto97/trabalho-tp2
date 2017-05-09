@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include "listagem.h"
 
 void CriaListaTopicos(ListaTopicos *lista1) {
 
@@ -66,7 +66,7 @@ void CriaListaDisciplinas(ListaDisciplinas *lista2) {
 }
 
 void AdicionaDisciplina(ListaDisciplinas *lista2, int codigo, char *disciplina) {
- 
+
 	Disciplinas *aux = lista2->ultimo;
 	aux->proximo = (Disciplinas*)malloc(sizeof(Disciplinas));
 	strcpy(aux->proximo->nomeDisciplina, disciplina);

@@ -4,7 +4,7 @@
 #include <string.h>
 #include "GerenciaDisciplina.h"
 #include "TAD.h"
-#include "quiz.h"
+#include "listagem.h"
 
 /*Função responsável por apresentar a tela de Login ao cliente. Pede que seja inserido usuário e senha e
 Informa se o Login foi realizado com sucesso. */
@@ -117,7 +117,7 @@ void TelaRecuperarSenha() {
 	FILE *fp;
 	char nomearquivo[20] = "usuarios.txt", nome[20], usuario[20], senha[20], nome_read[20], usuario_read[20];
 	int loginfound = 0;
-	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Recuperacao de Senha %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");	
+	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Recuperacao de Senha %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
 	printf("%%%%%%%%%%%%%% Insira seu primeiro nome: ");
 	scanf("%s", nome);
 	printf("%%%%%%%%%%%%%% Insira seu usuario: ");
@@ -126,7 +126,7 @@ void TelaRecuperarSenha() {
 		printf("Nao existe nenhum usuario cadastrado!\n");
 		printf("Insira <ENTER> para retornar ao menu inicial.");
 		getchar();
-		getchar();		
+		getchar();
 	}
 	else {
 		fp = fopen(nomearquivo, "r");
@@ -147,7 +147,7 @@ void TelaRecuperarSenha() {
 			getchar();
 			getchar();
 			fclose(fp);
-		}	
+		}
 	}
 }
 
@@ -177,8 +177,8 @@ void TelaFinalizarSessao(int *opcao) {
 		getchar();
 	}
 	else {
-		
-	
+
+
 	}
 }
 */
@@ -205,14 +205,14 @@ void TelaEntradaSistema(char usuario_sessao[20]) {
 				scanf("%s", nometopico);
 			}
 			switch(opcao) {
-				case 1: break; //CadastrarDisciplina(usuario_sessao,nomearquivo);
+				case 1: break; /*CadastrarDisciplina(usuario_sessao,nomearquivo);*/
 				case 2: break;
 				case 3: ListaPerguntas(nomearquivo, nometopico);
 						break;
 				case 4: TelaFinalizarSessao(&opcao);
 						break;
 			}
-		}	
+		}
 	}
 	else {
 		while(opcao != 4) {
@@ -247,7 +247,7 @@ void TelaEntradaSistema(char usuario_sessao[20]) {
 void TelaInicial() {
 	int opcao = 0;
 	while(opcao != 4) {
-		system("clear");		
+		system("clear");
 		printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Seja Bem-Vindo ao QuizTime %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
 		printf("Opcoes: \n");
 		printf("1 - Fazer Login\n");
@@ -266,8 +266,8 @@ void TelaInicial() {
 			case 4: TelaSaida(&opcao);
 					break;
 		}
-	}	
-}	
+	}
+}
 
 
 int main () {

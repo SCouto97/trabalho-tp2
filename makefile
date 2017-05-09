@@ -1,21 +1,9 @@
 CC = gcc
-CFLAGS = -ansi -Wall
-DEPS = usuario.h GerenciaDisciplina.h listagem.h
-OBJS = usuario.o GerenciaDisciplina.o listagem.o
+CFLAGS = -ansi -Wall -std=c99
+DEPS = usuario.h GerenciaDisciplina.h listagem.h TAD.h
 
-all: usuario
+%.o: %.c $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
-usuario: $(OBJS)
-	$(CC) $(OBJS) -o usuario
-
-usuario.o: usuario.c $(DEPS)
-	$(CC) $(CFLAGS) usuario.c $(DEPS) -c
-
-GerenciaDisciplina.o: GerenciaDisciplina.c GerenciaDisciplina.h
-	$(CC) $(CFLAGS) GerenciaDisciplina.c -c
-
-listagem.o: listagem.c
-	$(CC) $(CFLAGS) listagem.c -c
-
-clean: 
-	rm -rf *.o *.gch usuario
+usuario: usuario.o GerenciaDisciplina.o listagem.o TAD.o quiz.o
+	gcc -o $@ $^ $(CFLAGS)

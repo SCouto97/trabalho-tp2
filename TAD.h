@@ -25,6 +25,6 @@ void ListaPerguntas(char *nomearquivo, char *nometopico);
 
 void ImprimirPerguntas(tipoLista lista, char *nometopico);
 
-
+void gerenciaPerguntas(char* nomearquivo, char* usuario_sessao);
 
 #endif
