@@ -3,6 +3,8 @@
 #include "usuario.h"
 #include <string.h>
 #include "GerenciaDisciplina.h"
+#include "TAD.h"
+#include "quiz.h"
 
 /*Função responsável por apresentar a tela de Login ao cliente. Pede que seja inserido usuário e senha e
 Informa se o Login foi realizado com sucesso. */
@@ -184,8 +186,7 @@ void TelaFinalizarSessao(int *opcao) {
 
 void TelaEntradaSistema(char usuario_sessao[20]) {
 	int opcao = 1;
-	char nomearquivo[] = "disciplinas.txt";
-
+	char nomearquivo[] = "disciplinas.txt", nometopico[25];
 	system("clear");
 	if(strcmp(usuario_sessao,"admin") != 0) {
 		while(opcao != 4) {
@@ -194,14 +195,20 @@ void TelaEntradaSistema(char usuario_sessao[20]) {
 			printf("Opcoes: \n");
 			printf("1 - Cadastrar em Nova Disciplina\n");
 			printf("2 - Listar Disciplinas\n");
-			printf("3 - Acessar Disciplina \n");
+			printf("3 - Acessar Quiz de uma Disciplina\n");
 			printf("4 - Encerrar Sessao e retornar para o Menu Inicial\n");
 			printf("Opcao Desejada: ");
 			scanf("%d", &opcao);
+			printf("\n");
+			if(opcao == 3) {
+				printf("Insira o TOpico que desejas realizar um quiz: ");
+				scanf("%s", nometopico);
+			}
 			switch(opcao) {
 				case 1: break; //CadastrarDisciplina(usuario_sessao,nomearquivo);
 				case 2: break;
-				case 3: break;
+				case 3: ListaPerguntas(nomearquivo, nometopico);
+						break;
 				case 4: TelaFinalizarSessao(&opcao);
 						break;
 			}
@@ -215,16 +222,17 @@ void TelaEntradaSistema(char usuario_sessao[20]) {
 			printf("Opcoes: \n");
 				printf("1 - Cadastrar Novo Usuario\n");
 				printf("2 - Criar Disciplina\n");
-				printf("3 - Encerrar Sessao e retornar para o Menu Inicial\n");
+				printf("3 - Adicionar Perguntas de um determinado topico\n");
+				printf("4 - Encerrar Sessao e retornar para o Menu Inicial\n");
 				printf("Opcao Desejada: ");
 				scanf("%d", &opcao);
-				if(opcao == 3) {
-					opcao = 4;
-				}
 				switch(opcao) {
 					case 1: TelaCadastro();
+							break;
 					case 2: ModificarArquivo(nomearquivo,usuario_sessao);
-					case 3: break;
+							break;
+					case 3: gerenciaPerguntas(nomearquivo,usuario_sessao);
+							break;
 					case 4: TelaFinalizarSessao(&opcao);
 							break;
 				}
