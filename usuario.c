@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "usuario.h"
 #include <string.h>
-#include "GerenciaDisciplina.h"
 #include "TAD.h"
+#include "usuario.h"
+#include "GerenciaDisciplina.h"
 #include "listagem.h"
 
 /*Função responsável por apresentar a tela de Login ao cliente. Pede que seja inserido usuário e senha e
@@ -166,23 +166,6 @@ void TelaFinalizarSessao(int *opcao) {
 	getchar();
 	getchar();
 }
-
-/*void CadastrarDisciplina(char usuario_sessao[20], char nomearquivo[20]) {
-	FILE *fp;
-	int counter = 0, opcao;
-	if(fopen(nomearquivo,"r") == NULL) {
-		printf("Ainda nao existe disciplina disponivel para cadastro.\n");
-		printf("Insira <ENTER> para retornar ao Menu de Entrada.\n");
-		getchar();
-		getchar();
-	}
-	else {
-
-
-	}
-}
-*/
-
 
 void TelaEntradaSistema(char usuario_sessao[20]) {
 	int opcao = 1;
