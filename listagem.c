@@ -65,13 +65,18 @@ void CriaListaDisciplinas(ListaDisciplinas *lista2) {
 	return;
 }
 
-void AdicionaDisciplina(ListaDisciplinas *lista2, int codigo, char *disciplina) {
+void AdicionaDisciplina(ListaDisciplinas *lista2, float codigo, char *nome) {
 
 	Disciplinas *aux = lista2->ultimo;
 	aux->proximo = (Disciplinas*)malloc(sizeof(Disciplinas));
-	strcpy(aux->proximo->nomeDisciplina, disciplina);
 	aux->proximo->codigo = codigo;
-	lista2->ultimo = aux->proximo;
+	strcpy(aux->proximo->nomeDisciplina, nome);
+	aux->proximo->visitado = 1;
+	ListaTopicos *lt;
+/*	CriaListaTopicos(lt);
+	AdicionaTopico(lt)
+*/
+	return;
 }
 
 void DesalocaListaDisciplinas(ListaDisciplinas *lista2) {
@@ -94,7 +99,15 @@ void MostraDisciplinas() {
 
 	FILE *fp = fopen("disciplinas.txt", "r");
 
+	ListaDisciplinas *l1;
+
 	if(fp) {
+
+		AdicionaDisciplina(l1);				
+		system("clear");
+		printf("------------------------------------------------------------------\n");
+		printf("Codigo: %f\nMateria: %s\nTopicos: \n", l1->ultimo->codigo, l1->ultimo->nomeDisciplina);
+		MostraTopicos(l1->ultimo->listadetopicos);
 
 		fclose(fp);
 	} else
@@ -102,3 +115,55 @@ void MostraDisciplinas() {
 
 	return;
 }
+
+int main() {
+
+	FILE *fp = fopen("disciplinas.txt", "r");
+	
+	if(fp) {
+
+			float codigo;
+			char *nome, *token, *linha_atual;
+	
+			const char sep[2] = "|";
+
+			fgets(linha_atual, 100, fp);
+			token = strtok(linha_atual, sep);
+			codigo = atof(token);
+			
+			Disciplinas *aux = lista2->ultimo;
+			aux->proximo = (Disciplinas*)malloc(sizeof(Disciplinas));
+			
+			aux->proximo->codigo = codigo;
+
+			CriaListaTopicos(aux->listadetopicos);
+			
+			int i = 0;
+
+			while(token != NULL) {
+
+				token = strtok(NULL, sep);
+
+				if(i == 0)
+					strcpy(nome, token);
+				if(i == 1)
+					AdicionaTopico(aux->listadetopicos, token);
+
+				strcpy(aux->proximo->nomeDisciplina, nome);
+
+				lista2->ultimo = aux->proximo;
+				++i;
+			}
+	
+	
+	
+			fclose(fp);
+	} else
+		printf("O arquivo nao pode ser acessado\n");
+	
+	return;
+
+
+	return 0;
+}
+
