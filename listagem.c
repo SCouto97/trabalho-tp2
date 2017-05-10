@@ -72,8 +72,8 @@ void AdicionaDisciplina(ListaDisciplinas *lista2, float codigo, char *nome) {
 	aux->proximo->codigo = codigo;
 	strcpy(aux->proximo->nomeDisciplina, nome);
 	aux->proximo->visitado = 1;
-	ListaTopicos *lt;
 /*	CriaListaTopicos(lt);
+	ListaTopicos *lt;
 	AdicionaTopico(lt)
 */
 	return;
@@ -97,7 +97,7 @@ void DesalocaListaDisciplinas(ListaDisciplinas *lista2) {
 
 void MostraDisciplinas() {
 
-	FILE *fp = fopen("disciplinas.txt", "r");
+/*	FILE *fp = fopen("disciplinas.txt", "r");
 
 	ListaDisciplinas *l1;
 
@@ -114,8 +114,10 @@ void MostraDisciplinas() {
 		printf("nao foi possivel abrir o arquivo\n\n");
 
 	return;
+*/
 }
 
+/*
 int main() {
 
 	FILE *fp = fopen("disciplinas.txt", "r");
@@ -167,3 +169,4 @@ int main() {
 	return 0;
 }
 
+*/
