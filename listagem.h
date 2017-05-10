@@ -17,8 +17,9 @@ typedef struct _listadetopicos {
 typedef struct _disciplinas {
 
 	struct _disciplinas *proximo;
-	int codigo;
+	float codigo;
 	char *nomeDisciplina;
+	int visitado;
 	ListaTopicos *listadetopicos;
 
 } Disciplinas;
@@ -36,6 +37,6 @@ void AdicionaTopico(ListaTopicos *lista1, char *topico);
 void MostraTopicos(ListaTopicos *lista1);
 void DesalocaListaTopicos(ListaTopicos *lista1);
 void CriaListaDisciplinas(ListaDisciplinas *lista2);
-void AdicionaDisciplina(ListaDisciplinas *lista2, int codigo, char *disciplina);
+void AdicionaDisciplina(ListaDisciplinas *lista2);
 void DesalocaListaDisciplinas(ListaDisciplinas *lista2);
 void MostraDisciplinas();
