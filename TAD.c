@@ -92,11 +92,10 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
 
 void ListaPerguntas(char *nomearquivo,char *nometopico) {
     FILE *fp;
-    int counter = 1;
+
     char line[100], *token, charaux[10];
     tipoLista lista;
     tipoQuiz quiz;
-    apontador aux;
 
     if(fopen("perguntas.txt","r") == NULL) {
         printf("Nao existe uma lista de perguntas ainda!\n");
