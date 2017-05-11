@@ -4,7 +4,6 @@
 #include "TAD.h"
 #include "usuario.h"
 #include "GerenciaDisciplina.h"
-#include "listagem.h"
 
 /*Função responsável por apresentar a tela de Login ao cliente. Pede que seja inserido usuário e senha e
 Informa se o Login foi realizado com sucesso. */
@@ -167,24 +166,6 @@ void TelaFinalizarSessao(char opcao) {
 	getchar();
 }
 
-void listarDisciplinas(char* nomearquivo){
-	FILE* arq;
-	char c;
-	c = getchar();
-	if((arq = fopen(nomearquivo,"r")) == NULL){
-		printf("Arquivos de perguntas inexistente!\nVoltando ao menu inicial...\n");
-		printf("Pressione enter para continuar...\n");
-		c = getchar();
-	}else{
-		while(c != EOF){
-			c = fgetc(arq);
-			printf("%c",c);
-		}printf("\n");
-		printf("Pressione enter para continuar...\n");
-		c = getchar();
-	}
-}
-
 void TelaEntradaSistema(char usuario_sessao[20]) {
 	char opcao = '1';
 	char nomearquivo[] = "disciplinas.txt", nometopico[25];
@@ -202,18 +183,17 @@ void TelaEntradaSistema(char usuario_sessao[20]) {
 			scanf("%c", &opcao);
 			printf("\n");
 			if(opcao == '3') {
-				printf("Insira o TOpico que desejas realizar um quiz: ");
+				printf("Insira o Topico que desejas realizar um quiz: ");
 				scanf("%s", nometopico);
 			}
 			switch(opcao) {
 				case '1': break; /*CadastrarDisciplina(usuario_sessao,nomearquivo);*/
-				case '2': listarDisciplinas(nomearquivo);
-						TelaEntradaSistema(usuario_sessao);
-						break;
+				case '2': ListarDisciplinas();
+						  break;
 				case '3': ListaPerguntas(nomearquivo, nometopico);
-						break;
+						  break;
 				case '4': TelaFinalizarSessao(opcao);
-						break;
+						  break;
 			}
 		}
 	}
