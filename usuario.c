@@ -160,19 +160,37 @@ void TelaSaida(int *opcao) {
 	getchar();
 }
 
-void TelaFinalizarSessao(int *opcao) {
+void TelaFinalizarSessao(char opcao) {
 	printf("Sessao finalizada com sucesso.\n");
 	printf("Insira <ENTER> para retornar ao Menu Inicial.\n");
 	getchar();
 	getchar();
 }
 
+void listarDisciplinas(char* nomearquivo){
+	FILE* arq;
+	char c;
+	c = getchar();
+	if((arq = fopen(nomearquivo,"r")) == NULL){
+		printf("Arquivos de perguntas inexistente!\nVoltando ao menu inicial...\n");
+		printf("Pressione enter para continuar...\n");
+		c = getchar();
+	}else{
+		while(c != EOF){
+			c = fgetc(arq);
+			printf("%c",c);
+		}printf("\n");
+		printf("Pressione enter para continuar...\n");
+		c = getchar();
+	}
+}
+
 void TelaEntradaSistema(char usuario_sessao[20]) {
-	int opcao = 1;
+	char opcao = '1';
 	char nomearquivo[] = "disciplinas.txt", nometopico[25];
-	system("clear");
 	if(strcmp(usuario_sessao,"admin") != 0) {
-		while(opcao != 4) {
+		while(opcao != '4') {
+			system("clear");
 			printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sessao Ativa - %s %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", usuario_sessao);
 			printf("Perfil: Estudante\n");
 			printf("Opcoes: \n");
@@ -181,24 +199,26 @@ void TelaEntradaSistema(char usuario_sessao[20]) {
 			printf("3 - Acessar Quiz de uma Disciplina\n");
 			printf("4 - Encerrar Sessao e retornar para o Menu Inicial\n");
 			printf("Opcao Desejada: ");
-			scanf("%d", &opcao);
+			scanf("%c", &opcao);
 			printf("\n");
-			if(opcao == 3) {
+			if(opcao == '3') {
 				printf("Insira o TOpico que desejas realizar um quiz: ");
 				scanf("%s", nometopico);
 			}
 			switch(opcao) {
-				case 1: break; /*CadastrarDisciplina(usuario_sessao,nomearquivo);*/
-				case 2: break;
-				case 3: ListaPerguntas(nomearquivo, nometopico);
+				case '1': break; /*CadastrarDisciplina(usuario_sessao,nomearquivo);*/
+				case '2': listarDisciplinas(nomearquivo);
+						TelaEntradaSistema(usuario_sessao);
 						break;
-				case 4: TelaFinalizarSessao(&opcao);
+				case '3': ListaPerguntas(nomearquivo, nometopico);
+						break;
+				case '4': TelaFinalizarSessao(opcao);
 						break;
 			}
 		}
 	}
 	else {
-		while(opcao != 4) {
+		while(opcao != '4') {
 			system("clear");
 			printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sessao Ativa - %s %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", usuario_sessao);
 			printf("Perfil: Administrador\n");
@@ -208,15 +228,15 @@ void TelaEntradaSistema(char usuario_sessao[20]) {
 				printf("3 - Adicionar Perguntas de um determinado topico\n");
 				printf("4 - Encerrar Sessao e retornar para o Menu Inicial\n");
 				printf("Opcao Desejada: ");
-				scanf("%d", &opcao);
+				scanf("%c", &opcao);
 				switch(opcao) {
-					case 1: TelaCadastro();
+					case '1': TelaCadastro();
 							break;
-					case 2: ModificarArquivo(nomearquivo,usuario_sessao);
+					case '2': ModificarArquivo(nomearquivo,usuario_sessao);
 							break;
-					case 3: gerenciaPerguntas(nomearquivo,usuario_sessao);
+					case '3': gerenciaPerguntas(nomearquivo,usuario_sessao);
 							break;
-					case 4: TelaFinalizarSessao(&opcao);
+					case '4': TelaFinalizarSessao(opcao);
 							break;
 				}
 			}

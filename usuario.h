@@ -13,10 +13,12 @@ void TelaSaida();
 
 void TelaEntradaSistema(char usuario_sessao[20]);
 
-void TelaFinalizarSessao(int *opcao);
+void TelaFinalizarSessao(char opcao);
 
 int ProcuraNomeUsuario(char username[20], char nomearquivo[20]);
 
 void CadastrarDisciplina(char usuario_sessao[20], char nomearquivo[20]);
+
+void listarDisciplinas(char* nomearquivo);
 
 #endif

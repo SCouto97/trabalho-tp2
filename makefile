@@ -1,6 +1,6 @@
 
 CC = gcc
-CFLAGS = -ansi -Wall
+CFLAGS = -ansi -Wall -std=c99
 
 #Caso exista a adição de algum módulo, modificar apenas essas variáveis
 #Para a compilação (que deve ser feita independentemente) seguir os exemplos .o
@@ -10,7 +10,7 @@ OBJS = usuario.o GerenciaDisciplina.o listagem.o quiz.o TAD.o
 
 all: usuario
 
-usuario: $(OBJS) 
+usuario: $(OBJS)
 	$(CC) $(OBJS) -o usuario
 
 usuario.o: usuario.c $(DEPS)
@@ -28,5 +28,5 @@ quiz.o: quiz.c TAD.h
 TAD.o: TAD.c TAD.h
 	$(CC) $(CFLAGS) TAD.c -c
 
-clean: 
+clean:
 	rm -rf *.o *.gch usuario
