@@ -46,6 +46,7 @@ void ListarDisciplinas() {
     tipoListaDisciplina listaDisciplina;
     char line[100];
     char *token;
+    char nomeDisciplina[25];
     int opcao, identificador;
     tipoDisciplina disciplina;
     apontador2 aux;
@@ -78,13 +79,22 @@ void ListarDisciplinas() {
         printf("--------------------------------------------------------------------:\n");
         printf("1- Listar Topicos de uma Disciplina.\n");
         printf("2- Retornar ao Menu\n");
+        printf("Opcao: ");
         scanf("%d", &opcao);
         if(opcao == 1) {
             printf("Insira o Identificador da Disciplina: ");
             scanf("%d", &identificador);
         }
+        aux = listaDisciplina.primeiro->prox;
+        while(aux != NULL) {
+            if(aux->disciplina.idDisciplina == identificador) {
+                strcpy(nomeDisciplina,aux->disciplina.nomeDisciplina);
+                break;
+            }
+            aux = aux->prox;
+        }
         switch(opcao) {
-            case 1: ListarTopicos(identificador);
+            case 1: ListarTopicos(nomeDisciplina);
                     break;
             case 2: printf("Insira <ENTER> para retornar ao Menu.\n");
                     getchar();
@@ -111,36 +121,35 @@ void InsereTopico(tipoListaTopico *lista, tipoTopico infosTopico) {
     lista->ultimo->prox = NULL;
 }
 
-void ListarTopicos(int idDisciplina) {
+void ListarTopicos(char *nomeDisciplina) {
     apontador3 aux;
     FILE *fp;
     char line[100];
     char *token;
-    char nomeDisciplina[25];
     tipoListaTopico listaTopico;
     tipoTopico topico;
     fp = fopen("disciplinas.txt","r");
+    system("clear");
     CriaListaTopico(&listaTopico);
     while(fgets(line,90,fp) != NULL) {
-        if(idDisciplina == atoi(strtok(line,"."))) {
+        if(strstr(line,nomeDisciplina) != NULL) {
             token = strtok(line,".");
             topico.idDisciplinaOrigem = atoi(token);
-            token = strtok(line,"|");
+            token = strtok(NULL,"|");
             topico.idTopico = atoi(token);
-            token = strtok(line,"|");
-            strcpy(nomeDisciplina,token);
-            token = strtok(line,"|");
+            token = strtok(NULL,"|");
+            token = strtok(NULL,"|");
             strcpy(topico.nomeTopico, token);
             InsereTopico(&listaTopico, topico);
         }
     }
     aux = listaTopico.primeiro->prox;
-        printf("------------------------Lista de Topicos de: %s ------------------------:\n", nomeDisciplina);
+        printf("--------------------Lista de Topicos de: %s --------------------:\n", nomeDisciplina);
         while(aux != NULL) {
             printf("ID: %d - Nome: %s\n", aux->topico.idTopico, aux->topico.nomeTopico);
             aux = aux->prox;
         }
-        printf("--------------------------------------------------------------------:\n");
+        printf("-----------------------------------------------------------------------:\n");
         printf("Insira <ENTER> para retornar ao Menu.\n");
         getchar();
         getchar();

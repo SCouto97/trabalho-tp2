@@ -58,7 +58,7 @@ void CriaListaTopico(tipoListaTopico *lista);
 
 void InsereTopico(tipoListaTopico *lista, tipoTopico infosTopico);
 
-void ListarTopicos(int idDisciplina);
+void ListarTopicos(char *nomeDisciplina);
 
 void ListarDisciplinas();
 
