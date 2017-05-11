@@ -16,6 +16,142 @@ void InsereLista(tipoQuiz x,tipoLista *lista){
 	  lista->ultimo->prox=NULL;	
 }
 
+void CriaListaDisciplina(tipoListaDisciplina *lista) {
+    lista->primeiro = (apontador2)malloc(sizeof(celulaDisciplina));
+    lista->ultimo = lista->primeiro;
+    lista->ultimo->prox = NULL;
+}
+
+void InsereDisciplina(tipoListaDisciplina *lista, tipoDisciplina infosDisciplina) {
+    apontador2 aux;
+    aux = lista->primeiro->prox;
+    int checaExistencia = 0;
+    while(aux != NULL) {
+        if(aux->disciplina.idDisciplina == infosDisciplina.idDisciplina) {
+            checaExistencia = 1;
+            break;
+        }         
+        aux = aux->prox;    
+    }
+    if(checaExistencia == 0) {
+        lista->ultimo->prox = (apontador2)malloc(sizeof(celulaDisciplina));
+        lista->ultimo = lista->ultimo->prox;
+        lista->ultimo->disciplina = infosDisciplina; 
+        lista->ultimo->prox = NULL;
+    }
+}
+
+void ListarDisciplinas() { 
+    FILE *fp;
+    tipoListaDisciplina listaDisciplina;
+    char line[100];
+    char *token;
+    int opcao, identificador;
+    tipoDisciplina disciplina;
+    apontador2 aux;
+
+    if(fopen("disciplinas.txt", "r") == NULL) {
+        printf("Nao existem disciplinas cadastradas no sistema!\n");
+        printf("Insira <ENTER> para retornar ao Menu.\n");
+        getchar();
+        getchar();
+    }
+    else {
+        CriaListaDisciplina(&listaDisciplina);
+        fp = fopen("disciplinas.txt", "r");
+        
+
+        while(fgets(line,90,fp) != NULL) {
+            token = strtok(line,".");
+            disciplina.idDisciplina = atoi(token);
+            token = strtok(NULL,"|");
+            token = strtok(NULL,"|");
+            strcpy(disciplina.nomeDisciplina, token);
+            InsereDisciplina(&listaDisciplina, disciplina);
+        }
+        aux = listaDisciplina.primeiro->prox;
+        printf("------------------------Lista de Disciplinas------------------------:\n");
+        while(aux != NULL) {
+            printf("ID: %d - Nome: %s\n", aux->disciplina.idDisciplina, aux->disciplina.nomeDisciplina);
+            aux = aux->prox;
+        }
+        printf("--------------------------------------------------------------------:\n");
+        printf("1- Listar Topicos de uma Disciplina.\n");
+        printf("2- Retornar ao Menu\n");
+        scanf("%d", &opcao);
+        if(opcao == 1) {
+            printf("Insira o Identificador da Disciplina: ");
+            scanf("%d", &identificador);
+        }
+        switch(opcao) {
+            case 1: ListarTopicos(identificador);
+                    break;
+            case 2: printf("Insira <ENTER> para retornar ao Menu.\n");
+                    getchar();
+                    getchar();
+                    break;
+        }
+        fclose(fp);
+    }
+}
+
+
+
+
+void CriaListaTopico(tipoListaTopico *lista) {
+    lista->primeiro = (apontador3)malloc(sizeof(celulaTopico));
+    lista->ultimo = lista->primeiro;
+    lista->ultimo->prox = NULL;
+}
+
+void InsereTopico(tipoListaTopico *lista, tipoTopico infosTopico) {
+    lista->ultimo->prox = (apontador3)malloc(sizeof(celulaTopico));
+    lista->ultimo = lista->ultimo->prox;
+    lista->ultimo->topico = infosTopico; 
+    lista->ultimo->prox = NULL;
+}
+
+void ListarTopicos(int idDisciplina) {
+    apontador3 aux;
+    FILE *fp;
+    char line[100];
+    char *token;
+    char nomeDisciplina[25];
+    tipoListaTopico listaTopico;
+    tipoTopico topico;
+    fp = fopen("disciplinas.txt","r");
+    CriaListaTopico(&listaTopico);
+    while(fgets(line,90,fp) != NULL) {
+        if(idDisciplina == atoi(strtok(line,"."))) {
+            token = strtok(line,".");
+            topico.idDisciplinaOrigem = atoi(token);
+            token = strtok(line,"|");
+            topico.idTopico = atoi(token);
+            token = strtok(line,"|");
+            strcpy(nomeDisciplina,token);
+            token = strtok(line,"|");
+            strcpy(topico.nomeTopico, token);
+            InsereTopico(&listaTopico, topico);
+        }
+    }
+    aux = listaTopico.primeiro->prox;
+        printf("------------------------Lista de Topicos de: %s ------------------------:\n", nomeDisciplina);
+        while(aux != NULL) {
+            printf("ID: %d - Nome: %s\n", aux->topico.idTopico, aux->topico.nomeTopico);
+            aux = aux->prox;
+        }
+        printf("--------------------------------------------------------------------:\n");
+        printf("Insira <ENTER> para retornar ao Menu.\n");
+        getchar();
+        getchar();
+    fclose(fp);
+
+}
+
+
+
+
+
 void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     apontador aux;
     int counter = 1, boolean = 0;
