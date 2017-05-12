@@ -195,15 +195,37 @@ void cadastrarUsuario(char* usuario_sessao){
 	FILE *fp;
 	system("clear");
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cadastro em Disciplina %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
-
+	char line[100];
 	char opcao;
+	char *token;
+	int flag = 0;
 	ListarDisciplinas(0);
 	printf("Insira o ID da Disciplina que desejas se cadastrar: ");
 	getchar();
 	scanf("%c", &opcao);
-	fp = fopen("cadastros.txt","a");
-	fprintf(fp,"%s %c\n", usuario_sessao, opcao);
-	fclose(fp);
+	if(fopen("cadastros.txt","r") != NULL) {
+		fp = fopen("cadastros.txt", "r");
+		while(fgets(line,90,fp) != NULL) {
+			if(strstr(line,usuario_sessao) != NULL) {
+				token = strtok(line," ");
+				token = strtok(NULL,"\n");
+				if(*token == opcao) {
+					flag = 1;
+					printf("Usuario ja cadastrado nesta disciplina.\n");
+					printf("Insira <ENTER> para retornar ao Menu.\n");
+					getchar();
+					getchar();
+					break;
+				}
+			}
+		}
+		fclose(fp);
+	}
+	if(flag == 0) {
+		fp = fopen("cadastros.txt","a");
+		fprintf(fp,"%s %c\n", usuario_sessao, opcao);
+		fclose(fp);
+	}
 }
 
 void acessarQuiz(char *usuario_sessao) {

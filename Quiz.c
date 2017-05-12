@@ -138,6 +138,7 @@ void ListaPerguntas(char *nomearquivo,char *nometopico) {
                     strcpy(quiz.pergunta,token);
                     token = strtok(NULL,"|");
                     quiz.resposta = *token; 
+                    InsereLista(quiz,&lista);
                 }
                 printf("%s\n", nometopico);
             }
