@@ -104,7 +104,7 @@ Para isso, vare o arrquivo de perguntas, e, atraves da comparacao dos identifica
 void ListaPerguntas(char *nomearquivo,char *nometopico) {
     FILE *fp;
 
-    char line[100]; /*Array de char para armazenar uma linha do arquivo capturada*/
+    char line[260]; /*Array de char para armazenar uma linha do arquivo capturada*/
     char *token;    /*Token do strtok que sera utilizado*/
     char charaux[10];  /* Array de char para armazenar o identificador de um topico*/
     tipoLista lista;
@@ -131,15 +131,15 @@ void ListaPerguntas(char *nomearquivo,char *nometopico) {
             fclose(fp);
             fp = fopen("perguntas.txt","r");
         /*Filtra perguntas do topico passado como parametro*/
-            while(fgets(line,90,fp) != NULL) { 
+            while(fgets(line,250,fp) != NULL) { 
                 if(strstr(line,charaux) != NULL) {
                     token = strtok(line,"|");
                     token = strtok(NULL,"|");
                     strcpy(quiz.pergunta,token);
                     token = strtok(NULL,"|");
                     quiz.resposta = *token; 
-                    InsereLista(quiz,&lista);
                 }
+                printf("%s\n", nometopico);
             }
             fclose(fp);
             ImprimirPerguntas(lista,nometopico);
