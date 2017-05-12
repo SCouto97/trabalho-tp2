@@ -1,3 +1,14 @@
-0.1|Matematica|Trigonometria|{Quiz 1}
-1.1|automatos|maquina de turing|{Quiz 1}
-1.2|automatos|GLC|{Quiz 1}
+1.1|Matematica|Trigonometria|{Quiz 1}
+1.2|Matematica|Algebra|{Quiz 1}
+2.1|Portugues|Sintaxe|{Quiz 1}
+2.2|Portugues|Pontuacao|{Quiz 1}
+3.1|Quimica|Organica|{Quiz 1}
+3.2|Quimica|Inorganica|{Quiz 1}
+4.1|Fisica|Mecanica|{Quiz 1}
+4.2|Fisica|Eletrica|{Quiz 1}
+5.1|Geografia|Geopolitica|{Quiz 1}
+5.2|Geografia|Topografia|{Quiz 1}
+6.1|Historia|Guerra Fria|{Quiz 1}
+6.2|Historia|Historia do Brasil|{Quiz 1}
+7.1|Biologia|Zoologia|{Quiz 1}
+7.2|Biologia|Botanica|{Quiz 1}

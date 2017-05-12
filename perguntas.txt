@@ -1,0 +1,43 @@
+
+1.1|sen^2(x) + cos^2(x) = 1|V|
+1.1|Uma rampa plana, de 36 m de comprimento, faz angulo de 30 graus com o plano horizontal. Uma pessoa que sobe a rampa inteira eleva-se verticalmente de 18m.|V|
+1.1|Se um cateto e a hipotenusa de um triangulo retangulo medem 2a e 4a, respectivamente, entao a tangente do angulo oposto ao menor lado eh igual a duas vezes raiz de 3.|F|
+1.2|Na expressao 6x-4=3x-7, X eh um numero negativo|V|
+1.2|x^4 - (2 - x^4) = 34, x1 = 2, x2 = 4, x3 = -1, x4 = 8|F|
+1.2|a raiz da equacao x^2 - 3x - 4 = 0 eh 5|F|
+2.1|O sujeito do periodo "Os meninos foram recepcionados pelo padrasto" eh simples|V|
+2.1|Patricia se cortou. Temos na oracao anterior um sujeito na voz passiva analica|F|
+2.1|Na oracao: O lobo devorou os porquinhos; "devorou" tem a funcao de verbo transitivo direto|V|
+2.2|Era do conhecimento de todos a hora da prova, mas, alguns se atrasaram. - A pontuacao na frase anterior esta errada|V|
+2.2|os paises menos desenvolvidos vêm buscando, ultimamente, solucões para seus problemas no acervo cultural dos mais avancados; - A supressao das virgulas na oracao anterior nao traria alteracao na semantica|V|
+2.2|Sujeito e predicado nunca podem ser separados por virgula|V|
+3.1|A quimica organica e uma ciência desenvolvida em torno do elemento quimico Carbono.|V|
+3.1|O carbono e monovalente|F|
+3.1|a formula do etanol e CH2CH3OH.|F|
+3.2|Quimica inorganica ou quimica mineral e o ramo da quimica que estuda os elementos quimicos e as substancias da natureza que nao possuem o carbono coordenados em cadeias.|V|
+3.2|A formula do sal de cozinha e NaCl2|F|
+3.2|O grupo dos carbonatos e composto de minerais contendo o aniao|V|
+4.1|Galileu Galilei tentou medir a velocidade da luz e falhou|V|
+4.1|A terceira lei de Newton - Para toda acao(forca) existe uma reacao|V|
+4.1|No calculo da forca elastica, nao e considerada nenhuma constante especifica|F|
+4.2|A potencia tem como unidade de medida o Volt(V)|F|
+4.2|A diferenca de potencial pode ser medida por U = R*i|V|
+4.2|Forca eletrica = K0(Q1*Q2)/d²|V|
+5.1|A geopolitica nao trata de assuntos do meio-ambiente|F|
+5.1|A Uniao Europeia e uma uniao economica e monetaria|V|
+5.1|O chile e um pais-membro do Mercosul|F|
+5.2|Topografia e a ciência dos mapas.|V|
+5.2|Todo mapa deve vir com a legenda de sua escala|V|
+5.2|O mapa-mundi e uma representacao perfeita do planeta terra.|F|
+6.1|Guerra Fria e a designacao atribuida ao periodo historico de disputas estrategicas e conflitos indiretos entre os Estados Unidos e a Uniao Sovietica|V|
+6.1|O anico grande confronto militar que envolveu batalhas em que de um lado havia forcas militares estadunidenses e do outro forcas sovieticas, foi a Guerra do Vietna.|F|
+6.1|Um dos campos que mais se beneficiaram com a Guerra Fria foi o da tecnologia|V|
+6.2|Pedro alvarez Cabral descobriu o Brasil em 1500|V|
+6.2|No Brasil Colonia, a derrama era um dispositivo fiscal aplicado em Minas Gerais a fim de assegurar o teto de cem arrobas anuais na arrecadacao do quinto.|V|
+6.2|A escravidao no Brasil foi abolida em 1888 por Santos Dummond.|F|
+7.1|Anfibios sao animais vertebrados que nao possuem bolsas amnioticas|V|
+7.1|Morcegos sao os anicos mamiferos com habilidade de voar.|V|
+7.1|Entomologia e o ramo da zoologia que estuda os pequenos animais aquaticos|F|
+7.2|A taiga, ou floresta boreal, e um bioma formado por arvores coniferas, predominantes em climas temperados|V|
+7.2|As Angiospermas ou angiospermicas sao plantas espermatofitas cujas sementes sao protegidas por uma estrutura denominada fruto e nao possuem flores|F|
+7.2|A  botanica tambem e responsavel por estudar as algas.|V|
