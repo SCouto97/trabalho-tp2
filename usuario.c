@@ -1,9 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "TAD.h"
+#include "Topicos.h"
 #include "usuario.h"
 #include "GerenciaDisciplina.h"
+#include "GerenciamentoQuiz.h"
+#include "ListagemDeDisciplinas.h"
+#include "Quiz.h"
 
 /*Função responsável por apresentar a tela de Login ao cliente. Pede que seja inserido usuário e senha e
 Informa se o Login foi realizado com sucesso. */
@@ -34,7 +37,7 @@ void TelaLogin() {
 				printf("Insira <ENTER> para ir para a entrada do sistema.\n");
 				getchar();
 				getchar();
-				loginfound = 1; 
+				loginfound = 1;
 				TelaEntradaSistema(user_read); /*Chama funcao que apresenta Tela 									de Entrada (Login Efetuado)*/
 				break;
 			}
@@ -157,10 +160,10 @@ void TelaRecuperarSenha() {
 }
 
 /* Externar uma mensagem de saida para o usuario ao optar pelo encerramento da aplicacao */
-void TelaSaida(int *opcao) {
+void TelaSaida(char *opcao) {
 	printf("Obrigado por utilizar o QuizTime!\n");
 	printf("Insira <ENTER> para encerrar.\n");
-	*opcao = 4;
+	*opcao = '4';
 	getchar();
 	getchar();
 }
@@ -173,16 +176,82 @@ void TelaFinalizarSessao(char opcao) {
 	getchar();
 }
 
-/* Funcao responsavel por manifestar a tela de entrada do usuario no sistema (apos login ser realizado). Caso o usuario seja identificado como administrador, seu Menu de opcoes apresentado sera diferente caso o usuario possua perfil de estudante. */ 
+void ListarMinhasDisciplinas(char* usuario_sessao) {
+	FILE *fp;
+	char line[100], *token;
+	if(fopen("cadastros.txt", "r") != NULL) {
+		fp = fopen("cadastros.txt", "r");
+		while(fgets(line,90,fp) != NULL) {
+			if(strstr(line, usuario_sessao) != NULL) {
+				token = strtok(line," ");
+				token = strtok(NULL,"\n");
+				printf("ID: %d\n", atoi(token));
+			}
+		}
+	}
+}
+
+void cadastrarUsuario(char* usuario_sessao){
+	FILE *fp;
+	system("clear");
+	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cadastro em Disciplina %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
+
+	char opcao;
+	ListarDisciplinas(0);
+	printf("Insira o ID da Disciplina que desejas se cadastrar: ");
+	getchar();
+	scanf("%c", &opcao);
+	fp = fopen("cadastros.txt","a");
+	fprintf(fp,"%s %c\n", usuario_sessao, opcao);
+	fclose(fp);
+}
+
+void acessarQuiz(char *usuario_sessao) {
+	FILE *fp, *fp2;
+	char line[100], line2[100], *token, *token2;
+	char nomeTopico[25];
+	if(fopen("cadastros.txt","r") != NULL && fopen("disciplinas.txt","r") != NULL) {
+		fp = fopen("cadastros.txt","r");
+		printf("---------------------------Topicos Disponiveis---------------------------\n");
+		while(fgets(line,90,fp)!=NULL) {
+			if(strstr(line,usuario_sessao) != NULL) {
+				token = strtok(line," ");
+				token = strtok(NULL,"\n");
+				fp2 = fopen("disciplinas.txt","r");
+				while(fgets(line2,90,fp2)!=NULL) {
+					token2 = strtok(line2,".");
+					if(strcmp(token,token2) == 0) {
+						token2 = strtok(NULL,"|");
+						token2 = strtok(NULL,"|");
+						token2 = strtok(NULL,"|");
+						printf("%s\n", token2);
+					}
+				}
+			}
+		}
+		printf("-------------------------------------------------------------------------\n");
+		printf("Insira o nome do topico sobre o qual desejas realizar um quiz: ");
+		scanf("%s", nomeTopico);
+		ListaPerguntas("disciplinas.txt",nomeTopico);
+		fclose(fp);
+		fclose(fp2);
+	}
+}
+
+/* Funcao responsavel por manifestar a tela de entrada do usuario no sistema (apos login ser realizado). Caso o usuario seja identificado como administrador, seu Menu de opcoes apresentado sera diferente caso o usuario possua perfil de estudante. */
 
 void TelaEntradaSistema(char usuario_sessao[20]) {
 	char opcao = '1';
-	char nomearquivo[] = "disciplinas.txt", nometopico[25];
+	char nomearquivo[] = "disciplinas.txt";
 	if(strcmp(usuario_sessao,"admin") != 0) { /*Menu de usuario estudante*/
 		while(opcao != '4') {
 			system("clear");
 			printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sessao Ativa - %s %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", usuario_sessao);
 			printf("Perfil: Estudante\n");
+			printf("---------------------------Minhas Disciplinas---------------------------\n");
+			ListarMinhasDisciplinas(usuario_sessao);
+			printf("------------------------------------------------------------------------\n");
+
 			printf("Opcoes: \n");
 			printf("1 - Cadastrar em Nova Disciplina\n");
 			printf("2 - Listar Disciplinas\n");
@@ -191,15 +260,13 @@ void TelaEntradaSistema(char usuario_sessao[20]) {
 			printf("Opcao Desejada: ");
 			scanf("%c", &opcao);
 			printf("\n");
-			if(opcao == '3') {
-				printf("Insira o Topico que desejas realizar um quiz: ");
-				scanf("%s", nometopico);
-			}
 			switch(opcao) {
-				case '1': break; /*CadastrarDisciplina(usuario_sessao,nomearquivo);*/
-				case '2': ListarDisciplinas();
+				case '1': cadastrarUsuario(usuario_sessao);
+
+					break; /*CadastrarDisciplina(usuario_sessao,nomearquivo);*/
+				case '2': ListarDisciplinas(1);
 						  break;
-				case '3': ListaPerguntas(nomearquivo, nometopico);
+				case '3': acessarQuiz(usuario_sessao);
 						  break;
 				case '4': TelaFinalizarSessao(opcao);
 						  break;
@@ -237,8 +304,8 @@ void TelaEntradaSistema(char usuario_sessao[20]) {
 
 /*Tela Inicial do nosso QuizTime. A Mesma informara ao usuario as opcoes que ele pode utilizar.*/
 void TelaInicial() {
-	int opcao = 0;
-	while(opcao != 4) {
+	char opcao = '0';
+	while(opcao != '4') {
 		system("clear");
 		printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Seja Bem-Vindo ao QuizTime %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
 		printf("Opcoes: \n");
@@ -247,15 +314,15 @@ void TelaInicial() {
 		printf("3 - Esqueci Minha Senha\n");
 		printf("4 - Sair\n");
 		printf("Opcao Desejada: ");
-		scanf("%d", &opcao);
+		scanf("%c", &opcao);
 		switch(opcao) {
-			case 1: TelaLogin();
+			case '1': TelaLogin();
 					break;
-			case 2: TelaCadastro();
+			case '2': TelaCadastro();
 					break;
-			case 3: TelaRecuperarSenha();
+			case '3': TelaRecuperarSenha();
 					break;
-			case 4: TelaSaida(&opcao);
+			case '4': TelaSaida(&opcao);
 					break;
 		}
 	}
