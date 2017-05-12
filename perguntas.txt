@@ -1,4 +1,3 @@
-
 1.1|sen^2(x) + cos^2(x) = 1|V|
 1.1|Uma rampa plana, de 36 m de comprimento, faz angulo de 30 graus com o plano horizontal. Uma pessoa que sobe a rampa inteira eleva-se verticalmente de 18m.|V|
 1.1|Se um cateto e a hipotenusa de um triangulo retangulo medem 2a e 4a, respectivamente, entao a tangente do angulo oposto ao menor lado eh igual a duas vezes raiz de 3.|F|
@@ -9,11 +8,11 @@
 2.1|Patricia se cortou. Temos na oracao anterior um sujeito na voz passiva analica|F|
 2.1|Na oracao: O lobo devorou os porquinhos; "devorou" tem a funcao de verbo transitivo direto|V|
 2.2|Era do conhecimento de todos a hora da prova, mas, alguns se atrasaram. - A pontuacao na frase anterior esta errada|V|
-2.2|os paises menos desenvolvidos vêm buscando, ultimamente, solucões para seus problemas no acervo cultural dos mais avancados; - A supressao das virgulas na oracao anterior nao traria alteracao na semantica|V|
+2.2|os paises menos desenvolvidos vem buscando, ultimamente, solucões para seus problemas no acervo cultural dos mais avancados; - A supressao das virgulas na oracao anterior nao traria alteracao na semantica|V|
 2.2|Sujeito e predicado nunca podem ser separados por virgula|V|
-3.1|A quimica organica e uma ciência desenvolvida em torno do elemento quimico Carbono.|V|
-3.1|O carbono e monovalente|F|
-3.1|a formula do etanol e CH2CH3OH.|F|
+3.1|A quimica organica eh uma ciencia desenvolvida em torno do elemento quimico Carbono.|V|
+3.1|O carbono eh monovalente|F|
+3.1|a formula do etanol eh CH2CH3OH.|F|
 3.2|Quimica inorganica ou quimica mineral e o ramo da quimica que estuda os elementos quimicos e as substancias da natureza que nao possuem o carbono coordenados em cadeias.|V|
 3.2|A formula do sal de cozinha e NaCl2|F|
 3.2|O grupo dos carbonatos e composto de minerais contendo o aniao|V|
@@ -26,11 +25,11 @@
 5.1|A geopolitica nao trata de assuntos do meio-ambiente|F|
 5.1|A Uniao Europeia e uma uniao economica e monetaria|V|
 5.1|O chile e um pais-membro do Mercosul|F|
-5.2|Topografia e a ciência dos mapas.|V|
+5.2|Topografia eh a ciencia dos mapas.|V|
 5.2|Todo mapa deve vir com a legenda de sua escala|V|
 5.2|O mapa-mundi e uma representacao perfeita do planeta terra.|F|
-6.1|Guerra Fria e a designacao atribuida ao periodo historico de disputas estrategicas e conflitos indiretos entre os Estados Unidos e a Uniao Sovietica|V|
-6.1|O anico grande confronto militar que envolveu batalhas em que de um lado havia forcas militares estadunidenses e do outro forcas sovieticas, foi a Guerra do Vietna.|F|
+6.1|Guerra Fria eh a designacao atribuida ao periodo historico de disputas estrategicas e conflitos indiretos entre os Estados Unidos e a Uniao Sovietica|V|
+6.1|O unico grande confronto militar que envolveu batalhas em que de um lado havia forcas militares estadunidenses e do outro forcas sovieticas, foi a Guerra do Vietna.|F|
 6.1|Um dos campos que mais se beneficiaram com a Guerra Fria foi o da tecnologia|V|
 6.2|Pedro alvarez Cabral descobriu o Brasil em 1500|V|
 6.2|No Brasil Colonia, a derrama era um dispositivo fiscal aplicado em Minas Gerais a fim de assegurar o teto de cem arrobas anuais na arrecadacao do quinto.|V|
