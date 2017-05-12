@@ -9,7 +9,7 @@
 Informa se o Login foi realizado com sucesso. */
 void TelaLogin() {
 	FILE *fp;
-	int loginfound = 0;
+	int loginfound = 0; /*Variavel para controle de login. So sera settada para "1" se o login 				    existir.*/
 	char user[20], password[20], name[20], user_read[20], password_read[20], nomearquivo[20] = "usuarios.txt";
 	system("clear");
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Tela de Login: %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
@@ -18,7 +18,7 @@ void TelaLogin() {
 	printf("%%%%%%%%%%%%%% Senha: ");
 	scanf("%s", password);
 
-	if(fopen(nomearquivo, "r") == NULL) {
+	if(fopen(nomearquivo, "r") == NULL) {	/*Trata Possibilidade do Arquivo Nao Existir*/
 		printf("Nao existem usuarios cadastrados!\n");
 		printf("Insira <ENTER> para retornar ao menu inicial.");
 		getchar();
@@ -34,12 +34,12 @@ void TelaLogin() {
 				printf("Insira <ENTER> para ir para a entrada do sistema.\n");
 				getchar();
 				getchar();
-				loginfound = 1;
-				TelaEntradaSistema(user_read);
+				loginfound = 1; 
+				TelaEntradaSistema(user_read); /*Chama funcao que apresenta Tela 									de Entrada (Login Efetuado)*/
 				break;
 			}
 		}
-		if(loginfound == 0) {
+		if(loginfound == 0) { /*Informa falha de login*/
 			printf("Usuario e/ou Senha Incorretos.\n");
 			printf("Insira <ENTER> para retornar ao menu inicial.");
 			getchar();
@@ -51,43 +51,48 @@ void TelaLogin() {
 }
 
 /*Função responsável por checar se um nome de usuário já existe. Para isso, lê o arquivo e compara com o nome
-inserido pelo usuário. Caso já exista um igual, retorna 1. Caso contrário, retorna 0.*/
+inserido pelo usuário. Caso já exista um igual, retorna 1. Caso contrário, retorna 0.
+
+Parametros da funcao: "username" - Nome do usuario que queremos checar existencia.
+"nomearquivo" - Nome do arquivo no qual procuraremos o usuario inserido.*/
+
 int ProcuraNomeUsuario(char username[20], char nomearquivo[20]) {
 	char user_read[20], name_read[20], password_read[20];
 	FILE *fp;
-	if(fopen(nomearquivo, "r") == NULL) {
+	if(fopen(nomearquivo, "r") == NULL) {	/*Trata Possibilidade do Arquivo Nao Existir*/
 		return 0;
 	}
 	else {
-		fp = fopen(nomearquivo,"r");
+		fp = fopen(nomearquivo,"r");	/*Efetivamente procura pelo usuario no arquivo*/
 		while(fscanf(fp,("%s %s %s"), name_read, user_read, password_read) == 3) {
 			if(strcmp(user_read,username) == 0) {
 				printf("Este usuario ja existe. Insira outro. \n");
 				return 1;
 			}
 		}
+		fclose(fp);
 		return 0;
 	}
 }
 
 /*Função responsável por realizar o cadastro de novos usuários. São solicitados a princípio: Nome, Usuário e Senha.
-Checa se o usuario está disponível para uso. Se não estiver, o cadastro é realizado. Se estiver, então o cliente deverá
-optar por outro nome de usuário*/
+Checa se o usuario está disponível para uso. Se não estiver, o cadastro é realizado. Se estiver, então o cliente sera informado e devera optar por outro nome de usuário*/
+
 void TelaCadastro() {
 	char nome[20], login[20], senha[20], nomearquivo[20] = "usuarios.txt";
 	FILE *fp;
-	int usuarioexiste = 1;
+	int usuarioexiste = 1;	/*Variavel de controle para o While*/
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cadastro %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
 	printf("%%%%%%%%%%%%%% Primeiro Nome: ");
 	scanf("%s", nome);
-	while(usuarioexiste == 1) {
+	while(usuarioexiste == 1) {  /*Loop para Garantir a unicidade do usuario a ser cadastrado*/
 		printf("%%%%%%%%%%%%%% Usuario: ");
 		scanf("%s", login);
-		usuarioexiste = ProcuraNomeUsuario(login,nomearquivo);
+		usuarioexiste = ProcuraNomeUsuario(login,nomearquivo); /*Retorno 0 ou 1*/
 	}
 	printf("%%%%%%%%%%%%%% Senha: ");
 	scanf("%s", senha);
-	if(fopen(nomearquivo,"r") == NULL) {
+	if(fopen(nomearquivo,"r") == NULL) { /*Caso ainda nao exista arquivo de usuarios*/
 		fp = fopen(nomearquivo, "w");
 		fprintf(fp,"%s %s %s\n", nome, login, senha);
 		printf("Cadastro realizado com sucesso.\n");
@@ -97,7 +102,7 @@ void TelaCadastro() {
 		system("clear");
 		fclose(fp);
 	}
-	else {
+	else {	/* Caso ja exista, acrescenta ao final os dados do novo usuario */
 		fp = fopen(nomearquivo, "a");
 		fprintf(fp,"%s %s %s\n", nome, login, senha);
 		printf("Cadastro realizado com sucesso.\n");
@@ -111,11 +116,12 @@ void TelaCadastro() {
 
 /*Função responsável por procurar no arquivo de cadastros o usuario inserido. Para solicitar a senha é necessario
 informar o nome e o usuario. Com ambas informações, é realizada uma busca no arquivo e, se existir algum cadastro
-que possua o Nome e o Usuário informados, entao pegamos essa senha e informamos ao cliente.*/
+que possua o Nome e o Usuário informados, entao  essa senha e informada ao cliente.*/
+
 void TelaRecuperarSenha() {
 	FILE *fp;
 	char nomearquivo[20] = "usuarios.txt", nome[20], usuario[20], senha[20], nome_read[20], usuario_read[20];
-	int loginfound = 0;
+	int loginfound = 0; /*Variavel para controle de login. So sera settada para "1" se o 				    usuario for encontrado no cadastro.*/
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Recuperacao de Senha %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
 	printf("%%%%%%%%%%%%%% Insira seu primeiro nome: ");
 	scanf("%s", nome);
@@ -150,7 +156,7 @@ void TelaRecuperarSenha() {
 	}
 }
 
-/* Externar uma mensagem de saida para o usuario */
+/* Externar uma mensagem de saida para o usuario ao optar pelo encerramento da aplicacao */
 void TelaSaida(int *opcao) {
 	printf("Obrigado por utilizar o QuizTime!\n");
 	printf("Insira <ENTER> para encerrar.\n");
@@ -159,6 +165,7 @@ void TelaSaida(int *opcao) {
 	getchar();
 }
 
+/* Funcao responsavel por externar uma mensagem de LogOut*/
 void TelaFinalizarSessao(char opcao) {
 	printf("Sessao finalizada com sucesso.\n");
 	printf("Insira <ENTER> para retornar ao Menu Inicial.\n");
@@ -166,10 +173,12 @@ void TelaFinalizarSessao(char opcao) {
 	getchar();
 }
 
+/* Funcao responsavel por manifestar a tela de entrada do usuario no sistema (apos login ser realizado). Caso o usuario seja identificado como administrador, seu Menu de opcoes apresentado sera diferente caso o usuario possua perfil de estudante. */ 
+
 void TelaEntradaSistema(char usuario_sessao[20]) {
 	char opcao = '1';
 	char nomearquivo[] = "disciplinas.txt", nometopico[25];
-	if(strcmp(usuario_sessao,"admin") != 0) {
+	if(strcmp(usuario_sessao,"admin") != 0) { /*Menu de usuario estudante*/
 		while(opcao != '4') {
 			system("clear");
 			printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sessao Ativa - %s %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", usuario_sessao);
@@ -197,7 +206,7 @@ void TelaEntradaSistema(char usuario_sessao[20]) {
 			}
 		}
 	}
-	else {
+	else {	/*Menu de usuario administrador*/
 		while(opcao != '4') {
 			system("clear");
 			printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sessao Ativa - %s %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", usuario_sessao);
