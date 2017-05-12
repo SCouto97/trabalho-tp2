@@ -34,7 +34,7 @@ int ValidarDisciplina(char *nomeDisciplina, char *nomeTopico) {
 void gerenciaPerguntas(char* nomearquivo, char* usuario_sessao){
     FILE* arq;
     float num;
-    char pergunta[150], nomedisciplina[25], topico[25], resposta, line[100], *token;
+    char pergunta[250], nomedisciplina[25], topico[25], resposta, line[100], *token;
     arq = fopen(nomearquivo,"r");
     int boolean = 0;
     int boolean2 = 0;
