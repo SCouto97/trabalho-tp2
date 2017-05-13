@@ -114,3 +114,18 @@ void ListarDisciplinas(int IDaux) {
         fclose(fp);
     }
 }
+
+void ListarMinhasDisciplinas(char* usuario_sessao) {
+    FILE *fp;
+    char line[100], *token;
+    if(fopen("cadastros.txt", "r") != NULL) {
+        fp = fopen("cadastros.txt", "r");
+        while(fgets(line,90,fp) != NULL) {
+            if(strstr(line, usuario_sessao) != NULL) {
+                token = strtok(line," ");
+                token = strtok(NULL,"\n");
+                printf("ID: %d\n", atoi(token));
+            }
+        }
+    }
+}
