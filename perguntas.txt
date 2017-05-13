@@ -16,5 +16,5 @@
 3.1|O Acetileno e um hidrocarboneto com dois carbonos|V|
 3.1|o sufixo "al" representa a funcao organica aldeido|V|
 3.1|A Propanona e mais conhecida como acetona.|V|
-3.1|Hidrocarbonetos sao compostos de hidrogenios e oxigenios.|V|
+3.1|Hidrocarbonetos sao compostos de hidrogenios e oxigenios.|F|
 3.1|Butano e um hidrocarboneto com 3 Carbonos|F|

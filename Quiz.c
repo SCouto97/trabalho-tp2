@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/time.h> 
 #include "Quiz.h"
 
 /*Funcao para criar uma lista com cabeca com perguntas de um quiz*/
@@ -36,14 +37,19 @@ Recebe a Lista de Quiz e o nome do topico sobre o qual esta sendo realizado o qu
 void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     apontador aux;
     int counter = 1, boolean = 0;
-    char resposta;
+    char resposta, opcao = '0';
     tipoLista ListaErradas;
     aux = lista.primeiro->prox;
+    struct timeval t1, t2, v2, v1;
+    double elapsedTime;
     CriaLista(&ListaErradas);
     system("clear");
+    #include <sys/time.h>
     printf("---------------- Quiz: %s ----------------", nometopico);
     printf("\n");
+    gettimeofday(&v1, NULL); 
     while(aux!=NULL) {  /*Loop de Impressao da Pergunta e Leitura da Resposta*/
+        gettimeofday(&t1, NULL); 
         printf("------------------------------------------------------------------\n");
         printf("%d - %s\n", counter, aux->dadosquiz.pergunta);
         getchar();
@@ -69,6 +75,10 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
                 boolean = 0;
             }
         }
+        gettimeofday(&t2, NULL);
+        elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;      /*seg -> ms*/
+        elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   /*us -> ms*/
+        printf("Tempo de Resposta da Questao: %lf ms\n", elapsedTime);
     /*Caso a resposta do usuario esteja incorreta, adicionamos a pergunta a uma Lista que  contem os erros do usuario, para que ele seja informado ao termino do quiz.*/
         if(resposta != aux->dadosquiz.resposta) {
             InsereLista(aux->dadosquiz, &ListaErradas);
@@ -77,7 +87,11 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
         aux = aux->prox;
         counter++;
         printf("\n");
-    }    
+    }  
+    gettimeofday(&v2, NULL);   
+    elapsedTime = (v2.tv_sec - v1.tv_sec) * 1000.0;      /*seg -> ms*/
+    elapsedTime += (v2.tv_usec - v1.tv_usec) / 1000.0;   /*us -> ms*/
+    printf("Duracao do Quiz: %lf ms\n", elapsedTime);
     /*Caso nao haja erros, printa sucesso*/
     if(ListaErradas.primeiro->prox == NULL) {
         printf("Parabens, voce acertou todas as perguntas!\n");
@@ -87,21 +101,30 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     }
     else {  /*Caso contrario, imprime perguntas respondidas incorretamente*/
         aux = ListaErradas.primeiro->prox;
-        printf("ITENS INCORRETOS:\n\n");
-        while(aux!=NULL) {
-            printf("------------------------------------------------------------------\n");
-            printf("%s\n", aux->dadosquiz.pergunta);
-            if(aux->dadosquiz.resposta == 'V') {
-                printf("Respondeu: F\n");
-                printf("Resposta Correta: %c\n", aux->dadosquiz.resposta);
-            }
-            else {
-              printf("Respondeu: V\n");
-              printf("Resposta Correta: %c\n", aux->dadosquiz.resposta);
-            }
-            printf("------------------------------------------------------------------\n");
-            printf("\n\n");
-            aux = aux->prox;
+        printf("\n\n");
+        printf("1 - ITENS INCORRETOS\n");
+        printf("2 - SAIR\n");
+        printf("Opcao: ");
+        getchar();
+        scanf("%c", &opcao);
+        switch(opcao) {
+                case '1':    while(aux!=NULL) {
+                                printf("------------------------------------------------------------------\n");
+                                printf("%s\n", aux->dadosquiz.pergunta);
+                                if(aux->dadosquiz.resposta == 'V') {
+                                    printf("Respondeu: F\n");
+                                    printf("Resposta Correta: %c\n", aux->dadosquiz.resposta);
+                                }
+                                else {
+                                    printf("Respondeu: V\n");
+                                    printf("Resposta Correta: %c\n", aux->dadosquiz.resposta);
+                                }
+                                printf("------------------------------------------------------------------\n");
+                                printf("\n\n");
+                                aux = aux->prox;
+                            }
+                            break;
+                case '2':   break;
         }
         printf("Insira <ENTER> para retornar ao Menu.\n");
         getchar();
