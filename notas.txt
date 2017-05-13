@@ -1,4 +1,0 @@
-Arrumar:
-
-1- Validar a entrada da opção de escolher um quiz
-2- Validar o tópico ao adiicionar uma pergunta
