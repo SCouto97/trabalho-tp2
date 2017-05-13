@@ -27,4 +27,6 @@ void CriaLista(tipoLista *lista);
 
 void InsereLista(tipoQuiz x, tipoLista *lista);
 
+void DesalocarLista(tipoLista *lista);
+
 #endif

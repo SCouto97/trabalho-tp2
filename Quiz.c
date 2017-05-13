@@ -18,6 +18,16 @@ void InsereLista(tipoQuiz x,tipoLista *lista){
       lista->ultimo->prox=NULL; 
 }
 
+void DesalocarLista(tipoLista *lista) {
+    apontador aux, aux2;
+    aux = lista->primeiro;
+    while(aux!=NULL) {
+        aux2 = aux;
+        aux = aux->prox;
+        free(aux2);
+    }
+}
+
 /*Funcao Responsavel pela Impressao da Lista de Quiz e pela leitura das respostas do usuario.
 Tambem informa ao usuario, ao termino do quiz, quais perguntas ele errou.
 Recebe a Lista de Quiz e o nome do topico sobre o qual esta sendo realizado o quiz como parametro
@@ -96,6 +106,8 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
         printf("Insira <ENTER> para retornar ao Menu.\n");
         getchar();
         getchar();
+        DesalocarLista(&lista);
+        DesalocarLista(&ListaErradas);
     }
 }
 

@@ -31,6 +31,17 @@ void CriaListaDisciplina(tipoListaDisciplina *lista) {
     lista->ultimo->prox = NULL;
 }
 
+void DesalocarListaDisciplina(tipoListaDisciplina *lista) {
+    apontador2 aux, aux2;
+    aux = lista->primeiro;
+    while(aux!=NULL) {
+        aux2 = aux;
+        aux = aux->prox;
+        free(aux2);
+    }
+}
+
+
 /*Funcao responsavel por listar as disciplinas que estao cadastradas no sistema*/
 void ListarDisciplinas(int IDaux) {
     FILE *fp;
@@ -99,6 +110,7 @@ void ListarDisciplinas(int IDaux) {
                         break;
             }
         }
+        DesalocarListaDisciplina(&listaDisciplina);
         fclose(fp);
     }
 }

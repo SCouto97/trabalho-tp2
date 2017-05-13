@@ -18,6 +18,16 @@ void InsereTopico(tipoListaTopico *lista, tipoTopico infosTopico) {
     lista->ultimo->prox = NULL;
 }
 
+void DesalocarListaTopico(tipoListaTopico *lista) {
+    apontador3 aux, aux2;
+    aux = lista->primeiro;
+    while(aux!=NULL) {
+        aux2 = aux;
+        aux = aux->prox;
+        free(aux2);
+    }
+}
+
 /*Funcao responsavel por listar os topicos da disciplina passada como parametro*/
 void ListarTopicos(char *nomeDisciplina) {
     apontador3 aux;
@@ -53,5 +63,6 @@ void ListarTopicos(char *nomeDisciplina) {
         getchar();
         getchar();
     fclose(fp);
+    DesalocarListaTopico(&listaTopico);
 
 }

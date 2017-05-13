@@ -24,6 +24,8 @@ void ListarDisciplinas(int IDaux);
 
 void CriaListaDisciplina(tipoListaDisciplina *lista);
 
+void DesalocarListaDisciplina(tipoListaDisciplina *lista);
+
 void InsereDisciplina(tipoListaDisciplina *lista, tipoDisciplina infosDisciplina);
 
 #endif

@@ -18,6 +18,7 @@ typedef struct {
 	apontador3 primeiro,ultimo;
 }tipoListaTopico;
 
+void DesalocarListaTopico(tipoListaTopico *lista);
 
 void CriaListaTopico(tipoListaTopico *lista);
 
