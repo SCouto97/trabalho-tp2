@@ -18,7 +18,7 @@ Para a execução do teste, usar o comando './TESTE'.
 
 ## Considerações sobre o programa
 
-Para acessar o usuário admnistrador, utilizar login: admin, senha: admin
+Para acessar o usuário administrador, utilizar login: admin, senha: admin
 
 ## Link do repositório no GitHub
 
