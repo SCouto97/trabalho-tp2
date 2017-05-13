@@ -1,6 +1,7 @@
-- Gabriel Campos Albino (@Gagocampos) 		matr.: 15/0035187
-- Gabriel Nunes Ribeiro Silva (@gabnunes)    	matr.: 15/0126689
-- Samuel Andrade do Couto (@SCouto97)  		matr.: 15/0021623
+Membros:
+	- Gabriel Campos Albino (@Gagocampos) 		matr.: 15/0035187
+	- Gabriel Nunes Ribeiro Silva (@gabnunes)   matr.: 15/0126689
+	- Samuel Andrade do Couto (@SCouto97)  		matr.: 15/0021623
 
 Descrição do Modelo Conceitual:
 	Nosso QuizTime foi devidamete modularizado como solicitado, contemplando:
@@ -25,4 +26,14 @@ Função dos módulos:
 
 	Módulo Quiz: Cria uma lista de perguntas (através da leitura do arquivo "perguntas.txt"), e disponibiliza o Quiz para o Usuario. Conta o tempo de resposta de cada questao e o tempo total do quiz, armazena respostas erradas em uma lista. Oferece ao usuario a opção de checar quais erros cometeu.
 
+	Módulo de Testes: Um módulo de testes básico foi criado para testar a criação das estruturas dentro do sistema. Para os testes, utilizamos assertivas em relação a ponteiros e alocação de memória. Foi utilizada a biblioteca 64 bits do CUnit.
+
+Como
+
+
+Considerações Finais:
+	Algumas coisas foram mudadas em relação à especificação:
+
+	-O arquivo readme possui extensão .md, não .txt para ser compatível com o GitHub.
+	-Os gráficos do GitHub não são precisos. O sistema foi desenvolvido em maior parte utilizando-se pair-programming, sendo bem dividido entre os membros da equipe. A diferença maior é dada pela inclusão da biblioteca CUnit.
 
