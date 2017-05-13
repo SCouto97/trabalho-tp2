@@ -4,7 +4,7 @@
 				  
 				  - Gabriel Campos Albino (@Gagocampos)  matr.: 15/0035187
 				  
-				  - Gabriel Nunes (@gabnunes)            matr.: 15/0126689
+				  - Gabriel Nunes Ribeiro Silva(@gabnunes)            matr.: 15/0126689
 				  
 				  - Samuel Andrade do Couto (@SCouto97)  matr.: 15/0021623
 
