@@ -1,5 +1,5 @@
 - Gabriel Campos Albino (@Gagocampos) 		matr.: 15/0035187
-- Gabriel Nunes Ribeiro Silva (@gabnunes)    			matr.: 15/0126689
+- Gabriel Nunes Ribeiro Silva (@gabnunes)    	matr.: 15/0126689
 - Samuel Andrade do Couto (@SCouto97)  		matr.: 15/0021623
 
 Descrição do Modelo Conceitual:
@@ -19,7 +19,7 @@ Função dos módulos:
 
 	Módulo ListagemDeDisciplina: Responsável por criar uma lista de disciplinas e listar quais estão cadastradas (através da leitura do arquivo "disciplinas.txt".
 
-	Módulo Tópicos: Responsável po criar uma lista de tópicos e listar quais tópicos de uma disciplina estão cadastrados (através da leitura do arquivo "disciplinas.txt".
+	Módulo Tópicos: Responsável por criar uma lista de tópicos e listar quais tópicos de uma disciplina estão cadastrados (através da leitura do arquivo "disciplinas.txt".
 
 	Módulo GerenciamentoQuiz: Permite ao Administrador criar uma pergunta de um tópico de uma disciplina.
 
