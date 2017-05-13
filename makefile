@@ -4,16 +4,19 @@ CFLAGS = -ansi -Wall
 #Caso exista a adição de algum módulo, modificar apenas essas variáveis
 #Para a compilação (que deve ser feita independentemente) seguir os exemplos .o
 
-DEPS = usuario.h GerenciaDisciplina.h Topicos.h GerenciamentoQuiz.h ListagemDeDisciplinas.c
-OBJS = usuario.o GerenciaDisciplina.o Quiz.o Topicos.o GerenciamentoQuiz.o ListagemDeDisciplinas.o
+DEPS = Usuario.h GerenciaDisciplina.h Topicos.h GerenciamentoQuiz.h ListagemDeDisciplinas.c
+OBJS = Usuario.o GerenciaDisciplina.o Quiz.o Topicos.o GerenciamentoQuiz.o ListagemDeDisciplinas.o main.o
 
-all: usuario teste
+all: main teste
 
-usuario: $(OBJS)
-	$(CC) $(OBJS) -o usuario
+main: $(OBJS)
+	$(CC) $(OBJS) -o TP1
+
+main.o: main.c
+	$(CC) main.c -c
 
 teste: moduloTeste.c
-	$(CC) -I./CUnit -L./CUnit moduloTeste.c -lcunit -o teste
+	$(CC) -I./CUnit -L./CUnit moduloTeste.c -lcunit -o TESTE
 
 usuario.o: usuario.c $(DEPS)
 	$(CC) $(CFLAGS) usuario.c -c
@@ -34,4 +37,4 @@ ListagemDeDisciplinas.o: ListagemDeDisciplinas.c ListagemDeDisciplinas.h
 	$(CC) $(CFLAGS) ListagemDeDisciplinas.c -c
 
 clean:
-	rm -rf *.o *.gch usuario teste
+	rm -rf *.o *.gch TP1 TESTE
