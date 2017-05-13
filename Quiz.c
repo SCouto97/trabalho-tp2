@@ -134,6 +134,38 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     }
 }
 
+void acessarQuiz(char *usuario_sessao) {
+    FILE *fp, *fp2;
+    char line[100], line2[100], *token, *token2;
+    char nomeTopico[25];
+    if(fopen("cadastros.txt","r") != NULL && fopen("disciplinas.txt","r") != NULL) {
+        fp = fopen("cadastros.txt","r");
+        printf("---------------------------Topicos Disponiveis---------------------------\n");
+        while(fgets(line,90,fp)!=NULL) {
+            if(strstr(line,usuario_sessao) != NULL) {
+                token = strtok(line," ");
+                token = strtok(NULL,"\n");
+                fp2 = fopen("disciplinas.txt","r");
+                while(fgets(line2,90,fp2)!=NULL) {
+                    token2 = strtok(line2,".");
+                    if(strcmp(token,token2) == 0) {
+                        token2 = strtok(NULL,"|");
+                        token2 = strtok(NULL,"|");
+                        token2 = strtok(NULL,"|");
+                        printf("%s\n", token2);
+                    }
+                }
+            }
+        }
+        printf("-------------------------------------------------------------------------\n");
+        printf("Insira o nome do topico sobre o qual desejas realizar um quiz: ");
+        scanf("%s", nomeTopico);
+        ListaPerguntas("disciplinas.txt",nomeTopico);
+        fclose(fp);
+        fclose(fp2);
+    }
+}
+
 /*Funcao responavel pela criacao da lista de perguntas do quiz do topico passado como parametro.
 Para isso, vare o arrquivo de perguntas, e, atraves da comparacao dos identificadores, filtra apenas as perguntas que fazem parte do topico que esta sendo exercitado e acrescenta na lista.*/
 void ListaPerguntas(char *nomearquivo,char *nometopico) {
