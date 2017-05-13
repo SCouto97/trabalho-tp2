@@ -1,0 +1,28 @@
+- Gabriel Campos Albino (@Gagocampos) 		matr.: 15/0035187
+- Gabriel Nunes Ribeiro Silva (@gabnunes)    			matr.: 15/0126689
+- Samuel Andrade do Couto (@SCouto97)  		matr.: 15/0021623
+
+Descrição do Modelo Conceitual:
+	Nosso QuizTime foi devidamete modularizado como solicitado, contemplando:
+		Módulo de Usuário;
+		Módulo GerenciaDisciplina;
+		Módulo ListagemDeDisciplina;
+		Módulo Tópicos;
+		Módulo GerenciamentoQuiz;
+		Módulo Quiz;
+	Não dedicamos um módulo exclusivo para controle de tempo. Para isso, utilizamos a função "gettimeofday", através da biblioteca "sys/time.h" dentro do módulo Quiz. 
+
+Função dos módulos:
+	Módulo de Usuário: Apresentar as telas de interface com o cliente.
+		
+	Módulo GerenciaDisciplina: Permite ao Administrador criar uma nova Disciplina.
+
+	Módulo ListagemDeDisciplina: Responsável por criar uma lista de disciplinas e listar quais estão cadastradas (através da leitura do arquivo "disciplinas.txt".
+
+	Módulo Tópicos: Responsável po criar uma lista de tópicos e listar quais tópicos de uma disciplina estão cadastrados (através da leitura do arquivo "disciplinas.txt".
+
+	Módulo GerenciamentoQuiz: Permite ao Administrador criar uma pergunta de um tópico de uma disciplina.
+
+	Módulo Quiz: Cria uma lista de perguntas (através da leitura do arquivo "perguntas.txt"), e disponibiliza o Quiz para o Usuario. Conta o tempo de resposta de cada questao e o tempo total do quiz, armazena respostas erradas em uma lista. Oferece ao usuario a opção de checar quais erros cometeu.
+
+
