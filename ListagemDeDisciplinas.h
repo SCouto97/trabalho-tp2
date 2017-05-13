@@ -22,6 +22,8 @@ typedef struct {
 
 void ListarDisciplinas(int IDaux);
 
+void ListarMinhasDisciplinas(char* usuario_sessao);
+
 void CriaListaDisciplina(tipoListaDisciplina *lista);
 
 void DesalocarListaDisciplina(tipoListaDisciplina *lista);
