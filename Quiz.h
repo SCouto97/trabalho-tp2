@@ -29,4 +29,6 @@ void InsereLista(tipoQuiz x, tipoLista *lista);
 
 void DesalocarLista(tipoLista *lista);
 
+void acessarQuiz(char *usuario_sessao);
+
 #endif
