@@ -16,7 +16,7 @@ void InsereLista(tipoQuiz x,tipoLista *lista){
       lista->ultimo->prox=(apontador)malloc(sizeof(celula));
       lista->ultimo=lista->ultimo->prox;
       lista->ultimo->dadosquiz = x;
-      lista->ultimo->prox=NULL; 
+      lista->ultimo->prox=NULL;
 }
 
 void DesalocarLista(tipoLista *lista) {
@@ -49,44 +49,101 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     printf("\n");
     gettimeofday(&v1, NULL); 
     while(aux!=NULL) {  /*Loop de Impressao da Pergunta e Leitura da Resposta*/
-        gettimeofday(&t1, NULL); 
-        printf("------------------------------------------------------------------\n");
-        printf("%d - %s\n", counter, aux->dadosquiz.pergunta);
-        getchar();
-        printf("Insira V ou F: ");
-        scanf("%c", &resposta);
-    /*Valida se a Resposta Inserida foi V ou F, apenas*/
-        if(resposta == 'v' || resposta == 'V') {
-            resposta = 'V';
-        }
-        else {
-            if(resposta == 'f' || resposta == 'F') {
-                resposta = 'F';
+        if(aux->dadosquiz.tipoD == 0) {
+            gettimeofday(&t1, NULL); 
+            printf("------------------------------------------------------------------\n");
+            printf("%d - %s\n", counter, aux->dadosquiz.pergunta);
+            getchar();
+            printf("Insira V ou F: ");
+            scanf("%c", &resposta);
+        /*Valida se a Resposta Inserida foi V ou F, apenas*/
+            if(resposta == 'v' || resposta == 'V') {
+                resposta = 'V';
             }
             else {
-                while(boolean == 0) {
-                    getchar();
-                    printf("\nInsira V ou F: ");
-                    scanf("%c", &resposta);
-                    if(resposta == 'v' || resposta == 'V' || resposta == 'f' || resposta == 'F') {
-                        boolean = 1;
+                if(resposta == 'f' || resposta == 'F') {
+                    resposta = 'F';
+                }
+                else {
+                    while(boolean == 0) {
+                        getchar();
+                        printf("\nInsira V ou F: ");
+                        scanf("%c", &resposta);
+                        if(resposta == 'v' || resposta == 'V' || resposta == 'f' || resposta == 'F') {
+                            boolean = 1;
+                        }
+                    }
+                    boolean = 0;
+                }
+            }
+            gettimeofday(&t2, NULL);
+            elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;      /*seg -> ms*/
+            elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   /*us -> ms*/
+            printf("Tempo de Resposta da Questao: %lf ms\n", elapsedTime);
+        /*Caso a resposta do usuario esteja incorreta, adicionamos a pergunta a uma Lista que  contem os erros do usuario, para que ele seja informado ao termino do quiz.*/
+            if(resposta != aux->dadosquiz.resposta) {
+                aux->dadosquiz.respostaUser = resposta;
+                InsereLista(aux->dadosquiz, &ListaErradas);
+            }
+            printf("------------------------------------------------------------------\n");
+            aux = aux->prox;
+            counter++;
+            printf("\n");
+        }
+        else {
+            gettimeofday(&t1, NULL); 
+            printf("------------------------------------------------------------------\n");
+            printf("%d - %s\n", counter, aux->dadosquiz.pergunta);
+            printf("Opcao A: %s\n", aux->dadosquiz.opcaoA);
+            printf("Opcao B: %s\n", aux->dadosquiz.opcaoB);
+            printf("Opcao C: %s\n", aux->dadosquiz.opcaoC);
+            printf("Opcao D: %s\n", aux->dadosquiz.opcaoD);
+            getchar();
+            printf("Insira A,B,C ou D: ");
+            scanf("%c", &resposta);
+            if(resposta == 'a' || resposta == 'A') {
+                resposta = 'A';
+            }
+            else {
+                if(resposta == 'b' || resposta == 'B') {
+                    resposta = 'B';
+                }
+                else {
+                    if(resposta == 'c' || resposta == 'C') {
+                         resposta = 'C';
+                    }
+                    else {
+                        if(resposta == 'd' || resposta == 'D') {
+                            resposta = 'D';
+                        }
+                        else {
+                            while(boolean == 0) {
+                                getchar();
+                                printf("\nInsira V ou F: ");
+                                scanf("%c", &resposta);
+                                if(resposta == 'v' || resposta == 'V' || resposta == 'f' || resposta == 'F') {
+                                    boolean = 1;
+                                }
+                            }
+                            boolean = 0;
+                        }
                     }
                 }
-                boolean = 0;
             }
+            gettimeofday(&t2, NULL);
+            elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;      /*seg -> ms*/
+            elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   /*us -> ms*/
+            printf("Tempo de Resposta da Questao: %lf ms\n", elapsedTime);
+            /*Caso a resposta do usuario esteja incorreta, adicionamos a pergunta a uma Lista que  contem os erros do usuario, para que ele seja informado ao termino do quiz.*/
+            if(resposta != aux->dadosquiz.resposta) {
+                aux->dadosquiz.respostaUser = resposta;
+                InsereLista(aux->dadosquiz, &ListaErradas);
+            }
+            printf("------------------------------------------------------------------\n");
+            aux = aux->prox;
+            counter++;
+            printf("\n");
         }
-        gettimeofday(&t2, NULL);
-        elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;      /*seg -> ms*/
-        elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   /*us -> ms*/
-        printf("Tempo de Resposta da Questao: %lf ms\n", elapsedTime);
-    /*Caso a resposta do usuario esteja incorreta, adicionamos a pergunta a uma Lista que  contem os erros do usuario, para que ele seja informado ao termino do quiz.*/
-        if(resposta != aux->dadosquiz.resposta) {
-            InsereLista(aux->dadosquiz, &ListaErradas);
-        }
-        printf("------------------------------------------------------------------\n");
-        aux = aux->prox;
-        counter++;
-        printf("\n");
     }  
     gettimeofday(&v2, NULL);   
     elapsedTime = (v2.tv_sec - v1.tv_sec) * 1000.0;      /*seg -> ms*/
@@ -108,19 +165,13 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
         getchar();
         scanf("%c", &opcao);
         switch(opcao) {
-                case '1':    while(aux!=NULL) {
+                case '1':   while(aux!=NULL) {
                                 printf("------------------------------------------------------------------\n");
                                 printf("%s\n", aux->dadosquiz.pergunta);
-                                if(aux->dadosquiz.resposta == 'V') {
-                                    printf("Respondeu: F\n");
-                                    printf("Resposta Correta: %c\n", aux->dadosquiz.resposta);
-                                }
-                                else {
-                                    printf("Respondeu: V\n");
-                                    printf("Resposta Correta: %c\n", aux->dadosquiz.resposta);
-                                }
+                                printf("Respondeu: %c\n", aux->dadosquiz.respostaUser);
+                                printf("Resposta Correta: %c\n", aux->dadosquiz.resposta);
                                 printf("------------------------------------------------------------------\n");
-                                printf("\n\n");
+                                printf("\n");
                                 aux = aux->prox;
                             }
                             break;
@@ -170,7 +221,7 @@ void acessarQuiz(char *usuario_sessao) {
 Para isso, vare o arrquivo de perguntas, e, atraves da comparacao dos identificadores, filtra apenas as perguntas que fazem parte do topico que esta sendo exercitado e acrescenta na lista.*/
 void ListaPerguntas(char *nomearquivo,char *nometopico) {
     FILE *fp;
-
+    int counter=0;
     char line[260]; /*Array de char para armazenar uma linha do arquivo capturada*/
     char *token;    /*Token do strtok que sera utilizado*/
     char charaux[10];  /* Array de char para armazenar o identificador de um topico*/
@@ -205,11 +256,56 @@ void ListaPerguntas(char *nomearquivo,char *nometopico) {
                     strcpy(quiz.pergunta,token);
                     token = strtok(NULL,"|");
                     quiz.resposta = *token; 
+                    quiz.tipoD = 0;
                     InsereLista(quiz,&lista);
                 }
                 printf("%s\n", nometopico);
             }
             fclose(fp);
+            fp = fopen("perguntas2.txt","r");
+            while(fgets(line,250,fp) != NULL) {
+                if(strstr(line,charaux) != NULL) {
+                    counter++;
+                    if(counter == 1) {
+                        token = strtok(line,"|");
+                        token = strtok(NULL,"|");
+                        strcpy(quiz.pergunta,token);
+                        token = strtok(NULL,"|");
+                        quiz.resposta = *token;
+                    }
+                    else {
+                        if(counter == 2) {
+                            token = strtok(line,"|");
+                            token = strtok(NULL,"|");
+                            strcpy(quiz.opcaoA,token);
+                        }
+                        else {
+                            if(counter == 3) {
+                                token = strtok(line,"|");
+                                token = strtok(NULL,"|");
+                                strcpy(quiz.opcaoB,token);
+                            }
+                            else {
+                                if(counter == 4) {
+                                    token = strtok(line,"|");
+                                    token = strtok(NULL,"|");
+                                    strcpy(quiz.opcaoC,token);
+                                }
+                                else {
+                                    if(counter == 5) {
+                                        token = strtok(line,"|");
+                                        token = strtok(NULL,"|");
+                                        strcpy(quiz.opcaoD,token);
+                                        quiz.tipoD = 1;
+                                        InsereLista(quiz,&lista);
+                                        counter = 0;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
             ImprimirPerguntas(lista,nometopico);
         }
     }  

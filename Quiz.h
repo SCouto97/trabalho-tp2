@@ -4,8 +4,12 @@
 typedef struct celula_str *apontador;
 
 typedef struct {
-	char pergunta[250], resposta;
-	int respondida;
+	char pergunta[250], resposta, respostaUser;
+	char opcaoA[50];
+	char opcaoB[50];
+	char opcaoC[50];
+	char opcaoD[50];
+	int respondida, tipoD;
 } tipoQuiz;
 
 typedef struct {

@@ -34,65 +34,156 @@ int ValidarDisciplina(char *nomeDisciplina, char *nomeTopico) {
 void gerenciaPerguntas(char* nomearquivo, char* usuario_sessao){
     FILE* arq;
     float num;
-    char pergunta[250], nomedisciplina[25], topico[25], resposta, line[100], *token;
+    char pergunta[250], nomedisciplina[25], topico[25], resposta, line[100], *token, opcao;
+    char opcaoA[50];
+    char opcaoB[50];
+    char opcaoC[50];
+    char opcaoD[50];
     arq = fopen(nomearquivo,"r");
     int boolean = 0;
     int boolean2 = 0;
     system("clear");
     printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sessao Ativa - %s %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", usuario_sessao);
     printf("Perfil: Administrador\n");
-    printf("\n\n~>Adicione sua pergunta<~\n");
+    printf("1- Inserir Pergunta do Tipo A (V ou F)\n");
+    printf("2- Inserir Pergunta do Tipo D (Multipla Escolha)\n");
+    printf("Opcao: ");
     getchar();
-    printf("Digite o nome da disciplina: ");
-    scanf("%[^\n]s",nomedisciplina);
-    printf("Digite o nome do topico: ");
-    scanf(" %[^\n]s",topico);
-    while(boolean2 == 0) {
-	boolean2 = ValidarDisciplina(nomedisciplina, topico);
-	if(boolean2 == 0) {
-		printf("Disciplina e/ou Topico incorretos.\n");
-		getchar();
-		printf("Insira novamente a Disciplina: ");
-		scanf("%[^\n]s", nomedisciplina);
-		printf("Insira novamente o Topico: ");
-   		scanf(" %[^\n]s",topico);
-	}
-    }
-    while(fgets(line,90,arq) != NULL) {
-        if(strstr(line,topico) != NULL) {
-            token = strtok(line,"|");
-            num = atof(token);
-            break;
+    scanf("%c", &opcao);
+    if(opcao == '1') {
+        printf("\n\n~>Adicione sua pergunta<~\n");
+        getchar();
+        printf("Digite o nome da disciplina: ");
+        scanf("%[^\n]s",nomedisciplina);
+        printf("Digite o nome do topico: ");
+        scanf(" %[^\n]s",topico);
+        while(boolean2 == 0) {
+        	boolean2 = ValidarDisciplina(nomedisciplina, topico);
+        	if(boolean2 == 0) {
+        		printf("Disciplina e/ou Topico incorretos.\n");
+        		getchar();
+        		printf("Insira novamente a Disciplina: ");
+        		scanf("%[^\n]s", nomedisciplina);
+        		printf("Insira novamente o Topico: ");
+           		scanf(" %[^\n]s",topico);
+        	}
         }
-    }
-    fclose(arq);
-    arq = fopen("perguntas.txt","a");
-    printf("Digite sua pergunta: ");
-    scanf(" %[^\n]s", pergunta);
-    getchar();
-    printf("Insira a resposta (V ou F): ");
-    scanf("%c", &resposta);
-    if(resposta == 'v' || resposta == 'V') {
-            resposta = 'V';
-        }
-        else {
-          printf("%c", resposta);
-            if(resposta == 'f' || resposta == 'F') {
-                resposta = 'F';
+        while(fgets(line,90,arq) != NULL) {
+            if(strstr(line,topico) != NULL) {
+                token = strtok(line,"|");
+                num = atof(token);
+                break;
             }
+        }
+        fclose(arq);
+        arq = fopen("perguntas.txt","a");
+        printf("Digite sua pergunta: ");
+        scanf(" %[^\n]s", pergunta);
+        getchar();
+        printf("Insira a resposta (V ou F): ");
+        scanf("%c", &resposta);
+        if(resposta == 'v' || resposta == 'V') {
+                resposta = 'V';
+        }
             else {
-                while(boolean == 0) {
-                    getchar();
-                    printf("\nInsira V ou F: ");
-                    scanf("%c", &resposta);
-                    if(resposta == 'v' || resposta == 'V' || resposta == 'f' || resposta == 'F') {
-                        boolean = 1;
+                if(resposta == 'f' || resposta == 'F') {
+                    resposta = 'F';
+                }
+                else {
+                    while(boolean == 0) {
+                        getchar();
+                        printf("\nInsira V ou F: ");
+                        scanf("%c", &resposta);
+                        if(resposta == 'v' || resposta == 'V' || resposta == 'f' || resposta == 'F') {
+                            boolean = 1;
+                        }
                     }
                 }
             }
+
+
+        fprintf(arq,"%.1f|%s|%c|\n",num,pergunta,resposta);
+        fclose(arq);
+    }
+    else {
+        if(opcao == '2') {
+            printf("\n\n~>Adicione sua pergunta<~\n");
+            getchar();
+            printf("Digite o nome da disciplina: ");
+            scanf("%[^\n]s",nomedisciplina);
+            printf("Digite o nome do topico: ");
+            scanf(" %[^\n]s",topico);
+            while(boolean2 == 0) {
+                boolean2 = ValidarDisciplina(nomedisciplina, topico);
+                if(boolean2 == 0) {
+                    printf("Disciplina e/ou Topico incorretos.\n");
+                    getchar();
+                    printf("Insira novamente a Disciplina: ");
+                    scanf("%[^\n]s", nomedisciplina);
+                    printf("Insira novamente o Topico: ");
+                    scanf(" %[^\n]s",topico);
+                }
+            }
+            while(fgets(line,90,arq) != NULL) {
+                if(strstr(line,topico) != NULL) {
+                    token = strtok(line,"|");
+                    num = atof(token);
+                    break;
+                }
+            }
+            fclose(arq);
+            arq = fopen("perguntas2.txt","a");
+            printf("Digite sua pergunta: ");
+            scanf(" %[^\n]s", pergunta);
+            getchar();
+            printf("Insira a Opcao A: ");
+            scanf("%[^\n]s", opcaoA);
+            printf("Insira a Opcao B: ");
+            getchar();
+            scanf("%[^\n]s", opcaoB);
+            printf("Insira a Opcao C: ");
+            getchar();
+            scanf("%[^\n]s", opcaoC);
+            printf("Insira a Opcao D: ");
+            getchar();
+            scanf("%[^\n]s", opcaoD);
+            getchar();
+            printf("Insira a resposta (A, B, C ou D): ");
+            scanf("%c", &resposta);
+            if(resposta == 'a' || resposta == 'A') {
+                resposta = 'A';
+            }
+            else {
+                if(resposta == 'b' || resposta == 'B') {
+                    resposta = 'B';
+                }
+                else {
+                    if(resposta == 'c' || resposta == 'C') {
+                        resposta = 'C';
+                    }
+                    else {
+                        if(resposta == 'd' || resposta == 'D') {
+                           resposta = 'D';
+                        }
+                        else {
+                            while(boolean == 0) {
+                                getchar();
+                                printf("\nInsira A, B, C ou D: ");
+                                scanf("%c", &resposta);
+                                if(resposta == 'a' || resposta == 'A' || resposta == 'b' || resposta == 'B' || resposta == 'c' || resposta == 'C' || resposta == 'd' || resposta == 'D') {
+                                    boolean = 1;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            fprintf(arq,"%.1f|%s|%c|\n",num,pergunta,resposta);
+            fprintf(arq,"%.1f|%s|\n",num,opcaoA);
+            fprintf(arq,"%.1f|%s|\n",num,opcaoB);
+            fprintf(arq,"%.1f|%s|\n",num,opcaoC);
+            fprintf(arq,"%.1f|%s|\n",num,opcaoD);
+            fclose(arq);
         }
-
-
-    fprintf(arq,"%.1f|%s|%c|\n",num,pergunta,resposta);
-    fclose(arq);
+    }
 }
