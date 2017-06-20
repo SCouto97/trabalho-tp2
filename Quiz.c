@@ -262,49 +262,52 @@ void ListaPerguntas(char *nomearquivo,char *nometopico) {
                 printf("%s\n", nometopico);
             }
             fclose(fp);
-            fp = fopen("perguntas2.txt","r");
-            while(fgets(line,250,fp) != NULL) {
-                if(strstr(line,charaux) != NULL) {
-                    counter++;
-                    if(counter == 1) {
-                        token = strtok(line,"|");
-                        token = strtok(NULL,"|");
-                        strcpy(quiz.pergunta,token);
-                        token = strtok(NULL,"|");
-                        quiz.resposta = *token;
-                    }
-                    else {
-                        if(counter == 2) {
+            if(fopen("perguntas2.txt","r") != NULL) {
+                fp = fopen("perguntas2.txt","r");
+                while(fgets(line,250,fp) != NULL) {
+                    if(strstr(line,charaux) != NULL) {
+                        counter++;
+                        if(counter == 1) {
                             token = strtok(line,"|");
                             token = strtok(NULL,"|");
-                            strcpy(quiz.opcaoA,token);
+                            strcpy(quiz.pergunta,token);
+                            token = strtok(NULL,"|");
+                            quiz.resposta = *token;
                         }
                         else {
-                            if(counter == 3) {
+                            if(counter == 2) {
                                 token = strtok(line,"|");
                                 token = strtok(NULL,"|");
-                                strcpy(quiz.opcaoB,token);
+                                strcpy(quiz.opcaoA,token);
                             }
                             else {
-                                if(counter == 4) {
+                                if(counter == 3) {
                                     token = strtok(line,"|");
                                     token = strtok(NULL,"|");
-                                    strcpy(quiz.opcaoC,token);
+                                    strcpy(quiz.opcaoB,token);
                                 }
                                 else {
-                                    if(counter == 5) {
+                                    if(counter == 4) {
                                         token = strtok(line,"|");
                                         token = strtok(NULL,"|");
-                                        strcpy(quiz.opcaoD,token);
-                                        quiz.tipoD = 1;
-                                        InsereLista(quiz,&lista);
-                                        counter = 0;
+                                        strcpy(quiz.opcaoC,token);
+                                    }
+                                    else {
+                                        if(counter == 5) {
+                                            token = strtok(line,"|");
+                                            token = strtok(NULL,"|");
+                                            strcpy(quiz.opcaoD,token);
+                                            quiz.tipoD = 1;
+                                            InsereLista(quiz,&lista);
+                                            counter = 0;
+                                        }
                                     }
                                 }
                             }
                         }
                     }
                 }
+                fclose(fp);
             }
             ImprimirPerguntas(lista,nometopico);
         }
