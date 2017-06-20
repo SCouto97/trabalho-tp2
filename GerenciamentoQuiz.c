@@ -6,7 +6,7 @@
 /*Funcao responsavel por checar existencia da disciplina e topico recebida como parametro
 Retorna 1 se a disciplina e o topico inseridos existirem, 0 caso contrario*/
 int ValidarDisciplina(char *nomeDisciplina, char *nomeTopico) {
-	FILE *fp;	
+	FILE *fp;
 	char line[100]; /*Array de Char para armazenar linha do arquivo capturada*/
 	char *token;
 	if(fopen("disciplinas.txt","r") == NULL) {
@@ -39,9 +39,9 @@ void gerenciaPerguntas(char* nomearquivo, char* usuario_sessao){
     char opcaoB[50];
     char opcaoC[50];
     char opcaoD[50];
+		int boolean = 0;
+		int boolean2 = 0;
     arq = fopen(nomearquivo,"r");
-    int boolean = 0;
-    int boolean2 = 0;
     system("clear");
     printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sessao Ativa - %s %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", usuario_sessao);
     printf("Perfil: Administrador\n");

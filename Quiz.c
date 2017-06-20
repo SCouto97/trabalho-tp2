@@ -1,25 +1,25 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/time.h> 
+#include <sys/time.h>
 #include "Quiz.h"
 
 /*Funcao para criar uma lista com cabeca com perguntas de um quiz*/
-void CriaLista(tipoLista *lista) {
+void CriaLista(/*@out@*/ tipoLista *lista) {
   lista->primeiro = (apontador) malloc(sizeof(celula));
   lista->ultimo = lista->primeiro;
   lista->primeiro->prox = NULL;
 }
 
 /*Funcao para inserir elemento(do tipoQuiz) em uma lista com cabeca*/
-void InsereLista(tipoQuiz x,tipoLista *lista){
+void InsereLista(/*@out@*/ tipoQuiz x,/*@out@*/ tipoLista *lista){
       lista->ultimo->prox=(apontador)malloc(sizeof(celula));
       lista->ultimo=lista->ultimo->prox;
       lista->ultimo->dadosquiz = x;
       lista->ultimo->prox=NULL;
 }
 
-void DesalocarLista(tipoLista *lista) {
+void DesalocarLista(/*@out@*/ tipoLista *lista) {
     apontador aux, aux2;
     aux = lista->primeiro;
     while(aux!=NULL) {
@@ -39,18 +39,17 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     int counter = 1, boolean = 0;
     char resposta, opcao = '0';
     tipoLista ListaErradas;
-    aux = lista.primeiro->prox;
     struct timeval t1, t2, v2, v1;
     double elapsedTime;
+    aux = lista.primeiro->prox;
     CriaLista(&ListaErradas);
     system("clear");
-    #include <sys/time.h>
     printf("---------------- Quiz: %s ----------------", nometopico);
     printf("\n");
-    gettimeofday(&v1, NULL); 
+    gettimeofday(&v1, NULL);
     while(aux!=NULL) {  /*Loop de Impressao da Pergunta e Leitura da Resposta*/
         if(aux->dadosquiz.tipoD == 0) {
-            gettimeofday(&t1, NULL); 
+            gettimeofday(&t1, NULL);
             printf("------------------------------------------------------------------\n");
             printf("%d - %s\n", counter, aux->dadosquiz.pergunta);
             getchar();
@@ -91,7 +90,7 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
             printf("\n");
         }
         else {
-            gettimeofday(&t1, NULL); 
+            gettimeofday(&t1, NULL);
             printf("------------------------------------------------------------------\n");
             printf("%d - %s\n", counter, aux->dadosquiz.pergunta);
             printf("Opcao A: %s\n", aux->dadosquiz.opcaoA);
@@ -144,8 +143,8 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
             counter++;
             printf("\n");
         }
-    }  
-    gettimeofday(&v2, NULL);   
+    }
+    gettimeofday(&v2, NULL);
     elapsedTime = (v2.tv_sec - v1.tv_sec) * 1000.0;      /*seg -> ms*/
     elapsedTime += (v2.tv_usec - v1.tv_usec) / 1000.0;   /*us -> ms*/
     printf("Duracao do Quiz: %lf ms\n", elapsedTime);
@@ -224,9 +223,10 @@ void ListaPerguntas(char *nomearquivo,char *nometopico) {
     int counter=0;
     char line[260]; /*Array de char para armazenar uma linha do arquivo capturada*/
     char *token;    /*Token do strtok que sera utilizado*/
-    char charaux[10];  /* Array de char para armazenar o identificador de um topico*/
+    char charaux[20];  /* Array de char para armazenar o identificador de um topico*/
     tipoLista lista;
     tipoQuiz quiz;
+
 
     if(fopen("perguntas.txt","r") == NULL) { /*Trata nao existencia do arquivo*/
         printf("Nao existe uma lista de perguntas ainda!\n");
@@ -235,13 +235,13 @@ void ListaPerguntas(char *nomearquivo,char *nometopico) {
         getchar();
     }
     else {
-        CriaLista(&lista);  
+        CriaLista(&lista);
         if(fopen(nomearquivo,"r") != NULL) {
             fp = fopen(nomearquivo,"r");
             while(fgets(line,90,fp) != NULL) {  /*Captura linhas, compara identificadores*/
                 if(strstr(line,nometopico) != NULL) { /*Procura a string "nometopico" na string
                                                          "line" (Linha do Arquivo que foi capturada)*/
-                    token = strtok(line,"|");   
+                    token = strtok(line,"|");
                     strcpy(charaux,token);
                     break;
                 }
@@ -249,15 +249,15 @@ void ListaPerguntas(char *nomearquivo,char *nometopico) {
             fclose(fp);
             fp = fopen("perguntas.txt","r");
         /*Filtra perguntas do topico passado como parametro*/
-            while(fgets(line,250,fp) != NULL) { 
+            while(fgets(line,250,fp) != NULL) {
                 if(strstr(line,charaux) != NULL) {
                     token = strtok(line,"|");
                     token = strtok(NULL,"|");
                     strcpy(quiz.pergunta,token);
                     token = strtok(NULL,"|");
-                    quiz.resposta = *token; 
+                    quiz.resposta = *token;
                     quiz.tipoD = 0;
-                    InsereLista(quiz,&lista);
+                    InsereLista(quiz, &lista);
                 }
                 printf("%s\n", nometopico);
             }
@@ -311,5 +311,5 @@ void ListaPerguntas(char *nomearquivo,char *nometopico) {
             }
             ImprimirPerguntas(lista,nometopico);
         }
-    }  
+    }
 }

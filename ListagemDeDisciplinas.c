@@ -5,33 +5,33 @@
 #include "Topicos.h"
 
 /*Funcao para inserir elemento(do tipoDisciplina) em uma lista com cabeca*/
-void InsereDisciplina(tipoListaDisciplina *lista, tipoDisciplina infosDisciplina) {
+void InsereDisciplina(/*@out@*/ tipoListaDisciplina *lista, /*@out@*/ tipoDisciplina infosDisciplina) {
     apontador2 aux;
-    aux = lista->primeiro->prox;
     int checaExistencia = 0; /*Variavel de controle para indicar se a disciplina ja esta na lista*/
+    aux = lista->primeiro->prox;
     while(aux != NULL) {	/*Checa se a disciplina ja esta na lista para evitar repeticao*/
         if(aux->disciplina.idDisciplina == infosDisciplina.idDisciplina) {
             checaExistencia = 1;
             break;
-        }         
-        aux = aux->prox;    
+        }
+        aux = aux->prox;
     }
     if(checaExistencia == 0) { /*Caso a disciplina nao esteja na lista, inserimos.*/
         lista->ultimo->prox = (apontador2)malloc(sizeof(celulaDisciplina));
         lista->ultimo = lista->ultimo->prox;
-        lista->ultimo->disciplina = infosDisciplina; 
+        lista->ultimo->disciplina = infosDisciplina;
         lista->ultimo->prox = NULL;
     }
 }
 
 /*Funcao para criar uma lista de disciplina com cabeca */
-void CriaListaDisciplina(tipoListaDisciplina *lista) {
+void CriaListaDisciplina(/*@out@*/ tipoListaDisciplina *lista) {
     lista->primeiro = (apontador2)malloc(sizeof(celulaDisciplina));
     lista->ultimo = lista->primeiro;
     lista->ultimo->prox = NULL;
 }
 
-void DesalocarListaDisciplina(tipoListaDisciplina *lista) {
+void DesalocarListaDisciplina(/*@out@*/ tipoListaDisciplina *lista) {
     apontador2 aux, aux2;
     aux = lista->primeiro;
     while(aux!=NULL) {
@@ -48,12 +48,13 @@ void ListarDisciplinas(int IDaux) {
     tipoListaDisciplina listaDisciplina;
     char line[100];	/*Array de Char para capturar uma linha do arquivo (fgets)*/
     char *token;	/*token do strtok que sera utilizado*/
-    char nomeDisciplina[25]; /*Array de Char para armazenar o nome da disciplina que passaremos 				como parametro para Listar os Topicos dessa disciplina.*/
+    char *nomeDisciplina; /*Array de Char para armazenar o nome da disciplina que passaremos 				como parametro para Listar os Topicos dessa disciplina.*/
     int opcao;  	/*Armazena Resposta do usuario ao menu apresentado*/
     int identificador;  	/*Armazena identificador da disciplina que sera listado os 					topicos*/
     tipoDisciplina disciplina;
     apontador2 aux; /*Apontador para lista de Disciplina*/
 
+    nomeDisciplina = malloc(sizeof(char)*25);
     if(fopen("disciplinas.txt", "r") == NULL) {	/*Trata nao existencia do arquivo de disciplina*/
         printf("Nao existem disciplinas cadastradas no sistema!\n");
         printf("Insira <ENTER> para retornar ao Menu.\n");

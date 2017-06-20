@@ -59,9 +59,10 @@ inserido pelo usuário. Caso já exista um igual, retorna 1. Caso contrário, re
 Parametros da funcao: "username" - Nome do usuario que queremos checar existencia.
 "nomearquivo" - Nome do arquivo no qual procuraremos o usuario inserido.*/
 
-int ProcuraNomeUsuario(char username[20], char nomearquivo[20]) {
+int ProcuraNomeUsuario(char *username, char *nomearquivo) {
 	char user_read[20], name_read[20], password_read[20];
 	FILE *fp;
+
 	if(fopen(nomearquivo, "r") == NULL) {	/*Trata Possibilidade do Arquivo Nao Existir*/
 		return 0;
 	}
@@ -125,6 +126,7 @@ void TelaRecuperarSenha() {
 	FILE *fp;
 	char nomearquivo[20] = "usuarios.txt", nome[20], usuario[20], senha[20], nome_read[20], usuario_read[20];
 	int loginfound = 0; /*Variavel para controle de login. So sera settada para "1" se o 				    usuario for encontrado no cadastro.*/
+
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Recuperacao de Senha %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
 	printf("%%%%%%%%%%%%%% Insira seu primeiro nome: ");
 	scanf("%s", nome);
@@ -178,12 +180,12 @@ void TelaFinalizarSessao(char opcao) {
 
 void cadastrarUsuario(char* usuario_sessao){
 	FILE *fp;
-	system("clear");
-	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cadastro em Disciplina %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
 	char line[100];
 	char opcao;
 	char *token;
 	int flag = 0;
+	system("clear");
+	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cadastro em Disciplina %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
 	ListarDisciplinas(0);
 	printf("Insira o ID da Disciplina que desejas se cadastrar: ");
 	getchar();
@@ -215,7 +217,7 @@ void cadastrarUsuario(char* usuario_sessao){
 
 /* Funcao responsavel por manifestar a tela de entrada do usuario no sistema (apos login ser realizado). Caso o usuario seja identificado como administrador, seu Menu de opcoes apresentado sera diferente caso o usuario possua perfil de estudante. */
 
-void TelaEntradaSistema(char usuario_sessao[20]) {
+void TelaEntradaSistema(char *usuario_sessao) {
 	char opcao = '1';
 	char nomearquivo[] = "disciplinas.txt";
 	if(strcmp(usuario_sessao,"admin") != 0) { /*Menu de usuario estudante*/

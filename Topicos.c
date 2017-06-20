@@ -4,21 +4,21 @@
 #include "Topicos.h"
 
 /*Funcao para criar uma lista de topicos com cabeca */
-void CriaListaTopico(tipoListaTopico *lista) {
+void CriaListaTopico(/*@out@*/ tipoListaTopico *lista) {
     lista->primeiro = (apontador3)malloc(sizeof(celulaTopico));
     lista->ultimo = lista->primeiro;
     lista->ultimo->prox = NULL;
 }
 
 /*Funcao para inserir elemento(do tipoTopico) em uma lista com cabeca*/
-void InsereTopico(tipoListaTopico *lista, tipoTopico infosTopico) {
+void InsereTopico(/*@out@*/ tipoListaTopico *lista, /*@out@*/ tipoTopico infosTopico) {
     lista->ultimo->prox = (apontador3)malloc(sizeof(celulaTopico));
     lista->ultimo = lista->ultimo->prox;
-    lista->ultimo->topico = infosTopico; 
+    lista->ultimo->topico = infosTopico;
     lista->ultimo->prox = NULL;
 }
 
-void DesalocarListaTopico(tipoListaTopico *lista) {
+void DesalocarListaTopico(/*@out@*/ tipoListaTopico *lista) {
     apontador3 aux, aux2;
     aux = lista->primeiro;
     while(aux!=NULL) {
