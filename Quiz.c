@@ -122,11 +122,32 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
                                 getchar();
                                 printf("\nInsira A,B,C ou D: ");
                                 scanf("%c", &resposta);
-                                if(resposta == 'a' || resposta == 'A' || resposta == 'b' || resposta == 'B' || resposta == 'c' || resposta == 'C' || resposta == 'd' || resposta == 'D') {
+                                if(resposta == 'a' || resposta == 'A') {
+                                    resposta = 'A';
                                     boolean = 1;
+                               }
+                                else {
+                                    if(resposta == 'b' || resposta == 'B') {
+                                        resposta = 'B';
+                                        boolean = 1;
+                                    }
+                                    else {
+                                        if(resposta == 'c' || resposta == 'C') {
+                                            resposta = 'C';
+                                            boolean = 1;
+                                        }
+                                        else {
+                                            if(resposta == 'd' || resposta == 'D') {
+                                                resposta = 'D';
+                                                boolean = 1;
+                                            }
+                                            else {
+                                                boolean = 0;
+                                            }
+                                        }
+                                    }
                                 }
                             }
-                            boolean = 0;
                         }
                     }
                 }
