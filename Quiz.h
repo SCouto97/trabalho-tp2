@@ -21,6 +21,10 @@ typedef struct celula_str {
 	apontador prox;
 } celula;
 
+typedef struct topicosId {
+	char topico[25];
+}topicosId;
+
 void ListaPerguntas(char *nomearquivo, char *nometopico);
 
 void ImprimirPerguntas(tipoLista lista, char *nometopico);

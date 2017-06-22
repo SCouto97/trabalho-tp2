@@ -225,13 +225,13 @@ void TelaEntradaSistema(char *usuario_sessao) {
 			system("clear");
 			printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sessao Ativa - %s %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n", usuario_sessao);
 			printf("Perfil: Estudante\n");
-			printf("---------------------------Minhas Disciplinas---------------------------\n");
+			printf("---------------------------Meu Caderno---------------------------\n");
 			ListarMinhasDisciplinas(usuario_sessao);
 			printf("------------------------------------------------------------------------\n");
 
 			printf("Opcoes: \n");
-			printf("1 - Cadastrar em Nova Disciplina\n");
-			printf("2 - Listar Disciplinas\n");
+			printf("1 - Cadastrar Nova Disciplina ao Seu Caderno\n");
+			printf("2 - Listar Disciplinas do Sistema\n");
 			printf("3 - Acessar Quiz de uma Disciplina\n");
 			printf("4 - Encerrar Sessao e retornar para o Menu Inicial\n");
 			printf("Opcao Desejada: ");

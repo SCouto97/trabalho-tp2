@@ -37,6 +37,7 @@ Recebe a Lista de Quiz e o nome do topico sobre o qual esta sendo realizado o qu
 void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     apontador aux;
     int counter = 1, boolean = 0;
+    int counter2 = 0;
     char resposta, opcao = '0';
     tipoLista ListaErradas;
     struct timeval t1, t2, v2, v1;
@@ -49,10 +50,10 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     gettimeofday(&v1, NULL);
     while(aux!=NULL) {  /*Loop de Impressao da Pergunta e Leitura da Resposta*/
         if(aux->dadosquiz.tipoD == 0) {
+            printf("\n---------------- Quiz: %s ----------------\n", nometopico);
             gettimeofday(&t1, NULL);
             printf("------------------------------------------------------------------\n");
             printf("%d - %s\n", counter, aux->dadosquiz.pergunta);
-            getchar();
             printf("Insira V ou F: ");
             scanf("%c", &resposta);
         /*Valida se a Resposta Inserida foi V ou F, apenas*/
@@ -118,9 +119,9 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
                         else {
                             while(boolean == 0) {
                                 getchar();
-                                printf("\nInsira V ou F: ");
+                                printf("\nInsira A,B,C ou D: ");
                                 scanf("%c", &resposta);
-                                if(resposta == 'v' || resposta == 'V' || resposta == 'f' || resposta == 'F') {
+                                if(resposta == 'a' || resposta == 'A' || resposta == 'b' || resposta == 'B' || resposta == 'c' || resposta == 'C' || resposta == 'd' || resposta == 'D') {
                                     boolean = 1;
                                 }
                             }
@@ -135,6 +136,7 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
             printf("Tempo de Resposta da Questao: %lf ms\n", elapsedTime);
             /*Caso a resposta do usuario esteja incorreta, adicionamos a pergunta a uma Lista que  contem os erros do usuario, para que ele seja informado ao termino do quiz.*/
             if(resposta != aux->dadosquiz.resposta) {
+                counter2++;
                 aux->dadosquiz.respostaUser = resposta;
                 InsereLista(aux->dadosquiz, &ListaErradas);
             }
@@ -144,11 +146,17 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
             printf("\n");
         }
     }
+    system("clear");
     gettimeofday(&v2, NULL);
     elapsedTime = (v2.tv_sec - v1.tv_sec) * 1000.0;      /*seg -> ms*/
     elapsedTime += (v2.tv_usec - v1.tv_usec) / 1000.0;   /*us -> ms*/
+    printf("------------------------------Laudo do Quiz------------------------------------\n");
     printf("Duracao do Quiz: %lf ms\n", elapsedTime);
+    printf("Pontuacao: %d/%d\n", (counter-1)-(counter2),counter-1);
+    printf("-------------------------------------------------------------------------------\n");
     /*Caso nao haja erros, printa sucesso*/
+
+
     if(ListaErradas.primeiro->prox == NULL) {
         printf("Parabens, voce acertou todas as perguntas!\n");
         printf("Insira <ENTER> para retornar ao Menu.\n");
@@ -157,8 +165,7 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     }
     else {  /*Caso contrario, imprime perguntas respondidas incorretamente*/
         aux = ListaErradas.primeiro->prox;
-        printf("\n\n");
-        printf("1 - ITENS INCORRETOS\n");
+        printf("1 - VERIFICAR ITENS INCORRETOS\n");
         printf("2 - SAIR\n");
         printf("Opcao: ");
         getchar();
@@ -185,9 +192,12 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
 }
 
 void acessarQuiz(char *usuario_sessao) {
+    system("clear");
     FILE *fp, *fp2;
     char line[100], line2[100], *token, *token2;
-    char nomeTopico[25];
+    int counter = 0;
+    int opcao;
+    topicosId idtopicos[20];
     if(fopen("cadastros.txt","r") != NULL && fopen("disciplinas.txt","r") != NULL) {
         fp = fopen("cadastros.txt","r");
         printf("---------------------------Topicos Disponiveis---------------------------\n");
@@ -202,17 +212,28 @@ void acessarQuiz(char *usuario_sessao) {
                         token2 = strtok(NULL,"|");
                         token2 = strtok(NULL,"|");
                         token2 = strtok(NULL,"|");
-                        printf("%s\n", token2);
+                        printf("%d - %s\n", counter+1, token2);
+                        strcpy(idtopicos[counter].topico, token2);
+                        counter++;
                     }
                 }
             }
         }
         printf("-------------------------------------------------------------------------\n");
-        printf("Insira o nome do topico sobre o qual desejas realizar um quiz: ");
-        scanf("%s", nomeTopico);
-        ListaPerguntas("disciplinas.txt",nomeTopico);
-        fclose(fp);
-        fclose(fp2);
+        printf("Insira o ID do topico sobre o qual desejas realizar um quiz: ");
+        getchar();
+        scanf("%d", &opcao);
+        if(opcao >= 1 && opcao <= counter) {
+            ListaPerguntas("disciplinas.txt",idtopicos[opcao-1].topico);
+            fclose(fp);
+            fclose(fp2);
+        }
+        else {
+            printf("Nao existe o topico inserido.\n");
+            printf("Insira <ENTER> para retornar ao MENU de entrada");
+            getchar();
+            getchar();
+        }
     }
 }
 
