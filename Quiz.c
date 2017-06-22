@@ -51,10 +51,10 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     gettimeofday(&v1, NULL);
     while(aux!=NULL) {  /*Loop de Impressao da Pergunta e Leitura da Resposta*/
         if(aux->dadosquiz.tipoD == 0) {
-            printf("\n---------------- Quiz: %s ----------------\n", nometopico);
             gettimeofday(&t1, NULL);
             printf("------------------------------------------------------------------\n");
-            printf("%d - %s\n", counter, aux->dadosquiz.pergunta);
+            printf("Questao %d - %s\n", counter, aux->dadosquiz.pergunta);
+            getchar();
             printf("Insira V ou F: ");
             scanf("%c", &resposta);
         /*Valida se a Resposta Inserida foi V ou F, apenas*/
@@ -78,9 +78,9 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
                 }
             }
             gettimeofday(&t2, NULL);
-            elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;      /*seg -> ms*/
-            elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   /*us -> ms*/
-            printf("Tempo de Resposta da Questao: %lf ms\n", elapsedTime);
+            elapsedTime = (t2.tv_sec - t1.tv_sec);      /*seg -> ms*/
+            elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000000.0;   /*us -> ms*/
+            printf("Tempo de Resposta da Questao: %.2lf s\n", elapsedTime);
         /*Caso a resposta do usuario esteja incorreta, adicionamos a pergunta a uma Lista que  contem os erros do usuario, para que ele seja informado ao termino do quiz.*/
             if(resposta != aux->dadosquiz.resposta) {
                 aux->dadosquiz.respostaUser = resposta;
@@ -94,7 +94,7 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
         else {
             gettimeofday(&t1, NULL);
             printf("------------------------------------------------------------------\n");
-            printf("%d - %s\n", counter, aux->dadosquiz.pergunta);
+            printf("Questao %d - %s\n", counter, aux->dadosquiz.pergunta);
             printf("Opcao A: %s\n", aux->dadosquiz.opcaoA);
             printf("Opcao B: %s\n", aux->dadosquiz.opcaoB);
             printf("Opcao C: %s\n", aux->dadosquiz.opcaoC);
@@ -132,9 +132,9 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
                 }
             }
             gettimeofday(&t2, NULL);
-            elapsedTime = (t2.tv_sec - t1.tv_sec) * 1000.0;      /*seg -> ms*/
-            elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000.0;   /*us -> ms*/
-            printf("Tempo de Resposta da Questao: %lf ms\n", elapsedTime);
+            elapsedTime = (t2.tv_sec - t1.tv_sec);      /*seg -> ms*/
+            elapsedTime += (t2.tv_usec - t1.tv_usec) / 1000000.0;   /*us -> ms*/
+            printf("Tempo de Resposta da Questao: %.2lf s\n", elapsedTime);
             /*Caso a resposta do usuario esteja incorreta, adicionamos a pergunta a uma Lista que  contem os erros do usuario, para que ele seja informado ao termino do quiz.*/
             if(resposta != aux->dadosquiz.resposta) {
                 counter2++;
@@ -149,10 +149,10 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     }
     system("clear");
     gettimeofday(&v2, NULL);
-    elapsedTime = (v2.tv_sec - v1.tv_sec) * 1000.0;      /*seg -> ms*/
-    elapsedTime += (v2.tv_usec - v1.tv_usec) / 1000.0;   /*us -> ms*/
+    elapsedTime = (v2.tv_sec - v1.tv_sec);      /*seg -> ms*/
+    elapsedTime += (v2.tv_usec - v1.tv_usec) / 1000000.0;   /*us -> ms*/
     printf("------------------------------Laudo do Quiz------------------------------------\n");
-    printf("Duracao do Quiz: %lf ms\n", elapsedTime);
+    printf("Duracao do Quiz: %.2lf s\n", elapsedTime);
     printf("Pontuacao: %d/%d\n", (counter-1)-(counter2),counter-1);
     printf("-------------------------------------------------------------------------------\n");
     /*Caso nao haja erros, printa sucesso*/
