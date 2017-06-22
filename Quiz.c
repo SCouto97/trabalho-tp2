@@ -9,6 +9,7 @@ void CriaLista(/*@out@*/ tipoLista *lista) {
   lista->primeiro = (apontador) malloc(sizeof(celula));
   lista->ultimo = lista->primeiro;
   lista->primeiro->prox = NULL;
+
 }
 
 /*Funcao para inserir elemento(do tipoQuiz) em uma lista com cabeca*/
