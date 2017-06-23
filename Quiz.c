@@ -38,7 +38,10 @@ Recebe a Lista de Quiz e o nome do topico sobre o qual esta sendo realizado o qu
 void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     apontador aux;
     int counter = 1, boolean = 0;
-    int counter2 = 0;
+    int qtdTipoA = 0;
+    int qtdTipoD = 0;
+    int errosTipoA = 0;
+    int errosTipoD = 0;
     char resposta, opcao = '0';
     tipoLista ListaErradas;
     struct timeval t1, t2, v2, v1;
@@ -51,6 +54,7 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     gettimeofday(&v1, NULL);
     while(aux!=NULL) {  /*Loop de Impressao da Pergunta e Leitura da Resposta*/
         if(aux->dadosquiz.tipoD == 0) {
+            qtdTipoA++;
             gettimeofday(&t1, NULL);
             printf("------------------------------------------------------------------\n");
             printf("Questao %d - %s\n", counter, aux->dadosquiz.pergunta);
@@ -83,6 +87,7 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
             printf("Tempo de Resposta da Questao: %.2lf s\n", elapsedTime);
         /*Caso a resposta do usuario esteja incorreta, adicionamos a pergunta a uma Lista que  contem os erros do usuario, para que ele seja informado ao termino do quiz.*/
             if(resposta != aux->dadosquiz.resposta) {
+                errosTipoA++;
                 aux->dadosquiz.respostaUser = resposta;
                 InsereLista(aux->dadosquiz, &ListaErradas);
             }
@@ -92,6 +97,7 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
             printf("\n");
         }
         else {
+            qtdTipoD++;
             gettimeofday(&t1, NULL);
             printf("------------------------------------------------------------------\n");
             printf("Questao %d - %s\n", counter, aux->dadosquiz.pergunta);
@@ -158,7 +164,7 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
             printf("Tempo de Resposta da Questao: %.2lf s\n", elapsedTime);
             /*Caso a resposta do usuario esteja incorreta, adicionamos a pergunta a uma Lista que  contem os erros do usuario, para que ele seja informado ao termino do quiz.*/
             if(resposta != aux->dadosquiz.resposta) {
-                counter2++;
+                errosTipoD++;
                 aux->dadosquiz.respostaUser = resposta;
                 InsereLista(aux->dadosquiz, &ListaErradas);
             }
@@ -174,7 +180,8 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     elapsedTime += (v2.tv_usec - v1.tv_usec) / 1000000.0;   /*us -> ms*/
     printf("------------------------------Laudo do Quiz------------------------------------\n");
     printf("Duracao do Quiz: %.2lf s\n", elapsedTime);
-    printf("Pontuacao: %d/%d\n", (counter-1)-(counter2),counter-1);
+    printf("Acertos: %d/%d\n", (counter-1)-(errosTipoA + errosTipoD),counter-1);
+    printf("Pontuacao: %d/%d\n", (((qtdTipoA - errosTipoA)*1)+((qtdTipoD - errosTipoD)*5)), (qtdTipoA*1)+(qtdTipoD*5));
     printf("-------------------------------------------------------------------------------\n");
     /*Caso nao haja erros, printa sucesso*/
 
