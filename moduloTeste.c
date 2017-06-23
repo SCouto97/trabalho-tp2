@@ -18,6 +18,11 @@ void teste_CriaLista(void);
 void teste_InsereLista(void);
 void teste_CriaListaDisciplina(void);
 void teste_InsereListaDisciplina(void);
+void teste_DesalocarListaTopico(void);
+void teste_DesalocarListaDisciplina(void);
+void teste_DesalocarLista(void);
+
+
 
 void teste_CriaLista(void) {
 	tipoLista lista;
@@ -35,6 +40,12 @@ void teste_InsereLista(void) {
 	CU_ASSERT_PTR_NULL(lista.primeiro->prox->prox);
 }
 
+void teste_DesalocarLista(void) {
+	tipoLista lista;
+	CriaLista(&lista);
+	DesalocarLista(&lista)
+	CU_ASSERT_PTR_NULL(lista.primeiro);
+}
 void teste_CriaListaDisciplina(void) {
 	tipoListaDisciplina lista;
 	CriaListaDisciplina(&lista);
@@ -51,6 +62,13 @@ void teste_InsereListaDisciplina(void) {
 	CU_ASSERT_PTR_NULL(lista.primeiro->prox->prox);
 }
 
+void teste_DesalocarListaDisciplina(void) {
+	tipoListaDisciplina lista;
+	CriaListaDisciplina(&lista);
+	DesalocarListaDisciplina(&lista)
+	CU_ASSERT_PTR_NULL(lista.primeiro);
+}
+
 void verifica_ponteiro_lista(void) {
 
 	tipoListaTopico lista;
@@ -58,6 +76,7 @@ void verifica_ponteiro_lista(void) {
 	CU_ASSERT_PTR_NOT_NULL(lista.primeiro);
 	CU_ASSERT_PTR_NULL(lista.primeiro->prox);
 }
+
 
 void verifica_insercao(void) {
 
@@ -68,6 +87,14 @@ void verifica_insercao(void) {
 	CU_ASSERT_PTR_NOT_NULL(lista.primeiro->prox);
 	CU_ASSERT_PTR_NULL(lista.primeiro->prox->prox);
 }
+
+void teste_DesalocarListaTopico(void) {
+	tipoListaTopico lista;
+	CriaListaTopico(&lista);
+	DesalocarListaTopico(&lista)
+	CU_ASSERT_PTR_NULL(lista.primeiro);
+}
+
 
 void adicionar_suite(void) {
 
@@ -81,7 +108,9 @@ void adicionar_suite(void) {
 	CU_ADD_TEST(suite, teste_InsereLista);
 	CU_ADD_TEST(suite, teste_CriaListaDisciplina);
 	CU_ADD_TEST(suite, teste_InsereListaDisciplina);
-
+	CU_ADD_TEST(suite, teste_DesalocarLista);
+	CU_ADD_TEST(suite, teste_DesalocarListaTopico);
+	CU_ADD_TEST(suite, teste_DesalocarListaDisciplina);
 }
 
 int main() {
