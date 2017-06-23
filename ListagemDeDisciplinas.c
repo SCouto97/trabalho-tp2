@@ -38,6 +38,7 @@ void DesalocarListaDisciplina(/*@out@*/ tipoListaDisciplina *lista) {
         aux2 = aux;
         aux = aux->prox;
         free(aux2);
+        lista->primeiro = NULL;
     }
 }
 
