@@ -3,14 +3,12 @@
 #include <stdlib.h>
 #include "Topicos.h"
 
-/*Funcao para criar uma lista de topicos com cabeca */
 void CriaListaTopico(/*@out@*/ tipoListaTopico *lista) {
     lista->primeiro = (apontador3)malloc(sizeof(celulaTopico));
     lista->ultimo = lista->primeiro;
     lista->ultimo->prox = NULL;
 }
 
-/*Funcao para inserir elemento(do tipoTopico) em uma lista com cabeca*/
 void InsereTopico(/*@out@*/ tipoListaTopico *lista, /*@out@*/ tipoTopico infosTopico) {
     lista->ultimo->prox = (apontador3)malloc(sizeof(celulaTopico));
     lista->ultimo = lista->ultimo->prox;
@@ -29,7 +27,6 @@ void DesalocarListaTopico(/*@out@*/ tipoListaTopico *lista) {
     }
 }
 
-/*Funcao responsavel por listar os topicos da disciplina passada como parametro*/
 void ListarTopicos(char *nomeDisciplina) {
     apontador3 aux;
     FILE *fp;
