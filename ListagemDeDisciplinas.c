@@ -4,7 +4,6 @@
 #include "ListagemDeDisciplinas.h"
 #include "Topicos.h"
 
-/*Funcao para inserir elemento(do tipoDisciplina) em uma lista com cabeca*/
 void InsereDisciplina(/*@out@*/ tipoListaDisciplina *lista, /*@out@*/ tipoDisciplina infosDisciplina) {
     apontador2 aux;
     int checaExistencia = 0; /*Variavel de controle para indicar se a disciplina ja esta na lista*/
@@ -24,7 +23,6 @@ void InsereDisciplina(/*@out@*/ tipoListaDisciplina *lista, /*@out@*/ tipoDiscip
     }
 }
 
-/*Funcao para criar uma lista de disciplina com cabeca */
 void CriaListaDisciplina(/*@out@*/ tipoListaDisciplina *lista) {
     lista->primeiro = (apontador2)malloc(sizeof(celulaDisciplina));
     lista->ultimo = lista->primeiro;
@@ -42,8 +40,6 @@ void DesalocarListaDisciplina(/*@out@*/ tipoListaDisciplina *lista) {
     }
 }
 
-
-/*Funcao responsavel por listar as disciplinas que estao cadastradas no sistema*/
 void ListarDisciplinas(int IDaux) {
     FILE *fp;
     tipoListaDisciplina listaDisciplina;
