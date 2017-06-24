@@ -25,7 +25,7 @@ typedef struct topicosId {
 	char topico[25];
 }topicosId;
 
-/*Funcao responavel pela criacao da lista de perguntas do quiz do topico passado como parametro.
+/**Funcao responsavel pela criacao da lista de perguntas do quiz do topico passado como parametro.
 *Para isso, vare o arrquivo de perguntas, e, atraves da comparacao dos identificadores, 
 *filtra apenas as perguntas que fazem parte do topico que esta sendo exercitado e acrescenta na lista.
 */
@@ -37,7 +37,6 @@ void ListaPerguntas(char *nomearquivo, char *nometopico);
 */
 void ImprimirPerguntas(tipoLista lista, char *nometopico);
 
-void gerenciaPerguntas(char* nomearquivo, char* usuario_sessao);
 
 /**
 * Funcao para criar uma lista com cabeca com perguntas de um quiz
