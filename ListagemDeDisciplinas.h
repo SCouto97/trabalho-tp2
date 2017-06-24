@@ -18,16 +18,24 @@ typedef struct {
 }tipoListaDisciplina;
 
 
-/*Função usada para listar as disciplinas ao usuário*/
+/**\brief Funcao responsavel por listar as disciplinas que estao cadastradas no sistema.
 
+*/
 void ListarDisciplinas(int IDaux);
 
 void ListarMinhasDisciplinas(char* usuario_sessao);
 
+/**\brief Funcao para criar uma lista de disciplina com cabeca. 
+
+*/
 void CriaListaDisciplina(tipoListaDisciplina *lista);
 
 void DesalocarListaDisciplina(tipoListaDisciplina *lista);
 
+
+/**\brief Funcao para inserir elemento(do tipoDisciplina) em uma lista com cabeca.
+
+*/
 void InsereDisciplina(tipoListaDisciplina *lista, tipoDisciplina infosDisciplina);
 
 #endif
