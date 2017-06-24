@@ -20,10 +20,19 @@ typedef struct {
 
 void DesalocarListaTopico(tipoListaTopico *lista);
 
+/**\brief Funcao para criar uma lista de topicos com cabeca. 
+
+*/
 void CriaListaTopico(tipoListaTopico *lista);
 
+/**\brief Funcao para inserir elemento(do tipoTopico) em uma lista com cabeca.
+
+*/
 void InsereTopico(tipoListaTopico *lista, tipoTopico infosTopico);
 
+/**\brief Funcao responsavel por listar os topicos da disciplina passada como parametro.
+
+*/
 void ListarTopicos(char *nomeDisciplina);
 
 #endif
