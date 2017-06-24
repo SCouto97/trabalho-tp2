@@ -4,7 +4,6 @@
 #include <sys/time.h>
 #include "Quiz.h"
 
-/*Funcao para criar uma lista com cabeca com perguntas de um quiz*/
 void CriaLista(/*@out@*/ tipoLista *lista) {
   lista->primeiro = (apontador) malloc(sizeof(celula));
   lista->ultimo = lista->primeiro;
@@ -12,7 +11,6 @@ void CriaLista(/*@out@*/ tipoLista *lista) {
 
 }
 
-/*Funcao para inserir elemento(do tipoQuiz) em uma lista com cabeca*/
 void InsereLista(/*@out@*/ tipoQuiz x,/*@out@*/ tipoLista *lista){
       lista->ultimo->prox=(apontador)malloc(sizeof(celula));
       lista->ultimo=lista->ultimo->prox;
@@ -30,11 +28,6 @@ void DesalocarLista(/*@out@*/ tipoLista *lista) {
         lista->primeiro = NULL;
     }
 }
-
-/*Funcao Responsavel pela Impressao da Lista de Quiz e pela leitura das respostas do usuario.
-Tambem informa ao usuario, ao termino do quiz, quais perguntas ele errou.
-Recebe a Lista de Quiz e o nome do topico sobre o qual esta sendo realizado o quiz como parametro
-*/
 
 void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     apontador aux;
@@ -184,8 +177,9 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
     printf("Acertos: %d/%d\n", (counter-1)-(errosTipoA + errosTipoD),counter-1);
     printf("Pontuacao: %d/%d\n", (((qtdTipoA - errosTipoA)*1)+((qtdTipoD - errosTipoD)*5)), (qtdTipoA*1)+(qtdTipoD*5));
     printf("-------------------------------------------------------------------------------\n");
-    /*Caso nao haja erros, printa sucesso*/
-
+    /** \brief Caso nao haja erros, printa sucesso.
+     *
+     */
 
     if(ListaErradas.primeiro->prox == NULL) {
         printf("Parabens, voce acertou todas as perguntas!\n");
@@ -193,7 +187,9 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
         getchar();
         getchar();
     }
-    else {  /*Caso contrario, imprime perguntas respondidas incorretamente*/
+    else {  /**\brief Caso contrario, imprime perguntas respondidas incorretamente.
+             *
+            */
         aux = ListaErradas.primeiro->prox;
         printf("1 - VERIFICAR ITENS INCORRETOS\n");
         printf("2 - SAIR\n");
@@ -267,8 +263,6 @@ void acessarQuiz(char *usuario_sessao) {
     }
 }
 
-/*Funcao responavel pela criacao da lista de perguntas do quiz do topico passado como parametro.
-Para isso, vare o arrquivo de perguntas, e, atraves da comparacao dos identificadores, filtra apenas as perguntas que fazem parte do topico que esta sendo exercitado e acrescenta na lista.*/
 void ListaPerguntas(char *nomearquivo,char *nometopico) {
     FILE *fp;
     int counter=0;
