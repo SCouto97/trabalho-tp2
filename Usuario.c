@@ -13,7 +13,7 @@ Informa se o Login foi realizado com sucesso. */
 void TelaLogin() {
 	FILE *fp;
 	int loginfound = 0; /*Variavel para controle de login. So sera settada para "1" se o login 				    existir.*/
-	char user[20], password[20], name[20], user_read[20], password_read[20], nomearquivo[20] = "usuarios.txt";
+	char user[20], password[20], name[20] = "usrone", user_read[20] = "usrone", password_read[20] = "usrone", nomearquivo[20] = "usuarios.txt";
 	system("clear");
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Tela de Login: %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
 	printf("%%%%%%%%%%%%%% Usuario: ");
@@ -60,7 +60,7 @@ Parametros da funcao: "username" - Nome do usuario que queremos checar existenci
 "nomearquivo" - Nome do arquivo no qual procuraremos o usuario inserido.*/
 
 int ProcuraNomeUsuario(char *username, char *nomearquivo) {
-	char user_read[20], name_read[20], password_read[20];
+	char user_read[20] = "usrone", name_read[20], password_read[20];
 	FILE *fp;
 
 	if(fopen(nomearquivo, "r") == NULL) {	/*Trata Possibilidade do Arquivo Nao Existir*/
@@ -83,7 +83,7 @@ int ProcuraNomeUsuario(char *username, char *nomearquivo) {
 Checa se o usuario está disponível para uso. Se não estiver, o cadastro é realizado. Se estiver, então o cliente sera informado e devera optar por outro nome de usuário*/
 
 void TelaCadastro() {
-	char nome[20], login[20], senha[20], nomearquivo[20] = "usuarios.txt";
+	char nome[20], login[20] = "usrone", senha[20], nomearquivo[20] = "usuarios.txt";
 	FILE *fp;
 	int usuarioexiste = 1;	/*Variavel de controle para o While*/
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cadastro %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
@@ -124,7 +124,7 @@ que possua o Nome e o Usuário informados, entao  essa senha e informada ao clie
 
 void TelaRecuperarSenha() {
 	FILE *fp;
-	char nomearquivo[20] = "usuarios.txt", nome[20], usuario[20], senha[20], nome_read[20], usuario_read[20];
+	char nomearquivo[20] = "usuarios.txt", nome[20], usuario[20], senha[20] = "usrone", nome_read[20] = "usrone", usuario_read[20] = "usrone";
 	int loginfound = 0; /*Variavel para controle de login. So sera settada para "1" se o 				    usuario for encontrado no cadastro.*/
 
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Recuperacao de Senha %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
