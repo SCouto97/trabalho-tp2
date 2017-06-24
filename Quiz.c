@@ -218,12 +218,16 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico) {
 }
 
 void acessarQuiz(char *usuario_sessao) {
-    system("clear");
     FILE *fp, *fp2;
     char line[100], line2[100], *token, *token2;
     int counter = 0;
     int opcao;
     topicosId idtopicos[20];
+    int i;
+    for(i=0;i<20;i++) {
+      strcpy(idtopicos[i].topico, "a");
+    }
+    system("clear");
     if(fopen("cadastros.txt","r") != NULL && fopen("disciplinas.txt","r") != NULL) {
         fp = fopen("cadastros.txt","r");
         printf("---------------------------Topicos Disponiveis---------------------------\n");
@@ -268,7 +272,7 @@ void ListaPerguntas(char *nomearquivo,char *nometopico) {
     int counter=0;
     char line[260]; /*Array de char para armazenar uma linha do arquivo capturada*/
     char *token;    /*Token do strtok que sera utilizado*/
-    char charaux[20];  /* Array de char para armazenar o identificador de um topico*/
+    char charaux[20] = "abc";  /* Array de char para armazenar o identificador de um topico*/
     tipoLista lista;
     tipoQuiz quiz;
 

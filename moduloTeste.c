@@ -43,7 +43,7 @@ void teste_InsereLista(void) {
 void teste_DesalocarLista(void) {
 	tipoLista lista;
 	CriaLista(&lista);
-	DesalocarLista(&lista)
+	DesalocarLista(&lista);
 	CU_ASSERT_PTR_NULL(lista.primeiro);
 }
 void teste_CriaListaDisciplina(void) {
@@ -65,7 +65,7 @@ void teste_InsereListaDisciplina(void) {
 void teste_DesalocarListaDisciplina(void) {
 	tipoListaDisciplina lista;
 	CriaListaDisciplina(&lista);
-	DesalocarListaDisciplina(&lista)
+	DesalocarListaDisciplina(&lista);
 	CU_ASSERT_PTR_NULL(lista.primeiro);
 }
 
@@ -91,7 +91,7 @@ void verifica_insercao(void) {
 void teste_DesalocarListaTopico(void) {
 	tipoListaTopico lista;
 	CriaListaTopico(&lista);
-	DesalocarListaTopico(&lista)
+	DesalocarListaTopico(&lista);
 	CU_ASSERT_PTR_NULL(lista.primeiro);
 }
 
