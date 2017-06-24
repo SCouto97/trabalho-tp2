@@ -3,6 +3,26 @@ Membros:
 	- Gabriel Nunes Ribeiro Silva (@gabnunes)   matr.: 15/0126689
 	- Samuel Andrade do Couto (@SCouto97)  		matr.: 15/0021623
 
+
+------ Trabalho 2 ------
+Neste projeto 2 foram acrescentados as seguintes funcionalidades:
+	-Caderno;
+	-Agora para realizar um quiz deve-se inserir o ID do tópico ao invés do nome do tópico, para evitar que o usuário escreva incorretamente o nome;
+	-Foi implementado a possibilidade de criar perguntas do tipo D (múltipla escolha). Assim, quando um administrador vai cadastrar uma nova pergunta, ele tem a opção de escolher entre criar uma pergunta do tipo A (V ou F) ou uma pergunta do tipo D;
+	-Foi implementado um sistema de pontuação. Como há dois tipos de perguntas (tipo A e tipo D), optamos por aplicar pesos a essas perguntas da seguinte forma:
+Questões do tipo A possuem peso 1, enquanto questões do tipo D possuem peso 5;
+	-Foi acrescentado um laudo do quiz. Quando um Quiz é encerrado, o usuário é informado quanto ao tempo que demorou pra realizar o quiz, quantas perguntas ele acertou e qual a pontuação dele, além da possibilidade de checar os itens incorretos (implementado no trabalho 1);
+	-Modificado a unidade de tempo do quiz de milisegundos para segundos.
+
+Utilizamos o splint para avaliar as possiveis faltas quanto à analise estática do código, e através da compilação com os comandos "-weak +compdef +infloops +sysdirerrors" constatamos que não havia nenhum warning, exceto um relacionado ao splint desconhecer a função "gettimeofday".
+
+
+
+
+
+
+------ Trabalho 1 ------
+
 Descrição do Modelo Conceitual:
 	Nosso QuizTime foi devidamete modularizado como solicitado, contemplando:
 		Módulo de Usuário;
