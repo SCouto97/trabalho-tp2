@@ -7,7 +7,7 @@ CFLAGS = -ansi -Wall
 DEPS = Usuario.h GerenciaDisciplina.h Topicos.h GerenciamentoQuiz.h ListagemDeDisciplinas.c
 OBJS = Usuario.o GerenciaDisciplina.o Quiz.o Topicos.o GerenciamentoQuiz.o ListagemDeDisciplinas.o main.o
 
-all: main teste
+all: main teste teste_spec
 
 main: $(OBJS)
 	$(CC) $(OBJS) -o TP1
@@ -17,6 +17,9 @@ main.o: main.c
 
 teste: moduloTeste.c
 	$(CC) -I./CUnit -L./CUnit moduloTeste.c -lcunit -o TESTE
+
+teste_spec: teste_spec.c
+	$(CC) -std=c99 teste_spec.c -o teste_spec
 
 usuario.o: usuario.c $(DEPS)
 	$(CC) $(CFLAGS) usuario.c -c
