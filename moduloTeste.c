@@ -10,6 +10,7 @@
 #include "Quiz.c"
 #include "ListagemDeDisciplinas.c"
 
+
 void adicionar_suite(void);
 
 void verifica_ponteiro_lista(void);
@@ -21,8 +22,6 @@ void teste_InsereListaDisciplina(void);
 void teste_DesalocarListaTopico(void);
 void teste_DesalocarListaDisciplina(void);
 void teste_DesalocarLista(void);
-
-
 
 void teste_CriaLista(void) {
 	tipoLista lista;
