@@ -43,13 +43,13 @@ void DesalocarListaDisciplina(/*@out@*/ tipoListaDisciplina *lista) {
 void ListarDisciplinas(int IDaux) {
     FILE *fp;
     tipoListaDisciplina listaDisciplina;
-    char line[100];	/*Array de Char para capturar uma linha do arquivo (fgets)*/
-    char *token;	/*token do strtok que sera utilizado*/
-    char nomeDisciplina[25] = "discpone"; /*Array de Char para armazenar o nome da disciplina que passaremos 				como parametro para Listar os Topicos dessa disciplina.*/
-    int opcao;  	/*Armazena Resposta do usuario ao menu apresentado*/
-    int identificador;  	/*Armazena identificador da disciplina que sera listado os 					topicos*/
+    char line[100];	/* Array de Char para capturar uma linha do arquivo (fgets)*/
+    char *token;	/* Token do strtok que sera utilizado*/
+    char nomeDisciplina[25] = "discpone"; /**< Array de Char para armazenar o nome da disciplina que passaremos 				como parametro para Listar os Topicos dessa disciplina.*/
+    int opcao;  	/* Armazena Resposta do usuario ao menu apresentado*/
+    int identificador;  	/* Armazena identificador da disciplina que sera listado os 					topicos*/
     tipoDisciplina disciplina;
-    apontador2 aux; /*Apontador para lista de Disciplina*/
+    apontador2 aux; /* Apontador para lista de Disciplina*/
 
     if(fopen("disciplinas.txt", "r") == NULL) {	/*Trata nao existencia do arquivo de disciplina*/
         printf("Nao existem disciplinas cadastradas no sistema!\n");
