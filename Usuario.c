@@ -8,41 +8,55 @@
 #include "ListagemDeDisciplinas.h"
 #include "Quiz.h"
 
-/*Função responsável por apresentar a tela de Login ao cliente. Pede que seja inserido usuário e senha e
-Informa se o Login foi realizado com sucesso. */
-void TelaLogin() {
-	FILE *fp;
-	int loginfound = 0; /*Variavel para controle de login. So sera settada para "1" se o login 				    existir.*/
-	char user[20], password[20], name[20] = "usrone", user_read[20] = "usrone", password_read[20] = "usrone", nomearquivo[20] = "usuarios.txt";
+
+
+void LerDadosLogin() {
+	char user[20], password[20];
 	system("clear");
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Tela de Login: %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
 	printf("%%%%%%%%%%%%%% Usuario: ");
 	scanf("%s", user);
 	printf("%%%%%%%%%%%%%% Senha: ");
 	scanf("%s", password);
+	TelaLogin(user,password,"usuarios.txt",0);
+}
 
+/*Função responsável por apresentar a tela de Login ao cliente. Pede que seja inserido usuário e senha e
+Informa se o Login foi realizado com sucesso. */
+int TelaLogin(char *user, char *password, char *nomearquivo, int test) {
+	FILE *fp;
+	int loginfound = 0; /*Variavel para controle de login. So sera settada para "1" se o login 				    existir.*/
+	char name[20] = "usrone", user_read[20] = "usrone", password_read[20] = "usrone";
 	if(fopen(nomearquivo, "r") == NULL) {	/*Trata Possibilidade do Arquivo Nao Existir*/
+		if(test == 1) {
+			return loginfound;
+		}
 		printf("Nao existem usuarios cadastrados!\n");
 		printf("Insira <ENTER> para retornar ao menu inicial.");
 		getchar();
 		getchar();
-
 	}
 	else {
 		fp = fopen(nomearquivo, "r");
 		while(fscanf(fp,("%s %s %s"), name, user_read, password_read) == 3) {
 			if(strcmp(user_read,user) == 0 && strcmp(password_read,password) == 0) {
+				loginfound = 1;
+				if(test == 1) {
+					return loginfound;
+				}
 				printf("Login Efetuado com Sucesso!\n");
 				printf("Seja Bem-Vindo, %s\n", name);
 				printf("Insira <ENTER> para ir para a entrada do sistema.\n");
 				getchar();
 				getchar();
-				loginfound = 1;
 				TelaEntradaSistema(user_read); /*Chama funcao que apresenta Tela 									de Entrada (Login Efetuado)*/
 				break;
 			}
 		}
 		if(loginfound == 0) { /*Informa falha de login*/
+			if(test == 1) {
+				return loginfound;
+			}
 			printf("Usuario e/ou Senha Incorretos.\n");
 			printf("Insira <ENTER> para retornar ao menu inicial.");
 			getchar();
@@ -51,6 +65,7 @@ void TelaLogin() {
 		}
 		fclose(fp);
 	}
+	return 0;
 }
 
 /*Função responsável por checar se um nome de usuário já existe. Para isso, lê o arquivo e compara com o nome
@@ -293,7 +308,7 @@ void TelaInicial() {
 		printf("Opcao Desejada: ");
 		scanf("%c", &opcao);
 		switch(opcao) {
-			case '1': TelaLogin();
+			case '1': LerDadosLogin();
 					break;
 			case '2': TelaCadastro();
 					break;

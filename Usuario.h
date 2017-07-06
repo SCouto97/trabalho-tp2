@@ -3,7 +3,9 @@
 
 void TelaInicial();
 
-void TelaLogin();
+void LerDadosLogin();
+
+int TelaLogin(char *user, char *password, char *nomearquivo, int test);
 
 void TelaCadastro();
 

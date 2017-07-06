@@ -10,7 +10,7 @@ OBJS = Usuario.o GerenciaDisciplina.o Quiz.o Topicos.o GerenciamentoQuiz.o Lista
 all: main teste teste_spec
 
 main: $(OBJS)
-	$(CC) $(OBJS) -o TP1
+	$(CC) $(OBJS) -DDEBUG -o TP1
 
 main.o: main.c
 	$(CC) main.c -c
@@ -22,7 +22,7 @@ teste_spec: teste_spec.c
 	$(CC) -std=c99 teste_spec.c -o teste_spec
 
 usuario.o: usuario.c $(DEPS)
-	$(CC) $(CFLAGS) usuario.c -c
+	$(CC) $(CFLAGS) usuario.c  -c
 
 GerenciaDisciplina.o: GerenciaDisciplina.c GerenciaDisciplina.h
 	$(CC) $(CFLAGS) GerenciaDisciplina.c -c
@@ -40,4 +40,4 @@ ListagemDeDisciplinas.o: ListagemDeDisciplinas.c ListagemDeDisciplinas.h
 	$(CC) $(CFLAGS) ListagemDeDisciplinas.c -c
 
 clean:
-	rm -rf *.o *.gch TP1 TESTE
+	rm -rf *.o *.gch TP1 TESTE teste_spec
