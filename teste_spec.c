@@ -108,6 +108,15 @@ describe("Testes do modulo Usuario") {
 		resultado = TelaCadastro(nome,user,password,nomearquivo,1);
 		check(resultado == 2);
 	}
+
+	it("Teste se o elemento eh inserido com sucesso numa lista") {
+		int resultado;
+		tipoQuiz quiz;
+		tipoLista lista;
+		strcpy(quiz.pergunta, "Pergunta aleatoria");
+		resultado = InsereLista(quiz, &lista);
+		check(resultado == 0);
+	}
 	
 }
 

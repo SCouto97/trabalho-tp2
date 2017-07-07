@@ -47,7 +47,7 @@ void CriaLista(tipoLista *lista);
 /**
 *Funcao para inserir elemento(do tipoQuiz) em uma lista com cabeca
 */
-void InsereLista(tipoQuiz x, tipoLista *lista);
+int InsereLista(tipoQuiz x, tipoLista *lista);
 
 void DesalocarLista(tipoLista *lista);
 
