@@ -97,10 +97,9 @@ int ProcuraNomeUsuario(char *username, char *nomearquivo) {
 /*Função responsável por realizar o cadastro de novos usuários. São solicitados a princípio: Nome, Usuário e Senha.
 Checa se o usuario está disponível para uso. Se não estiver, o cadastro é realizado. Se estiver, então o cliente sera informado e devera optar por outro nome de usuário*/
 
-void TelaCadastro() {
+void LerDadosCadastro() {
 	char nome[20], login[20] = "usrone", senha[20], nomearquivo[20] = "usuarios.txt";
-	FILE *fp;
-	int usuarioexiste = 1;	/*Variavel de controle para o While*/
+	int usuarioexiste = 1;
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cadastro %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
 	printf("%%%%%%%%%%%%%% Primeiro Nome: ");
 	scanf("%s", nome);
@@ -111,7 +110,16 @@ void TelaCadastro() {
 	}
 	printf("%%%%%%%%%%%%%% Senha: ");
 	scanf("%s", senha);
+	TelaCadastro(nome,login,senha, nomearquivo, 0);
+}
+
+
+int TelaCadastro(char *nome, char *login, char *senha, char *nomearquivo, int test) {
+	FILE *fp;
 	if(fopen(nomearquivo,"r") == NULL) { /*Caso ainda nao exista arquivo de usuarios*/
+		if(test == 1) {
+			return 1;
+		}
 		fp = fopen(nomearquivo, "w");
 		fprintf(fp,"%s %s %s\n", nome, login, senha);
 		printf("Cadastro realizado com sucesso.\n");
@@ -122,6 +130,9 @@ void TelaCadastro() {
 		fclose(fp);
 	}
 	else {	/* Caso ja exista, acrescenta ao final os dados do novo usuario */
+		if(test == 1) {
+			return 2;
+		}
 		fp = fopen(nomearquivo, "a");
 		fprintf(fp,"%s %s %s\n", nome, login, senha);
 		printf("Cadastro realizado com sucesso.\n");
@@ -131,6 +142,7 @@ void TelaCadastro() {
 		system("clear");
 		fclose(fp);
 	}
+	return 0;
 }
 
 /*Função responsável por procurar no arquivo de cadastros o usuario inserido. Para solicitar a senha é necessario
@@ -278,7 +290,7 @@ void TelaEntradaSistema(char *usuario_sessao) {
 				printf("Opcao Desejada: ");
 				scanf("%c", &opcao);
 				switch(opcao) {
-					case '1': TelaCadastro();
+					case '1': LerDadosCadastro();
 							break;
 					case '2': ModificarArquivo(nomearquivo,usuario_sessao);
 							break;
@@ -310,7 +322,7 @@ void TelaInicial() {
 		switch(opcao) {
 			case '1': LerDadosLogin();
 					break;
-			case '2': TelaCadastro();
+			case '2': LerDadosCadastro();
 					break;
 			case '3': TelaRecuperarSenha();
 					break;
