@@ -7,7 +7,9 @@ void LerDadosLogin();
 
 int TelaLogin(char *user, char *password, char *nomearquivo, int test);
 
-void TelaCadastro();
+void LerDadosCadastro();
+
+int TelaCadastro(char *nome, char *login, char *senha, char *nomearquivo, int test);
 
 void TelaRecuperarSenha();
 
