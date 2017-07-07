@@ -113,9 +113,11 @@ describe("Testes do modulo Usuario") {
 		int resultado;
 		tipoQuiz quiz;
 		tipoLista lista;
-		strcpy(quiz.pergunta, "Pergunta aleatoria");
+		CriaLista(&lista);
+		strcpy(quiz.pergunta, "Pergunta");
 		resultado = InsereLista(quiz, &lista);
 		check(resultado == 0);
+		DesalocarLista(&lista);
 	}
 	
 }
