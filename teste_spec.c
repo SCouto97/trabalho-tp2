@@ -89,6 +89,25 @@ describe("Testes do modulo Usuario") {
 		check(resultado == 0);
 	}
 
+	it("Ao cadastrar um usuario cria o arquivo de usuarios(caso nao exista)") {
+		char user[20] = "adadadadad";
+		char password[20] = "adadadadad";
+		char nome[20] = "stallone";
+		char nomearquivo[20] = "inexistent.txt";
+		int resultado;
+		resultado = TelaCadastro(nome,user,password,nomearquivo,1);
+		check(resultado == 1);
+	}
+
+	it("Ao cadastrar um usuario incrementa o arquivo de usuarios ja existente") {
+		char user[20] = "adadadadad";
+		char password[20] = "adadadadad";
+		char nome[20] = "stallone";
+		char nomearquivo[20] = "usuarios.txt";
+		int resultado;
+		resultado = TelaCadastro(nome,user,password,nomearquivo,1);
+		check(resultado == 2);
+	}
 	
 }
 
