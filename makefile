@@ -1,5 +1,6 @@
 CC = gcc
 CFLAGS = -ansi -Wall 
+GCOV = -Wall -ftest-coverage -fprofile-arcs
 
 #Caso exista a adição de algum módulo, modificar apenas essas variáveis
 #Para a compilação (que deve ser feita independentemente) seguir os exemplos .o
@@ -7,7 +8,7 @@ CFLAGS = -ansi -Wall
 DEPS = Usuario.h GerenciaDisciplina.h Topicos.h GerenciamentoQuiz.h ListagemDeDisciplinas.c
 OBJS = Usuario.o GerenciaDisciplina.o Quiz.o Topicos.o GerenciamentoQuiz.o ListagemDeDisciplinas.o main.o
 
-all: main teste teste_spec
+all: main teste
 
 main: $(OBJS)
 	$(CC) $(OBJS) -DDEBUG -o TP1
@@ -19,7 +20,7 @@ teste: moduloTeste.c
 	$(CC) -I./CUnit -L./CUnit moduloTeste.c -lcunit -o TESTE
 
 teste_spec: teste_spec.c
-	$(CC) -std=c99 teste_spec.c -o teste_spec
+	$(CC)  -Wall -std=c99 teste_spec.c -o teste_spec
 
 usuario.o: usuario.c $(DEPS)
 	$(CC) $(CFLAGS) usuario.c  -c
@@ -38,6 +39,9 @@ GerenciamentoQuiz.o: GerenciamentoQuiz.c GerenciamentoQuiz.h
 
 ListagemDeDisciplinas.o: ListagemDeDisciplinas.c ListagemDeDisciplinas.h
 	$(CC) $(CFLAGS) ListagemDeDisciplinas.c -c
+
+gcov: *.c
+	$(CC) $(GCOV) teste_spec.c -o testecov
 
 clean:
 	rm -rf *.o *.gch TP1 TESTE teste_spec
