@@ -8,7 +8,7 @@ int InsereDisciplina(/*@out@*/ tipoListaDisciplina *lista, /*@out@*/ tipoDiscipl
     apontador2 aux;
     int checaExistencia = 0; /*Variavel de controle para indicar se a disciplina ja esta na lista*/
     aux = lista->primeiro->prox;
-    while(aux != NULL) {	/*Checa se a disciplina ja esta na lista para evitar repeticao*/
+    while(aux != NULL) {    /*Checa se a disciplina ja esta na lista para evitar repeticao*/
         if(aux->disciplina.idDisciplina == infosDisciplina.idDisciplina) {
             checaExistencia = 1;
             break;
@@ -43,7 +43,7 @@ int DesalocarListaDisciplina(/*@out@*/ tipoListaDisciplina *lista) {
     return lista->primeiro == NULL;
 }
 
-void ListarDisciplinas(int IDaux) {
+int ListarDisciplinas(int IDaux) {
     FILE *fp;
     tipoListaDisciplina listaDisciplina;
     char line[100];	/* Array de Char para capturar uma linha do arquivo (fgets)*/
@@ -76,6 +76,11 @@ void ListarDisciplinas(int IDaux) {
         }
         aux = listaDisciplina.primeiro->prox;
 	/*Impressao da Lista de Disciplinas*/
+        if(IDaux == 2 && aux != NULL) {
+            DesalocarListaDisciplina(&listaDisciplina);
+            fclose(fp);
+            return 1;
+        }
         printf("------------------------Lista de Disciplinas------------------------:\n");
         while(aux != NULL) {
             printf("ID: %d - Nome: %s\n", aux->disciplina.idDisciplina, aux->disciplina.nomeDisciplina);
@@ -102,7 +107,7 @@ void ListarDisciplinas(int IDaux) {
                 aux = aux->prox;
             }
             switch(opcao) {
-                case 1: ListarTopicos(nomeDisciplina); /*Chamamos ListarTopicos passando o nome da 							Disciplina da qual desejamos obter os topicos como 							parametro*/
+                case 1: ListarTopicos(nomeDisciplina, 0); /*Chamamos ListarTopicos passando o nome da 							Disciplina da qual desejamos obter os topicos como 							parametro*/
                         break;
                 case 2: printf("Insira <ENTER> para retornar ao Menu.\n");
                         getchar();
@@ -113,6 +118,7 @@ void ListarDisciplinas(int IDaux) {
         DesalocarListaDisciplina(&listaDisciplina);
         fclose(fp);
     }
+    return 0;
 }
 
 void ListarMinhasDisciplinas(char* usuario_sessao) {
