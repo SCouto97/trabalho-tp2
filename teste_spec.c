@@ -147,5 +147,22 @@ describe("Testes do modulo Usuario") {
 		DesalocarLista(&lista);
 	}
 	
+	it("Testa se a lista eh desalocada com sucesso") {
+
+		int resultado;
+		tipoLista lista;
+		CriaLista(&lista);
+		resultado =	DesalocarLista(&lista);
+		check(resultado == 1);	
+	}
+
+	it("Verifica se a lista eh criada com sucesso") {
+
+		int resultado;
+		tipoLista lista;
+		resultado = CriaLista(&lista);
+		check(resultado == 1);
+		DesalocarLista(&lista);
+	}
 }
 

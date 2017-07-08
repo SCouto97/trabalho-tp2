@@ -4,11 +4,11 @@
 #include <sys/time.h>
 #include "Quiz.h"
 
-void CriaLista(/*@out@*/ tipoLista *lista) {
+int CriaLista(/*@out@*/ tipoLista *lista) {
     lista->primeiro = (apontador) malloc(sizeof(celula));
     lista->ultimo = lista->primeiro;
     lista->primeiro->prox = NULL;
-
+    return (lista != NULL);
 }
 
 int InsereLista(/*@out@*/ tipoQuiz x,/*@out@*/ tipoLista *lista){
@@ -19,7 +19,7 @@ int InsereLista(/*@out@*/ tipoQuiz x,/*@out@*/ tipoLista *lista){
     return (strcmp(lista->ultimo->dadosquiz.pergunta, x.pergunta));
 }
 
-void DesalocarLista(/*@out@*/ tipoLista *lista) {
+int DesalocarLista(/*@out@*/ tipoLista *lista) {
     apontador aux, aux2;
     aux = lista->primeiro;
     while(aux!=NULL) {
@@ -28,6 +28,7 @@ void DesalocarLista(/*@out@*/ tipoLista *lista) {
         free(aux2);
         lista->primeiro = NULL;
     }
+    return (lista->primeiro == NULL);
 }
 
 void ImprimirPerguntas(tipoLista lista, char *nometopico) {
