@@ -41,7 +41,7 @@ void ImprimirPerguntas(tipoLista lista, char *nometopico);
 /**
 * Funcao para criar uma lista com cabeca com perguntas de um quiz
 */
-void CriaLista(tipoLista *lista);
+int CriaLista(tipoLista *lista);
 
 
 /**
@@ -49,7 +49,7 @@ void CriaLista(tipoLista *lista);
 */
 int InsereLista(tipoQuiz x, tipoLista *lista);
 
-void DesalocarLista(tipoLista *lista);
+int DesalocarLista(tipoLista *lista);
 
 void acessarQuiz(char *usuario_sessao);
 
