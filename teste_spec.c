@@ -201,14 +201,12 @@ describe("Testes Utilizando Specs") {
 	* Pelo critério de cobertura de instruções, checamos se todas instruções de CriaLista são devidamente exercitadas
 	*/
 	it("Verifica se a lista eh criada com sucesso") {
-
 		int resultado;
 		tipoLista lista;
 		resultado = CriaLista(&lista);
 		check(resultado == 1);
 		DesalocarLista(&lista);
 	}
-<<<<<<< HEAD
 
 	it("Testa se a lista de disciplinas foi criada e preenchida") {
 		int teste = 2;
@@ -235,9 +233,7 @@ describe("Testes Utilizando Specs") {
 		}
 	}
 
-=======
 /*aqui muda*/
->>>>>>> b91ab1d00b99585077ad0f54ff40555d48474543
 	it("Teste se consegue criar uma lista de disciplinas") {
 		tipoListaDisciplina lista;
 		int resultado;
@@ -251,18 +247,12 @@ describe("Testes Utilizando Specs") {
 	* Pelo critério de cobertura de instruções, checamos se todas instruções de DesalocarLista são devidamente exercitadas
 	*/
 	it("Testa se a lista de disciplinas eh desalocada com sucesso") {
-<<<<<<< HEAD
-=======
-
->>>>>>> b91ab1d00b99585077ad0f54ff40555d48474543
 		int resultado;
 		tipoListaDisciplina lista;
 		CriaListaDisciplina(&lista);
 		resultado =	DesalocarListaDisciplina(&lista);
 		check(resultado == 1);	
 	}
-<<<<<<< HEAD
-
 	/*! Diagrama da funcao CriaLista
 	* \image latex CriaLista.eps "Fluxograma" width=4cm
 	* Pelo critério de cobertura de instruções, checamos se todas instruções de CriaLista são devidamente exercitadas
@@ -288,10 +278,6 @@ describe("Testes Utilizando Specs") {
 		check(resultado == 1);
 		DesalocarListaDisciplina(&lista);
 	}
-}
-=======
->>>>>>> b91ab1d00b99585077ad0f54ff40555d48474543
-
 	/*! Diagrama da funcao CriaLista
 	* \image latex CriaLista.eps "Fluxograma" width=4cm
 	* Pelo critério de cobertura de instruções, checamos se todas instruções de CriaLista são devidamente exercitadas
@@ -306,8 +292,8 @@ describe("Testes Utilizando Specs") {
 		check(resultado == 0);
 		DesalocarListaDisciplina(&lista);
 	}
-	it("Verifica se consegue inserir uma disciplina ja existente") {
 
+	it("Verifica se consegue inserir uma disciplina ja existente") {
 		int resultado;
 		tipoListaDisciplina lista;
 		tipoDisciplina disciplina1;
@@ -317,5 +303,24 @@ describe("Testes Utilizando Specs") {
 		resultado = InsereDisciplina(&lista, disciplina2);
 		check(resultado == 1);
 		DesalocarListaDisciplina(&lista);
+	}
+
+	it("Checa se a funcao ListaPerguntas criou e preenchou a lista de perguntas"){
+		char arquivo[20] = "disciplinas.txt";
+		char *token;
+		FILE *fp;
+		char topico[20];
+		char line[100];
+		int resultado;
+		if(fopen(arquivo,"r") != NULL) {
+			fp = fopen(arquivo,"r");
+			fgets(line,90,fp);
+			token = strtok(line,"|");
+			token = strtok(NULL,"|");
+			token = strtok(NULL,"|");
+			strcpy(topico,token);
+			resultado = ListaPerguntas(arquivo,topico,1);
+			check(resultado == 1);
+		}
 	}
 }
