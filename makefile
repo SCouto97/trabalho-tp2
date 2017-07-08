@@ -8,16 +8,13 @@ GCOV = -Wall -ftest-coverage -fprofile-arcs
 DEPS = Usuario.h GerenciaDisciplina.h Topicos.h GerenciamentoQuiz.h ListagemDeDisciplinas.c
 OBJS = Usuario.o GerenciaDisciplina.o Quiz.o Topicos.o GerenciamentoQuiz.o ListagemDeDisciplinas.o main.o
 
-all: main teste
+all: main gcov
 
 main: $(OBJS)
-	$(CC) $(OBJS) -DDEBUG -o TP1
+	$(CC) $(OBJS) -o TP1
 
 main.o: main.c
 	$(CC) main.c -c
-
-teste: moduloTeste.c
-	$(CC) -I./CUnit -L./CUnit moduloTeste.c -lcunit -o TESTE
 
 teste_spec: teste_spec.c
 	$(CC)  -Wall -std=c99 teste_spec.c -o teste_spec
@@ -42,6 +39,10 @@ ListagemDeDisciplinas.o: ListagemDeDisciplinas.c ListagemDeDisciplinas.h
 
 gcov: *.c
 	$(CC) $(GCOV) teste_spec.c -o testecov
+	$(CC) $(GCOV) -I./CUnit -L./CUnit moduloTeste.c -lcunit -o cunit
+	./cunit
+	./testecov
+	gcov teste_spec.gcno
 
 clean:
-	rm -rf *.o *.gch TP1 TESTE teste_spec
+	rm -rf *.o *.gch TP1 cunit teste_spec testecov *.gcno *.gcov *.gcda
