@@ -217,6 +217,17 @@ void TelaFinalizarSessao(char opcao) {
 	getchar();
 }
 
+void LerDadosCadastroAdmin() {
+	char opcao;
+	system("clear");
+	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Cadastro em Disciplina %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
+	ListarDisciplinas(0);
+	printf("Insira o ID da Disciplina que desejas se cadastrar: ");
+	getchar();
+	scanf("%c", &opcao);
+}
+
+
 void cadastrarUsuario(char* usuario_sessao){
 	FILE *fp;
 	char line[100];
