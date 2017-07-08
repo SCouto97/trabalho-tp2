@@ -21,7 +21,7 @@ typedef struct {
 /**\brief Funcao responsavel por listar as disciplinas que estao cadastradas no sistema.
 
 */
-void ListarDisciplinas(int IDaux);
+int ListarDisciplinas(int IDaux);
 
 void ListarMinhasDisciplinas(char* usuario_sessao);
 
