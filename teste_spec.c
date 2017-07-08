@@ -6,8 +6,8 @@
 #include <string.h>
 
 #include "Usuario.c"
-#include "Topicos.c"
 #include "Quiz.c"
+#include "Topicos.c"
 #include "ListagemDeDisciplinas.c"
 #include "GerenciaDisciplina.c"
 #include "GerenciamentoQuiz.c"
@@ -41,7 +41,6 @@ describe("Testes Utilizando Specs") {
 	*/
 	it("Teste valido da funcao ValidarDisciplina") {
 		FILE *fp = fopen("disciplinas.txt", "r");
-		float lixo;
 		char disciplina[20];
 		char topperco[20];
 		char line[90];
@@ -209,7 +208,36 @@ describe("Testes Utilizando Specs") {
 		check(resultado == 1);
 		DesalocarLista(&lista);
 	}
+<<<<<<< HEAD
+
+	it("Testa se a lista de disciplinas foi criada e preenchida") {
+		int teste = 2;
+		int resultado;
+		resultado = ListarDisciplinas(teste);
+		check(resultado == 1);
+	}
+
+	it("Testa se a lista de topicos de uma disciplina foi criada e preenchida") {
+		int teste = 1;
+		int resultado;
+		char line[100];
+		char *token;
+		char nomeDisciplina[25];
+		FILE *fp;
+		if(fopen("disciplinas.txt","r") != NULL) {
+			fp = fopen("disciplinas.txt","r");
+			fgets(line,90,fp);
+			token = strtok(line,"|");
+			token = strtok(NULL,"|");
+			strcpy(nomeDisciplina,token);
+			resultado = ListarTopicos(nomeDisciplina,teste);
+			check(resultado == 1);
+		}
+	}
+
+=======
 /*aqui muda*/
+>>>>>>> b91ab1d00b99585077ad0f54ff40555d48474543
 	it("Teste se consegue criar uma lista de disciplinas") {
 		tipoListaDisciplina lista;
 		int resultado;
@@ -223,13 +251,46 @@ describe("Testes Utilizando Specs") {
 	* Pelo critério de cobertura de instruções, checamos se todas instruções de DesalocarLista são devidamente exercitadas
 	*/
 	it("Testa se a lista de disciplinas eh desalocada com sucesso") {
+<<<<<<< HEAD
+=======
 
+>>>>>>> b91ab1d00b99585077ad0f54ff40555d48474543
 		int resultado;
 		tipoListaDisciplina lista;
 		CriaListaDisciplina(&lista);
 		resultado =	DesalocarListaDisciplina(&lista);
 		check(resultado == 1);	
 	}
+<<<<<<< HEAD
+
+	/*! Diagrama da funcao CriaLista
+	* \image latex CriaLista.eps "Fluxograma" width=4cm
+	* Pelo critério de cobertura de instruções, checamos se todas instruções de CriaLista são devidamente exercitadas
+	*/
+	it("Verifica se consegue inserir uma disciplina nao existente") {
+		int resultado;
+		tipoListaDisciplina lista;
+		tipoDisciplina disciplina;
+		CriaListaDisciplina(&lista);
+		resultado = InsereDisciplina(&lista, disciplina);
+		check(resultado == 0);
+		DesalocarListaDisciplina(&lista);
+	}
+	
+	it("Verifica se consegue inserir uma disciplina ja existente") {
+		int resultado;
+		tipoListaDisciplina lista;
+		tipoDisciplina disciplina1;
+		tipoDisciplina disciplina2 = disciplina1;
+		CriaListaDisciplina(&lista);
+		InsereDisciplina(&lista, disciplina1);		
+		resultado = InsereDisciplina(&lista, disciplina2);
+		check(resultado == 1);
+		DesalocarListaDisciplina(&lista);
+	}
+}
+=======
+>>>>>>> b91ab1d00b99585077ad0f54ff40555d48474543
 
 	/*! Diagrama da funcao CriaLista
 	* \image latex CriaLista.eps "Fluxograma" width=4cm
