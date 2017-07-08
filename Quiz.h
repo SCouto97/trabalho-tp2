@@ -29,7 +29,7 @@ typedef struct topicosId {
 *Para isso, vare o arrquivo de perguntas, e, atraves da comparacao dos identificadores, 
 *filtra apenas as perguntas que fazem parte do topico que esta sendo exercitado e acrescenta na lista.
 */
-void ListaPerguntas(char *nomearquivo, char *nometopico);
+int ListaPerguntas(char *nomearquivo, char *nometopico, int test);
 
 /**Funcao Responsavel pela Impressao da Lista de Quiz e pela leitura das respostas do usuario.
 *Tambem informa ao usuario, ao termino do quiz, quais perguntas ele errou.
