@@ -20,6 +20,8 @@ Para a utilização e verificação do módulo de testes, utilizar o comando "ma
 
 Para acessar o usuário administrador, utilizar login: admin, senha: admin
 
+Para mais informações sobre o sistema, olhar a pasta de Documentação.
+
 ## Link do repositório no GitHub
 
 [github.com/SCouto97/trabalho-tp2](https://github.com/SCouto97/trabalho-tp2)
