@@ -33,6 +33,6 @@ void InsereTopico(tipoListaTopico *lista, tipoTopico infosTopico);
 /**\brief Funcao responsavel por listar os topicos da disciplina passada como parametro.
 
 */
-void ListarTopicos(char *nomeDisciplina);
+int ListarTopicos(char *nomeDisciplina, int test);
 
 #endif
