@@ -15,7 +15,7 @@ int InsereLista(/*@out@*/ tipoQuiz x,/*@out@*/ tipoLista *lista){
     lista->ultimo->prox=(apontador)malloc(sizeof(celula));
     lista->ultimo=lista->ultimo->prox;
     lista->ultimo->dadosquiz = x;
-    lista->ultimo->prox=NULL;
+    lista->ultimo->prox = NULL;
     return (strcmp(lista->ultimo->dadosquiz.pergunta, x.pergunta));
 }
 
