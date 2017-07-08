@@ -27,7 +27,7 @@ void DesalocarListaTopico(/*@out@*/ tipoListaTopico *lista) {
     }
 }
 
-void ListarTopicos(char *nomeDisciplina) {
+int ListarTopicos(char *nomeDisciplina, int test) {
     apontador3 aux;
     FILE *fp;
     char line[100];
@@ -35,7 +35,6 @@ void ListarTopicos(char *nomeDisciplina) {
     tipoListaTopico listaTopico;
     tipoTopico topico;
     fp = fopen("disciplinas.txt","r");
-    system("clear");
     CriaListaTopico(&listaTopico);
     while(fgets(line,90,fp) != NULL) {/*Varre arquivo, lendo com strtok e insere topico na lista*/
         if(strstr(line,nomeDisciplina) != NULL) {
@@ -50,7 +49,13 @@ void ListarTopicos(char *nomeDisciplina) {
         }
     }
     aux = listaTopico.primeiro->prox;
-	/* Impressao da lista de topicos */
+    /* Impressao da lista de topicos */
+    if(test == 1 && aux != NULL) { 
+        DesalocarListaTopico(&listaTopico);
+        fclose(fp);
+        return 1;
+    }
+    system("clear");
         printf("--------------------Lista de Topicos de: %s --------------------:\n", nomeDisciplina);
         while(aux != NULL) {
             printf("ID: %d - Nome: %s\n", aux->topico.idTopico, aux->topico.nomeTopico);
@@ -62,5 +67,6 @@ void ListarTopicos(char *nomeDisciplina) {
         getchar();
     fclose(fp);
     DesalocarListaTopico(&listaTopico);
+    return 0;
 
 }
