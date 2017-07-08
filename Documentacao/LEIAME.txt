@@ -3,6 +3,13 @@ Membros:
 	- Gabriel Nunes Ribeiro Silva (@gabnunes)   matr.: 15/0126689
 	- Samuel Andrade do Couto (@SCouto97)  		matr.: 15/0021623
 
+
+Para compilação do programa, usar o comando 'make'.
+
+Para a execução do programa, usar o comando './TP3'.
+
+Para a utilização e verificação do módulo de testes, utilizar o comando "make gcov".
+
 ------ Trabalho 3 ------
 Na terceira parte do trabalho, continuamos a testar o programa. Os testes criados foram feitos para testar as principais funções de cada módulo, funções que tem um papel maior. Devido ao curto prazo, não foi possível testar todas as funções de todos os módulos, tendo, assim, uma cobertura de testes não muito alta, porém aceitável dada a finalidade do sistema QuizTime. As mudanças que podemos destacar são:
 	-Foram criados diagramas/fluxogramas das funções a serem testadas. As instruções foram, em alguns casos, reduzidas ou descritas em linguagem natural, para facilitar o entendimento de quem lê, dependendo do contexto. Os fluxogramas foram criados na ferramenta Dia e tem como finalidade facilitar a vizualização e relação das funções com seus determinados testes;
@@ -10,7 +17,7 @@ Na terceira parte do trabalho, continuamos a testar o programa. Os testes criado
 	-Devido à natureza do projeto, por se tratar de um projeto onde a maioria das funções são de impressão, não há uma alta necessidade de cobertura de instruções, pois essas são, em maior parte, responsáveis apenas por gerar a interação visual com o usuário. O bom desempenho dessas funções depende da boa utilização e funcionamento das estruturas condicionais do código, por isso, utilizamos, na maioria dos casos(se tratando de teste de caixa branca), cobertura de decisões;
 	-Os novos testes criados se encontram no novo módulo de testes, teste_spec.c e possuem breve descrição sobre seus critérios em relação à matéria estudada na documentação gerada pelo Doxygen denominada Documentacao_TESTES.pdf.
 	-A cobertura de testes é mostrada no arquivo 'Cobertura', gerado automaticamente a partir da ferramenta gcovr.
-	O percentual de cobertura de testes se encontra baixo. O principal motivo é a dificuldade de testar funções que possuem uma alta quantidade de impressões na tela de comando e dependem, constantemente, de uma entrada de usuário. Caso essas funções fossem testadas, ocorreria uma ilegibilidade da saída dos casos de teste.
+	O percentual de cobertura de testes se encontra baixo. O principal motivo é a dificuldade de testar funções que possuem uma alta quantidade de impressões na tela de comando e dependem, constantemente, de uma entrada do usuário. Caso essas funções fossem testadas, ocorreria uma ilegibilidade da saída dos casos de teste.
 	-O arquivo README.md foi atualizado.
 	-Os fluxogramas estão localizados em uma pasta separada.
 
