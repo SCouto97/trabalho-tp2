@@ -4,7 +4,7 @@
 #include "ListagemDeDisciplinas.h"
 #include "Topicos.h"
 
-void InsereDisciplina(/*@out@*/ tipoListaDisciplina *lista, /*@out@*/ tipoDisciplina infosDisciplina) {
+int InsereDisciplina(/*@out@*/ tipoListaDisciplina *lista, /*@out@*/ tipoDisciplina infosDisciplina) {
     apontador2 aux;
     int checaExistencia = 0; /*Variavel de controle para indicar se a disciplina ja esta na lista*/
     aux = lista->primeiro->prox;
@@ -21,15 +21,17 @@ void InsereDisciplina(/*@out@*/ tipoListaDisciplina *lista, /*@out@*/ tipoDiscip
         lista->ultimo->disciplina = infosDisciplina;
         lista->ultimo->prox = NULL;
     }
+    return checaExistencia;
 }
 
-void CriaListaDisciplina(/*@out@*/ tipoListaDisciplina *lista) {
+int CriaListaDisciplina(/*@out@*/ tipoListaDisciplina *lista) {
     lista->primeiro = (apontador2)malloc(sizeof(celulaDisciplina));
     lista->ultimo = lista->primeiro;
     lista->ultimo->prox = NULL;
+    return lista->primeiro != NULL;
 }
 
-void DesalocarListaDisciplina(/*@out@*/ tipoListaDisciplina *lista) {
+int DesalocarListaDisciplina(/*@out@*/ tipoListaDisciplina *lista) {
     apontador2 aux, aux2;
     aux = lista->primeiro;
     while(aux!=NULL) {
@@ -38,6 +40,7 @@ void DesalocarListaDisciplina(/*@out@*/ tipoListaDisciplina *lista) {
         free(aux2);
         lista->primeiro = NULL;
     }
+    return lista->primeiro == NULL;
 }
 
 void ListarDisciplinas(int IDaux) {
