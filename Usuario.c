@@ -240,6 +240,10 @@ void cadastrarUsuario(char* usuario_sessao){
 	printf("Insira o ID da Disciplina que desejas se cadastrar: ");
 	getchar();
 	scanf("%c", &opcao);
+	while(opcao == '\n') {
+		printf("Insira o ID da Disciplina que desejas se cadastrar: ");
+		scanf("%c", &opcao);
+	}
 	if(fopen("cadastros.txt","r") != NULL) {
 		fp = fopen("cadastros.txt", "r");
 		while(fgets(line,90,fp) != NULL) {
