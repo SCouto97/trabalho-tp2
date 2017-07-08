@@ -5,18 +5,18 @@
 #include "Quiz.h"
 
 void CriaLista(/*@out@*/ tipoLista *lista) {
-  lista->primeiro = (apontador) malloc(sizeof(celula));
-  lista->ultimo = lista->primeiro;
-  lista->primeiro->prox = NULL;
+    lista->primeiro = (apontador) malloc(sizeof(celula));
+    lista->ultimo = lista->primeiro;
+    lista->primeiro->prox = NULL;
 
 }
 
 int InsereLista(/*@out@*/ tipoQuiz x,/*@out@*/ tipoLista *lista){
-      lista->ultimo->prox=(apontador)malloc(sizeof(celula));
-      lista->ultimo=lista->ultimo->prox;
-      lista->ultimo->dadosquiz = x;
-      lista->ultimo->prox=NULL;
-      return (strcmp(lista->ultimo->dadosquiz.pergunta, x.pergunta));
+    lista->ultimo->prox=(apontador)malloc(sizeof(celula));
+    lista->ultimo=lista->ultimo->prox;
+    lista->ultimo->dadosquiz = x;
+    lista->ultimo->prox=NULL;
+    return (strcmp(lista->ultimo->dadosquiz.pergunta, x.pergunta));
 }
 
 void DesalocarLista(/*@out@*/ tipoLista *lista) {
