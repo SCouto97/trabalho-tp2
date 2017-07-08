@@ -149,16 +149,21 @@ int TelaCadastro(char *nome, char *login, char *senha, char *nomearquivo, int te
 informar o nome e o usuario. Com ambas informações, é realizada uma busca no arquivo e, se existir algum cadastro
 que possua o Nome e o Usuário informados, entao  essa senha e informada ao cliente.*/
 
-void TelaRecuperarSenha() {
-	FILE *fp;
-	char nomearquivo[20] = "usuarios.txt", nome[20], usuario[20], senha[20] = "usrone", nome_read[20] = "usrone", usuario_read[20] = "usrone";
-	int loginfound = 0; /*Variavel para controle de login. So sera settada para "1" se o 				    usuario for encontrado no cadastro.*/
-
+void LerDadosRecuperarSenha() {
+	char nome[20], usuario[20];
 	printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%% Recuperacao de Senha %%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
 	printf("%%%%%%%%%%%%%% Insira seu primeiro nome: ");
 	scanf("%s", nome);
 	printf("%%%%%%%%%%%%%% Insira seu usuario: ");
 	scanf("%s", usuario);
+	TelaRecuperarSenha(nome,usuario,0);
+}
+
+
+int TelaRecuperarSenha(char *nome, char *usuario, int test) {
+	FILE *fp;
+	char nomearquivo[20] = "usuarios.txt", senha[20], nome_read[20] = "usrone", usuario_read[20] = "usrone";
+	int loginfound = 0; /*Variavel para controle de login. So sera settada para "1" se o 				    usuario for encontrado no cadastro.*/
 	if (fopen(nomearquivo, "r") == NULL) {	/*checa existencia do arquivo de cadastros*/
 		printf("Nao existe nenhum usuario cadastrado!\n");
 		printf("Insira <ENTER> para retornar ao menu inicial.");
@@ -170,6 +175,9 @@ void TelaRecuperarSenha() {
 		while(fscanf(fp,("%s %s %s"), nome_read, usuario_read, senha) == 3) {
 			if(strcmp(nome_read,nome) == 0 && strcmp(usuario_read,usuario) == 0) { /*Compara dados lido do arquivo com dados inserido pelo usuario*/
 				loginfound = 1;
+				if(test == 1) {
+					return loginfound;
+				}
 				printf("Sua senha: %s\n", senha);
 				printf("Insira <ENTER> para retornar ao menu inicial e fazer seu Login.\n");
 				getchar();
@@ -179,6 +187,9 @@ void TelaRecuperarSenha() {
 			}
 		}
 		if(loginfound == 0) {	/*nenhum usuario foi encontrado durante a pesquisa. */
+			if(test == 1) {
+				return loginfound;
+			}
 			printf("Nenhum usuario como o inserido foi encontrado.\n");
 			printf("Insira <ENTER> para retornar ao menu inicial.\n");
 			getchar();
@@ -186,6 +197,7 @@ void TelaRecuperarSenha() {
 			fclose(fp);
 		}
 	}
+	return 0;
 }
 
 /* Externar uma mensagem de saida para o usuario ao optar pelo encerramento da aplicacao */
@@ -324,7 +336,7 @@ void TelaInicial() {
 					break;
 			case '2': LerDadosCadastro();
 					break;
-			case '3': TelaRecuperarSenha();
+			case '3': LerDadosRecuperarSenha();
 					break;
 			case '4': TelaSaida(&opcao);
 					break;
