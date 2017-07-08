@@ -12,9 +12,9 @@
 
 Para compilação do programa, usar o comando 'make'.
 
-Para a execução do programa, usar o comando './TP1'.
+Para a execução do programa, usar o comando './TP3'.
 
-Para a execução do teste, usar o comando './TESTE'.
+Para a utilização e verificação do módulo de testes, utilizar o comando "make gcov".
 
 ## Considerações sobre o programa
 
