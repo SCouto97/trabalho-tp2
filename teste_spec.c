@@ -109,6 +109,33 @@ describe("Testes do modulo Usuario") {
 		check(resultado == 2);
 	}
 
+	it("Teste sucesso em recuperar a senha de um usuario") {
+		char nome[20];
+		char user[20];
+		char line [100];
+		char *token;
+		int resultado;
+		FILE *fp;
+		if(fopen("usuarios.txt","r") != NULL) {
+			fp = fopen("usuarios.txt", "r");
+			fgets(line,90,fp);
+			token = strtok(line," ");
+			strcpy(nome,token);
+			token = strtok(NULL," ");
+			strcpy(user,token);
+			resultado = TelaRecuperarSenha(nome,user,1);
+			check(resultado == 1);
+		}
+	}
+
+	it("Teste falha em recuperar a senha de um usuario") {
+		char nome[20] = "adadadadad";
+		char user[20] = "adxaxddasdas";
+		int resultado;
+		resultado = TelaRecuperarSenha(nome,user,1);
+		check(resultado == 0);
+	}
+
 	it("Teste se o elemento eh inserido com sucesso numa lista") {
 		int resultado;
 		tipoQuiz quiz;
