@@ -256,7 +256,7 @@ void acessarQuiz(char *usuario_sessao) {
         getchar();
         scanf("%d", &opcao);
         if(opcao >= 1 && opcao <= counter) {
-            ListaPerguntas("disciplinas.txt",idtopicos[opcao-1].topico);
+            ListaPerguntas("disciplinas.txt",idtopicos[opcao-1].topico, 0);
             fclose(fp);
             fclose(fp2);
         }
@@ -269,7 +269,7 @@ void acessarQuiz(char *usuario_sessao) {
     }
 }
 
-void ListaPerguntas(char *nomearquivo,char *nometopico) {
+int ListaPerguntas(char *nomearquivo,char *nometopico, int test) {
     FILE *fp;
     int counter=0;
     char line[260]; /*Array de char para armazenar uma linha do arquivo capturada*/
@@ -286,6 +286,7 @@ void ListaPerguntas(char *nomearquivo,char *nometopico) {
         getchar();
     }
     else {
+
         CriaLista(&lista);
         if(fopen(nomearquivo,"r") != NULL) {
             fp = fopen(nomearquivo,"r");
@@ -310,7 +311,6 @@ void ListaPerguntas(char *nomearquivo,char *nometopico) {
                     quiz.tipoD = 0;
                     InsereLista(quiz, &lista);
                 }
-                printf("%s\n", nometopico);
             }
             fclose(fp);
             if(fopen("perguntas2.txt","r") != NULL) {
@@ -360,7 +360,11 @@ void ListaPerguntas(char *nomearquivo,char *nometopico) {
                 }
                 fclose(fp);
             }
+            if(test == 1 && lista.primeiro->prox != NULL) {
+                return 1; /*Estado: Lista de Perguntas preenchida com sucesso*/
+            }
             ImprimirPerguntas(lista,nometopico);
         }
     }
+    return 0;
 }
