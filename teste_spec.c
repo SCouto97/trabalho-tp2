@@ -209,5 +209,52 @@ describe("Testes Utilizando Specs") {
 		check(resultado == 1);
 		DesalocarLista(&lista);
 	}
-}
+/*aqui muda*/
+	it("Teste se consegue criar uma lista de disciplinas") {
+		tipoListaDisciplina lista;
+		int resultado;
+		resultado = CriaListaDisciplina(&lista);
+		check(resultado == 1);
+		DesalocarListaDisciplina(&lista);
+	}
+	
+	/*! Diagrama da função DesalocarLista
+	* \image latex DesalocarLista.eps "Fluxograma" width=4cm
+	* Pelo critério de cobertura de instruções, checamos se todas instruções de DesalocarLista são devidamente exercitadas
+	*/
+	it("Testa se a lista de disciplinas eh desalocada com sucesso") {
 
+		int resultado;
+		tipoListaDisciplina lista;
+		CriaListaDisciplina(&lista);
+		resultado =	DesalocarListaDisciplina(&lista);
+		check(resultado == 1);	
+	}
+
+	/*! Diagrama da funcao CriaLista
+	* \image latex CriaLista.eps "Fluxograma" width=4cm
+	* Pelo critério de cobertura de instruções, checamos se todas instruções de CriaLista são devidamente exercitadas
+	*/
+	it("Verifica se consegue inserir uma disciplina nao existente") {
+
+		int resultado;
+		tipoListaDisciplina lista;
+		tipoDisciplina disciplina;
+		CriaListaDisciplina(&lista);
+		resultado = InsereDisciplina(&lista, disciplina);
+		check(resultado == 0);
+		DesalocarListaDisciplina(&lista);
+	}
+	it("Verifica se consegue inserir uma disciplina ja existente") {
+
+		int resultado;
+		tipoListaDisciplina lista;
+		tipoDisciplina disciplina1;
+		tipoDisciplina disciplina2 = disciplina1;
+		CriaListaDisciplina(&lista);
+		InsereDisciplina(&lista, disciplina1);		
+		resultado = InsereDisciplina(&lista, disciplina2);
+		check(resultado == 1);
+		DesalocarListaDisciplina(&lista);
+	}
+}
