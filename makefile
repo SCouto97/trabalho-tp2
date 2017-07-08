@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -ansi -Wall 
-GCOV = -Wall -ftest-coverage -fprofile-arcs
+GCOV = -std=c99 -Wall -ftest-coverage -fprofile-arcs -fPIC
 
 #Caso exista a adição de algum módulo, modificar apenas essas variáveis
 #Para a compilação (que deve ser feita independentemente) seguir os exemplos .o
@@ -8,10 +8,10 @@ GCOV = -Wall -ftest-coverage -fprofile-arcs
 DEPS = Usuario.h GerenciaDisciplina.h Topicos.h GerenciamentoQuiz.h ListagemDeDisciplinas.c
 OBJS = Usuario.o GerenciaDisciplina.o Quiz.o Topicos.o GerenciamentoQuiz.o ListagemDeDisciplinas.o main.o
 
-all: main gcov
+all: main
 
 main: $(OBJS)
-	$(CC) $(OBJS) -o TP1
+	$(CC) $(OBJS) -o TP3
 
 main.o: main.c
 	$(CC) main.c -c
